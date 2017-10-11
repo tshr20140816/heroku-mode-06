@@ -16,3 +16,8 @@ cp ./delegate9.9.13/src/builtin/icons/ysato/*.gif ./www/icons/
 rm -rf delegate9.9.13
 
 htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
+
+unset BASIC_USER
+unset BASIC_PASSWORD
+
+printenv
