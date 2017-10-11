@@ -2,6 +2,8 @@
 
 set -x
 
+printenv
+
 mkdir -m 777 www/icons
 touch www/icons/index.html
 
@@ -12,3 +14,5 @@ tar xfz delegate9.9.13.tar.gz
 rm -f delegate9.9.13.tar.gz
 cp ./delegate9.9.13/src/builtin/icons/ysato/*.gif ./www/icons/
 rm -rf delegate9.9.13
+
+htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
