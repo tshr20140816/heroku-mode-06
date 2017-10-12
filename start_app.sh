@@ -9,6 +9,12 @@ unset BASIC_PASSWORD
 
 printenv
 
+hostname
+
+uname -a
+
+cat /proc/version
+
 cat /proc/cpuinfo
 
 echo apache
