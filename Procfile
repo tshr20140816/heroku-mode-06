@@ -1,1 +1,3 @@
-web: vendor/bin/heroku-php-apache2 -C apache.conf www
+web: ./start_web.sh
+
+worker: ./start_worker.sh
