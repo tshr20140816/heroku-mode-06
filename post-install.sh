@@ -82,8 +82,9 @@ rm -f delegate.zip
 
 chmod 755 ./web-boot.sh
 
+htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
+
 popd
 
-htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
 date
