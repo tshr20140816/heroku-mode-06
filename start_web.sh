@@ -17,8 +17,8 @@ cat /proc/version
 
 cat /proc/cpuinfo
 
-ip_addr=$(ip -4 address | grep global | sed 's/\// /' | awk '{print $2}')
-echo ${ip_addr}
+export IP_ADDR=$(ip -4 address | grep global | sed 's/\// /' | awk '{print $2}')
+echo ${IP_ADDR}
 
 echo apache
 vendor/bin/heroku-php-apache2 -C apache.conf www
