@@ -4,27 +4,27 @@ set -x
 
 date
 
-if [ -v BASIC_USER ]; then
+if [ ! -v BASIC_USER ]; then
   echo "Error : BASIC_USER not defined."
   exit
 fi
 
-if [ -v BASIC_PASSWORD ]; then
+if [ ! -v BASIC_PASSWORD ]; then
   echo "Error : BASIC_PASSWORD not defined."
   exit
 fi
 
-if [ -v REMOTE_PATH_1 ]; then
+if [ ! -v REMOTE_PATH_1 ]; then
   echo "Error : REMOTE_PATH_1 not defined."
   exit
 fi
 
-if [ -v REMOTE_PATH_2 ]; then
+if [ ! -v REMOTE_PATH_2 ]; then
   echo "Error : REMOTE_PATH_2 not defined."
   exit
 fi
 
-if [ -v REMOTE_PATH_3 ]; then
+if [ ! -v REMOTE_PATH_3 ]; then
   echo "Error : REMOTE_PATH_3 not defined."
   exit
 fi
