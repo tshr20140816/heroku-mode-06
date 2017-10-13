@@ -105,7 +105,8 @@ rm -rf ./usr
 rm -rf ./ccache
 rm -f delegate.zip
 
-chmod 755 ./web-boot.sh
+chmod 755 ./start_web.sh
+chmod 755 ./start_worker.sh
 
 htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
