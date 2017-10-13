@@ -1,0 +1,7 @@
+s/<TITLE>/<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>/g
+s/<\/TITLE>/<\/TITLE><\/HEAD>/g
+s|__SED_STR_1__|__SED_STR_2__|g
+s|<IMG ALIGN=MIDDLE BORDER=0 ALT="search"|<DUMMY                                 |
+s|<INPUT TYPE=text size=16 name=key>|                                  |
+s|pop.mail.yahoo.co.jp|                    |g
+s|<IMG BORDER=0 ALIGN=MIDDLE ALT="upper"|<DUMMY                                |
