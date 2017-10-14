@@ -21,8 +21,8 @@ export IP_ADDR=$(ip -4 address | grep global | sed 's/\// /' | awk '{print $2}')
 echo ${IP_ADDR}
 
 echo apache
-vendor/bin/heroku-php-apache2 -C apache.conf www &
+vendor/bin/heroku-php-apache2 -C apache.conf www
 
-sleep 10s
+# sleep 10s
 
-./start_worker.sh
+# ./start_worker.sh
