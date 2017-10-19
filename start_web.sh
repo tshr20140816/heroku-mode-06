@@ -22,7 +22,3 @@ echo ${IP_ADDR}
 
 echo apache
 vendor/bin/heroku-php-apache2 -C apache.conf www
-
-# sleep 10s
-
-# ./start_worker.sh
