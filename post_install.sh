@@ -68,6 +68,7 @@ cp ./src/delegated ../delegate/
 cp ./src/builtin/icons/ysato/*.gif ../delegate/icons/
 cp ./src/builtin/icons/ysato/*.gif ../www/icons/
 cp ${HOME2}/delegate.conf ../delegate/
+cp ${HOME2}/filter.txt ../delegate/
 
 popd
 rm -rf delegate9.9.13
