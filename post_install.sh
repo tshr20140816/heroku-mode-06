@@ -4,31 +4,6 @@ set -x
 
 date
 
-if [ ! -v BASIC_USER ]; then
-  echo "Error : BASIC_USER not defined."
-  exit
-fi
-
-if [ ! -v BASIC_PASSWORD ]; then
-  echo "Error : BASIC_PASSWORD not defined."
-  exit
-fi
-
-if [ ! -v REMOTE_PATH_1 ]; then
-  echo "Error : REMOTE_PATH_1 not defined."
-  exit
-fi
-
-if [ ! -v REMOTE_PATH_2 ]; then
-  echo "Error : REMOTE_PATH_2 not defined."
-  exit
-fi
-
-if [ ! -v REMOTE_PATH_3 ]; then
-  echo "Error : REMOTE_PATH_3 not defined."
-  exit
-fi
-
 export HOME2=${PWD}
 export PATH="${HOME2}/usr/local/bin:${PATH}"
 
@@ -107,8 +82,6 @@ rm -f delegate.zip
 
 chmod 755 ./start_web.sh
 chmod 755 ./start_worker.sh
-
-htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
 popd
 
