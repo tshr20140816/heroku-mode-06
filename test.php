@@ -10,6 +10,8 @@ if ($fp>0) {
 }
 
 error_log($buf);
-  
+
+echo $buf;
+
 error_log('***** TEST MESSAGE FINISH *****');
 ?>
