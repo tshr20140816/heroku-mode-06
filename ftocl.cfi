@@ -1,5 +1,5 @@
 #!cfi
 Content-Type: text/html
-Output-Header: Content-Encoding: gzip
-#/usr/bin/gzip --best
-Body-Filter: sed s/n/N/g
+Body-Filter: /bin/sed -f s/n/N/g
+#Output-Header: Content-Encoding: gzip
+#Body-Filter: /usr/bin/gzip --best
