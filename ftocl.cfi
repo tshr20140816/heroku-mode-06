@@ -1,3 +1,3 @@
 #!cfi
 Content-Type: text/html
-Body-Filter: /bin/sed -f ${DGROOT}/filter.txt
+Body-Filter: /bin/sed -f /app/delegate/filter.txt
