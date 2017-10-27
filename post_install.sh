@@ -87,4 +87,6 @@ chmod 755 ./start_web.sh
 
 popd
 
+ls -lang delegate/
+
 date
