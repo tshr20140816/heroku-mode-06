@@ -69,6 +69,8 @@ cp ./src/builtin/icons/ysato/*.gif ../delegate/icons/
 cp ./src/builtin/icons/ysato/*.gif ../www/icons/
 cp ${HOME2}/delegate.conf ../delegate/
 cp ${HOME2}/filter.txt ../delegate/
+chmod 755 ${HOME2}/ftocl.cfi
+cp ${HOME2}/ftocl.cfi ../delegate/
 
 popd
 rm -rf delegate9.9.13
@@ -82,7 +84,6 @@ rm -rf ./ccache
 rm -f delegate.zip
 
 chmod 755 ./start_web.sh
-chmod 755 ./ftocl.cfi
 
 popd
 
