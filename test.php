@@ -9,6 +9,8 @@ if ($fp>0) {
     fclose($fp);
 }
 
+$buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
+
 error_log($buf);
 
 echo $buf;
