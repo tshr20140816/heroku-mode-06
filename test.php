@@ -11,6 +11,8 @@ if ($fp>0) {
 
 $buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
 
+$buf = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/', './', $buf);
+
 error_log($buf);
 
 echo $buf;
