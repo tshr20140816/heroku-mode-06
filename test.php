@@ -1,6 +1,8 @@
 <?php
 
-error_log('***** TEST MESSAGE *****');
+error_log('***** TEST MESSAGE START *****');
 
-echo "HELLO";
+error_log($argv[1]);
+  
+error_log('***** TEST MESSAGE FINISH *****');
 ?>
