@@ -17,4 +17,6 @@ export TZ=JST-9
 #export IP_ADDR=$(ip -4 address | grep global | sed 's/\// /' | awk '{print $2}')
 #echo ${IP_ADDR}
 
+whereis php
+
 ./delegate/delegated -r -vv -P${PORT} +=./delegate/delegate.conf
