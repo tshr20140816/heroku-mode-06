@@ -1,2 +1,0 @@
-#!cfi
-Body-Filter: /bin/sed -f /app/delegate/filter.txt
