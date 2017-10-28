@@ -11,7 +11,7 @@ if ($fp > 0) {
 
 if (strpos($buf, 'Content-Type: text/html;') !== false)
 {  
-  //$buf = preg_replace('/^X-Request.+\n/m', '', $buf);
+  $buf = preg_replace('/^X-Request.+\n/m', '', $buf);
   $buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
   
   $buf = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $buf);
@@ -25,18 +25,17 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   
   $buf = str_replace('<A HREF="../"><IMG BORDER=0 ALIGN=MIDDLE ALT="upper" SRC="/icons/up.gif"></A>', '', $buf);
   
-  //$buf = str_replace('X-Content-Length:', "Content-Encoding: gzip\nX-Content-Length:", $buf);
-  
   error_log($buf);
   
   $arr_buf = preg_split('/^\r\n/m', $buf, 2);
   
+  $body = gzencode($arr_buf[1]);
+  
   $buf = $arr_buf[0];
   $buf .= "Content-Encoding: gzip\r\n";
+  $buf .= "Content-Length: " . strlen($body) . "\r\n";
   $buf .= "\r\n";
-  $buf .= gzencode($arr_buf[1]);
-  
-  //$buf = gzencode($buf);
+  $buf .= $body;
 }
 
 echo $buf;
