@@ -18,6 +18,8 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
 
   $buf = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/-/builtin/icons/ysato/', './icons/', $buf);
 
+  $buf = preg_replace('/<FORM ACTION="..\/-search" METHOD=GET>/', '<FORM>', $buf);
+  
   error_log($buf);
 }
 
