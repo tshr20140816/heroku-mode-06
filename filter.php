@@ -9,6 +9,15 @@ if ($fp > 0) {
   fclose($fp);
 }
 
+if (substr($_SERVER['REQUEST_URI'], 0, 6) === '/mail/')
+{
+  error_log($_SERVER['REQUEST_URI']);
+  error_log($buf);
+  echo $buf;
+  error_log('***** TEST MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
+  return;
+}
+
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
 $body = $arr_buf[1];
@@ -19,7 +28,7 @@ $header = preg_replace('/^DeleGate.+\n/m', '', $header);
 $header = preg_replace('/^Expires.+\n/m', '', $header);
 $header = preg_replace('/^Server: DeleGate.+$/m', 'Server: Apache', $header);
 
-if (strpos($buf, 'Content-Type: text/html;') !== false)
+if (strpos($header, 'Content-Type: text/html;') !== false || strpos($header, 'Content-Type: text/html') !== false)
 {
   $header = preg_replace('/^Last-Modified.+\n/m', '', $header);
   
@@ -40,20 +49,20 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   $body = preg_replace('/^  /m', ' ', $body);
   $body = preg_replace('/^ +</m', '<', $body);
   
-  //$body = preg_replace('/^<small>.*?[Top.+?Up.+?A>$/m', '', $body);
-  
+  error_log($_SERVER['REQUEST_URI']);
   error_log($header);
   error_log("\r\n");
   error_log($body);
   
+  $buf = $header;
   $body = gzencode($body);
   
-  $buf = $header;
   $buf .= "Content-Encoding: gzip\r\n";
   $buf .= "Content-Length: " . strlen($body) . "\r\n";
   $buf .= "\r\n";
   $buf .= $body;
 } else {
+  error_log($_SERVER['REQUEST_URI']);
   error_log($header);
   $buf = $header;
   $buf .= "Cache-Control: max-age=86400\r\n";
