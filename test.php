@@ -11,7 +11,7 @@ if ($fp>0) {
 
 $buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
 
-$buf = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/-/builtin/icons/ysato/', './icons/', $buf);
+//$buf = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/-/builtin/icons/ysato/', './icons/', $buf);
 
 error_log($buf);
 
