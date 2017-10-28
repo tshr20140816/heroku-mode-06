@@ -10,12 +10,7 @@ if ($fp > 0) {
 }
 
 if (strpos($buf, 'Content-Type: text/html;') !== false)
-{
-  $b1 = preg_split('/^\r\n/m', $buf, 1);
-  error_log('***** ' . strlen($b1[0]) . ' *****');
-  error_log($b1[0]);
-  error_log('***** ----- *****');
-  
+{  
   //$buf = preg_replace('/^X-Request.+\n/m', '', $buf);
   $buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
   
@@ -33,6 +28,12 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   //$buf = str_replace('X-Content-Length:', "Content-Encoding: gzip\nX-Content-Length:", $buf);
   
   error_log($buf);
+  
+  $arr_buf = preg_split('/^\r\n/m', $buf, 2);
+  
+  $buf = $arr_buf[0];
+  $buf .= "\r\n";
+  $buf .= $arr_buf[1];
   
   //$buf = gzencode($buf);
 }
