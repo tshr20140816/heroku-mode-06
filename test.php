@@ -1,6 +1,7 @@
 <?php
 
 error_log('***** TEST MESSAGE START *****');
+file_put_contents("php://stderr", '***** TEST MESSAGE START STDERR *****');
 
 $fp = fopen("php://stdin","r");
 $buf="";
