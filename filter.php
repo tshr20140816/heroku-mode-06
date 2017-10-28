@@ -1,6 +1,6 @@
 <?php
 
-error_log('***** TEST MESSAGE START *****');
+error_log('***** TEST MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
 
 $fp = fopen("php://stdin","r");
 $buf = "";
@@ -62,5 +62,5 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
 
 echo $buf;
 
-error_log('***** TEST MESSAGE FINISH *****');
+error_log('***** TEST MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
 ?>
