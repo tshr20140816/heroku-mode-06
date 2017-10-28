@@ -83,9 +83,6 @@ rm -rf ./usr
 rm -rf ./ccache
 rm -f delegate.zip
 
-mv index.php ./www/
-mv user.ini ./www/.user.ini
-
 chmod 755 ./start_web.sh
 
 popd
