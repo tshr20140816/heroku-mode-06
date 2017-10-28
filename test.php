@@ -9,7 +9,10 @@ if ($fp>0) {
     fclose($fp);
 }
 
-$buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
+if (strpos($buf, 'Content-Type: text/html;') !== false)
+{
+  $buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
+}
 
 //$buf = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/-/builtin/icons/ysato/', './icons/', $buf);
 
