@@ -11,7 +11,7 @@ if ($fp > 0) {
 
 if (strpos($buf, 'Content-Type: text/html;') !== false)
 {
-  $b1 = preg_split('/^\r\n/m', $buf, 2);
+  $b1 = preg_split('/^\r\n/m', $buf, 1);
   error_log('***** ' . strlen($b1[0]) . ' *****');
   error_log($b1[0]);
   error_log('***** ----- *****');
