@@ -14,7 +14,6 @@ $header = $arr_buf[0];
 $body = $arr_buf[1];
 
 $header = preg_replace('/^X-Request.+\n/m', '', $header);
-$header = preg_replace('/^Last-Modified.+\n/m', '', $header);
 $header = preg_replace('/^ETag.+\n/m', '', $header);
 $header = preg_replace('/^DeleGate.+\n/m', '', $header);
 $header = preg_replace('/^Expires.+\n/m', '', $header);
@@ -22,6 +21,8 @@ $header = preg_replace('/^Server: DeleGate.+$/m', 'Server: Apache', $header);
 
 if (strpos($buf, 'Content-Type: text/html;') !== false)
 {
+  $header = preg_replace('/^Last-Modified.+\n/m', '', $header);
+  
   $header = str_replace('Content-Length:', 'X-Content-Length:', $header);
   
   $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $body);
