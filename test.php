@@ -11,7 +11,7 @@ if ($fp > 0) {
 
 if (strpos($buf, 'Content-Type: text/html;') !== false)
 {
-  $b1 = explode("\n\n", $buf, 1);
+  $b1 = explode("\n", $buf, 1);
   error_log('***** ' . strlen($b1[0]) . ' *****');
   error_log($b1[0]);
   error_log('***** ----- *****');
