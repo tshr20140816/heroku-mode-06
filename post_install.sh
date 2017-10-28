@@ -59,7 +59,7 @@ pushd delegate9.9.13
 
 rm ./src/builtin/mssgs/news/artlistfooter.dhtml
 cat << '__HEREDOC__' > ./src/builtin/mssgs/news/artlistfooter.dhtml
-<HR></HTML>
+<HR>
 __HEREDOC__
 
 time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
