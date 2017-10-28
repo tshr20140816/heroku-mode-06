@@ -24,11 +24,11 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   
   $buf = str_replace('<A HREF="../"><IMG BORDER=0 ALIGN=MIDDLE ALT="upper" SRC="/icons/up.gif"></A>', '', $buf);
   
-  $buf = str_replace('X-Content-Length:', "Content-Encoding: gzip\nX-Content-Length:", $buf);
+  //$buf = str_replace('X-Content-Length:', "Content-Encoding: gzip\nX-Content-Length:", $buf);
   
   error_log($buf);
   
-  $buf = gzencode($buf);
+  //$buf = gzencode($buf);
 }
 
 echo $buf;
