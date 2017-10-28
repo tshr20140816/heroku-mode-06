@@ -10,5 +10,6 @@ cat ./delegate/delegate.conf
 
 
 printenv
+hostname
 
 ./delegate/delegated -r -v -P${PORT} +=./delegate/delegate.conf
