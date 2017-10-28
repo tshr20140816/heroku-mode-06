@@ -66,7 +66,6 @@ time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
 
 cp ./src/delegated ../delegate/
 cp ./src/builtin/icons/ysato/*.gif ../delegate/icons/
-cp ./src/builtin/icons/ysato/*.gif ../www/icons/
 cp ${HOME2}/delegate.conf ../delegate/
 
 popd
