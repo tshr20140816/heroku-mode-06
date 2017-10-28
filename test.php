@@ -15,7 +15,7 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   error_log('***** ' . strlen($b1) . ' *****');
   
   
-  $buf = preg_replace('/^X-Request.+\n/m', '', $buf);
+  //$buf = preg_replace('/^X-Request.+\n/m', '', $buf);
   $buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
   
   $buf = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $buf);
