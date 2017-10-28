@@ -16,6 +16,8 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   $body = $arr_buf[1];
   
   $header = preg_replace('/^X-Request.+\n/m', '', $header);
+  $header = preg_replace('/^Last-Modified.+\n/m', '', $header);
+  $header = preg_replace('/^Etag.+\n/m', '', $header);
   $header = str_replace('Content-Length:', 'X-Content-Length:', $header);
   
   $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $body);
