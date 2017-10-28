@@ -33,6 +33,8 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   $body = preg_replace('/^  /m', ' ', $body);
   $body = preg_replace('/^ +</m', '<', $body);
   
+  $body = preg_replace('/^<small>.*?[Top.+?Up.+A>$/m', '', $body);
+  
   error_log($header);
   error_log("\r\n");
   error_log($body);
