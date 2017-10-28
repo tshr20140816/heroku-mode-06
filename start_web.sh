@@ -19,4 +19,4 @@ export TZ=JST-9
 
 whereis php
 
-./delegate/delegated -r -v -P${PORT} +=./delegate/delegate.conf
+./delegate/delegated -r -f -P${PORT} +=./delegate/delegate.conf
