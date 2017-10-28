@@ -12,7 +12,7 @@ if ($fp > 0) {
 if (strpos($buf, 'Content-Type: text/html;') !== false)
 {
   $b1 = explode('\r\n', $buf, 1);
-  error_log('***** ' . strlen($b1) . ' *****');
+  error_log('***** ' . strlen($b1[0]) . ' *****');
   
   
   //$buf = preg_replace('/^X-Request.+\n/m', '', $buf);
