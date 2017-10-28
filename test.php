@@ -13,7 +13,7 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
 {
   
   //$buf = preg_replace('/X-Request-.+/', 'X-Dummy: dummy', $buf);
-  $buf = preg_replace('/X-Request-.+$/', '', $buf);
+  $buf = preg_replace('/^X-Request-.+$/m', '', $buf);
   $buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
   
   $buf = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $buf);
