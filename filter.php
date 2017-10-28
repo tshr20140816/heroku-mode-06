@@ -54,10 +54,11 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   $buf .= "\r\n";
   $buf .= $body;
 } else {
+  error_log($header);
   $buf = $header;
   $buf .= "Cache-Control: max-age=86400\r\n";
   $buf .= "\r\n";
-  $buf .= $body;  
+  $buf .= $body;
 }
 
 echo $buf;
