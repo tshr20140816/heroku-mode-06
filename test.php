@@ -29,6 +29,9 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   
   $body = str_replace('<A HREF="../"><IMG BORDER=0 ALIGN=MIDDLE ALT="upper" SRC="/icons/up.gif"></A>', '', $body);
   
+  $body = preg_replace('/^ +\r\n/m', '', $body);
+  $body = preg_replace('/^\r\n/m', '', $body);
+  
   error_log($header);
   error_log("\r\n");
   error_log($body);
