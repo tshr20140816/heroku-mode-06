@@ -11,6 +11,9 @@ if ($fp > 0) {
 
 if (strpos($buf, 'Content-Type: text/html;') !== false)
 {
+  $b1 = explode('\r\n', $buf, 1);
+  error_log('***** ' . strlen($b1) . ' *****');
+  
   
   $buf = preg_replace('/^X-Request.+\n/m', '', $buf);
   $buf = str_replace('Content-Length:', 'X-Content-Length:', $buf);
