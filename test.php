@@ -32,8 +32,9 @@ if (strpos($buf, 'Content-Type: text/html;') !== false)
   $arr_buf = preg_split('/^\r\n/m', $buf, 2);
   
   $buf = $arr_buf[0];
+  $buf .= "Content-Encoding: gzip\r\n";
   $buf .= "\r\n";
-  $buf .= $arr_buf[1];
+  $buf .= gzencode($arr_buf[1]);
   
   //$buf = gzencode($buf);
 }
