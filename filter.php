@@ -65,7 +65,7 @@ if (strpos($header, 'Content-Type: text/html;') !== false || strpos($header, 'Co
   error_log($_SERVER['REQUEST_URI']);
   error_log($header);
   $buf = $header;
-  $buf .= "Cache-Control: max-age=86400\r\n";
+  //$buf .= "Cache-Control: max-age=86400\r\n";
   $buf .= "\r\n";
   $buf .= $body;
 }
