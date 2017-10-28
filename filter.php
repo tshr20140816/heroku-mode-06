@@ -37,7 +37,8 @@ if (strpos($header, 'Content-Type: text/html;') !== false || strpos($header, 'Co
   $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $body);
   $body = str_replace('</TITLE>', '</TITLE></HEAD>', $body);
 
-  $body = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/-/builtin/icons/ysato/', '/icons/', $body);
+  //$body = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/-/builtin/icons/ysato/', '/icons/', $body);
+  $body = str_replace('/-/builtin/icons/ysato/', '/icons/', $body);
 
   $body = preg_replace('/<FORM ACTION="..\/-search" METHOD=GET>.+?<\/FORM>/s', '', $body);
   
