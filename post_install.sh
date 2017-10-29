@@ -10,6 +10,13 @@ export PATH="${HOME2}/usr/local/bin:${PATH}"
 mkdir -m 777 delegate
 mkdir -m 777 -p delegate/icons
 
+# apache
+mkdir -m 777 www
+mkdir -m 777 -p www/icons
+
+# apache
+touch www/index.html
+
 mkdir -m 777 -p usr/local
 mkdir -m 777 ccache
 
@@ -66,6 +73,10 @@ time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
 
 cp ./src/delegated ../delegate/
 cp ./src/builtin/icons/ysato/*.gif ../delegate/icons/
+
+# apache
+cp ./src/builtin/icons/ysato/*.gif ../www/icons/
+
 cp ${HOME2}/delegate.conf ../delegate/
 
 popd
