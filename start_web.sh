@@ -7,7 +7,6 @@ export TZ=JST-9
 apachectl -v
 php --version
 
-sed -i -e "s/__MAIL_ACCOUNT__/${MAIL_ACCOUNT}/g" ./delegate/delegate.conf
 sed -i -e "s/__PORT__/${PORT}/g" ./delegate/delegate.conf
 
 cat ./delegate/delegate.conf
