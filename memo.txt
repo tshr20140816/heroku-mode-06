@@ -1,1 +1,4 @@
-heroku -> delegae
+(heroku -> apache) -> (heroku -> delegae)
+
+MODE APACHE or else
+REMOTE_PATH https://---.herokuapp.com/mail/---
