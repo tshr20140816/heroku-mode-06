@@ -40,7 +40,7 @@ if (strpos($header, 'Content-Type: text/html;') !== false || strpos($header, 'Co
   //$body = str_replace('<A HREF="/mail/"><IMG BORDER=0 ALIGN=MIDDLE ALT="upper" SRC="/icons/up.gif"></A>', '', $body);
 
   //$body = str_replace(getenv('MAIL_ACCOUNT'), '', $body);
-  $body = preg_replace('/<FONT .+?>.+?<\/FONT>/s', '', $body, 1);
+  //$body = preg_replace('/<FONT .+?>.+?<\/FONT>/s', '', $body, 1);
 
   $body = preg_replace('/^ *\r\n/m', '', $body);
   $body = preg_replace('/^  /m', ' ', $body);
