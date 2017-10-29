@@ -4,11 +4,9 @@ set -x
 
 date
 
-composer update
+# composer update
 
-cat composer.lock
-
-exit
+# cat composer.lock
 
 export HOME2=${PWD}
 export PATH="${HOME2}/usr/local/bin:${PATH}"
