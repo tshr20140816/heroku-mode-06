@@ -17,6 +17,7 @@ mkdir -m 777 -p www/icons
 # apache
 touch www/index.html
 mv 502.html www/
+mv favicon.ico www/
 
 mkdir -m 777 -p usr/local
 mkdir -m 777 ccache
