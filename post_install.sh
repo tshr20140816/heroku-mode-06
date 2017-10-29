@@ -4,14 +4,6 @@ set -x
 
 date
 
-rm composer.json
-mv c2.json composer.json
-composer update
-
-cat composer.lock
-
-exit
-
 export HOME2=${PWD}
 export PATH="${HOME2}/usr/local/bin:${PATH}"
 
