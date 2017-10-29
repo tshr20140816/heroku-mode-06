@@ -41,7 +41,7 @@ if (strpos($header, 'Content-Type: text/html;') !== false || strpos($header, 'Co
 
   //$body = str_replace(getenv('MAIL_ACCOUNT'), '', $body);
 
-  $body = preg_replace('/<xxxxxFONT .+?>.+?<\/FONT>/s', '', $body, 1);
+  $body = preg_replace('/<FONT .+?>.+?<\/FONT>/s', '', $body, 1);
 
   $body = preg_replace('/<small>.+?<\/small>/s', '', $body, 3);
   
