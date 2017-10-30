@@ -3,17 +3,6 @@
 error_log('***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
 
 error_log('***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
-/*
-$fp = fopen("php://stdin", "r");
-$buf = "";
-if ($fp > 0) {
-  while(!feof($fp))
-  {
-    $buf .= fread($fp, 4092);
-  }
-  fclose($fp);
-}
-*/
 $buf = file_get_contents('php://stdin');
 error_log('***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
