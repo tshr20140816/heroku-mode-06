@@ -6,7 +6,7 @@ error_log('***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 $fp = fopen("php://stdin","r");
 $buf = "";
 if ($fp > 0) {
-  while(!feof($fp)) $buf .= fread($fp,4092);
+  while(!feof($fp)) $buf .= fread($fp, 4092);
   fclose($fp);
 }
 error_log('***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
