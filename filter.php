@@ -3,7 +3,7 @@
 error_log('***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
 
 error_log('***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
-$fp = fopen("php://stdin","r");
+$fp = fopen("php://stdin", "r");
 $buf = "";
 if ($fp > 0) {
   while(!feof($fp))
