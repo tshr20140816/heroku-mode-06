@@ -2,9 +2,11 @@
 
 error_log('***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
 
-error_log('***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
+$pid = getmypid();
+  
+error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 $buf = file_get_contents('php://stdin');
-error_log('***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
+error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
@@ -72,5 +74,5 @@ if (strpos($header, 'Content-Type: text/html;') !== false || strpos($header, 'Co
 
 echo $buf;
 
-error_log('***** FILTER MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
+error_log($pid . ' ***** FILTER MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
 ?>
