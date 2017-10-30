@@ -1,13 +1,15 @@
 <?php
 
-error_log('***** TEST MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
+error_log('***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
 
+error_log('***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 $fp = fopen("php://stdin","r");
 $buf = "";
 if ($fp > 0) {
   while(!feof($fp)) $buf .= fread($fp,4092);
   fclose($fp);
 }
+error_log('***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
@@ -72,5 +74,5 @@ if (strpos($header, 'Content-Type: text/html;') !== false || strpos($header, 'Co
 
 echo $buf;
 
-error_log('***** TEST MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
+error_log('***** FILTER MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
 ?>
