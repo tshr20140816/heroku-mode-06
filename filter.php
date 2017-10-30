@@ -3,6 +3,7 @@
 error_log('***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
 
 error_log('***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
+/*
 $fp = fopen("php://stdin", "r");
 $buf = "";
 if ($fp > 0) {
@@ -12,6 +13,8 @@ if ($fp > 0) {
   }
   fclose($fp);
 }
+*/
+$buf = file_get_contents('php://stdin');
 error_log('***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
