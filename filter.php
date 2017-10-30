@@ -1,8 +1,8 @@
 <?php
 
-error_log('***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
-
 $pid = getmypid();
+
+error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
   
 error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 $buf = file_get_contents('php://stdin');
