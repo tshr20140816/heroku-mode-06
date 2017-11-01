@@ -4,6 +4,8 @@ $pid = getmypid();
 
 error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
   
+error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
+
 error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 $buf = file_get_contents('php://stdin');
 error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
