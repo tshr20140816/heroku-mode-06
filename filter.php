@@ -8,7 +8,7 @@ error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']))
 {
-  echo "HTTP 503 Service Unavailable\r\n\r\n";
+  echo "HTTP/1.1 503 Service Unavailable\r\n\r\n";
   return;
 }
 
