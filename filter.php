@@ -27,7 +27,7 @@ $header = preg_replace('/^Expires.+\n/m', '', $header);
 $header = preg_replace('/^Server: DeleGate.+$/m', 'Server: Apache', $header);
 $header = preg_replace('/^DeleGate.+\n/m', '', $header);
 
-if (strpos($header, 'Content-Type: text/html;') !== false || strpos($header, 'Content-Type: text/html') !== false)
+if (strpos($header, 'Content-Type: text/html') !== false)
 {
   $header = preg_replace('/^Last-Modified.+\n/m', '', $header);
   
