@@ -8,7 +8,7 @@ error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']))
 {
-  throw new Exception("IE or Edge");
+  throw new Exception("' #*#*#*#*# IE or Edge #*#*#*#*# '");
   return;
 }
 
