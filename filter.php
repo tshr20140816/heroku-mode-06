@@ -3,8 +3,14 @@
 $pid = getmypid();
 
 error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
-  
+
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
+
+if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']))
+{
+  echo "HTTP 503 Service Unavailable\r\n\r\n";
+  return;
+}
 
 error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 $buf = file_get_contents('php://stdin');
