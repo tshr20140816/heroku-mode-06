@@ -10,6 +10,5 @@ php --version
 if [ ${MODE} = 'APACHE' ]; then
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
-  ./delegate/delegated -r -v -P${PORT} +=./delegate/delegate.conf
-  # ./delegate/delegated -r -f -P${PORT} +=./delegate/delegate.conf
+  ./delegate/delegated -r -fv -P${PORT} +=./delegate/delegate.conf
 fi
