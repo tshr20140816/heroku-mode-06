@@ -8,15 +8,16 @@ error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/' . $_SERVER['SERVER_NAME'] . '/';
 
 error_log($pid . ' ' . $url);
-          
+
+$message = "$_SERVER['SERVER_NAME'] $_SERVER['HTTP_X_FORWARDED_FOR'] $_SERVER['REMOTE_USER'] $_SERVER['REQUEST_METHOD'] $_SERVER['REQUEST_METHOD'] $_SERVER['REQUEST_URI']";
+
 $context = array(
   "http" => array(
     "method" => "POST",
     "header" => array(
-      "Content-Type: text/plain",
-      "X-Dummy: dummy"
+      "Content-Type: text/plain"
       ),
-    "content" => $_SERVER['HTTP_USER_AGENT']
+    "content" => $message
     )
   );
 
