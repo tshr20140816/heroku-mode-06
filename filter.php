@@ -6,6 +6,7 @@ error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI'])
 
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 
+/*
 $url = 'http://logs-01.loggly.com/inputs/TOKEN/' . getenv('LOGGLY_TOKEN') . '/http/';
 
 error_log($pid . ' ' . $url);
@@ -21,6 +22,7 @@ $context = array(
 $res = file_get_contents($url, false, stream_context_create($context));
 
 error_log($pid . ' ' . $res);
+*/
 
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']))
 {
