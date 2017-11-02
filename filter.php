@@ -1,19 +1,9 @@
 <?php
-
-function output_log($message)
-{
-  $stdout = fopen('php://stdout', 'w');
-  fwrite($stdout, $message . "\n");
-  return;        
-}
-
 $pid = getmypid();
 
-//error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
-output_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
+error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
 
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
-
 
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/' . $_SERVER['SERVER_NAME'] . '/';
 
