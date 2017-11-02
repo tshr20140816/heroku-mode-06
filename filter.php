@@ -15,7 +15,7 @@ $context = array(
   "http" => array(
     "method" => "POST",
     "header" => "content-type:text/plain",
-    "content" => 'TEST MESSAGE'
+    "content" => $_SERVER['HTTP_USER_AGENT']
     )
   );
 
