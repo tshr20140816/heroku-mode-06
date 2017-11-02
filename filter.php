@@ -7,7 +7,7 @@ error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI'])
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 
 
-$url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/http/';
+$url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/' . $_SERVER['SERVER_NAME'] . '/';
 
 error_log($pid . ' ' . $url);
           
