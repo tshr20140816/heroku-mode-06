@@ -93,6 +93,7 @@ rm -rf ./ccache
 rm -f delegate.zip
 
 chmod 755 ./start_web.sh
+chmod 755 ./loggly.php
 
 popd
 
