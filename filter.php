@@ -12,7 +12,10 @@ error_log($pid . ' ' . $url);
 $context = array(
   "http" => array(
     "method" => "POST",
-    "header" => "content-type:text/plain",
+    "header" => array(
+      "Content-Type: text/plain",
+      "X-Dummy: dummy"
+      ),
     "content" => $_SERVER['HTTP_USER_AGENT']
     )
   );
