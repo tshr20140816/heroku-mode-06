@@ -14,7 +14,8 @@ $message =
   $_SERVER['HTTP_X_FORWARDED_FOR'] . " " .
   $_SERVER['REMOTE_USER'] . " " .
   $_SERVER['REQUEST_METHOD'] . " " .
-  $_SERVER['REQUEST_URI'];
+  $_SERVER['REQUEST_URI'] . " " .
+  $_SERVER['HTTP_USER_AGENT'];
 
 $context = array(
   "http" => array(
