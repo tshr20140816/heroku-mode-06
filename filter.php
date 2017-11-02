@@ -6,6 +6,22 @@ error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI'])
 
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 
+$url = 'https://logs-01.loggly.com/inputs/TOKEN/' . getenv('LOGGLY_TOKEN') . '/http/';
+
+error_log($pid . ' ' . $url);
+          
+$context = array(
+  "http" => array(
+    "method" => "POST",
+    "header" => "content-type:text/plain",
+    "content" => $_SERVER['HTTP_USER_AGENT']
+    )
+  );
+
+$res = file_get_contents($url, false, stream_context_create($context));
+
+error_log($pid . ' ' . $res);
+
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']))
 {
   throw new Exception("' #*#*#*#*# IE or Edge #*#*#*#*# '");
