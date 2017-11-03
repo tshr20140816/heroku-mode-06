@@ -4,6 +4,11 @@ set -x
 
 date
 
+if [ ! -v MODE ]; then
+  echo "Error : MODE not defined."
+  exit
+fi
+
 if [ ! -v LOG_LEVEL ]; then
   echo "Error : LOG_LEVEL not defined."
   exit
