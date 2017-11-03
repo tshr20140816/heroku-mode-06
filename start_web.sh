@@ -22,8 +22,9 @@ whereis php
 if [ ${MODE} = 'APACHE' ]; then
 
   if [ ! -v LOG_LEVEL ]; then
-    echo "Error : LOG_LEVEL not defined."
-    exit
+    # echo "Error : LOG_LEVEL not defined."
+    # exit
+    export LOG_LEVEL="warn"
   fi
 
   if [ ! -v BASIC_USER ]; then
