@@ -3,3 +3,4 @@
 MODE APACHE or else
 REMOTE_PATH https://---.herokuapp.com/mail/---
 LOG_LEVEL warn
+LOGGLY_TOKEN
