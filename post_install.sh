@@ -111,7 +111,8 @@ cat << '__HEREDOC__' > ./src/builtin/mssgs/news/artlistfooter.dhtml
 <HR>
 __HEREDOC__
 
-time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
+# time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
+time make -j ADMIN="admin@localhost"
 
 cp ./src/delegated ../delegate/
 cp ./src/builtin/icons/ysato/*.gif ../delegate/icons/
