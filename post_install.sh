@@ -4,41 +4,6 @@ set -x
 
 date
 
-if [ ! -v MODE ]; then
-  echo "Error : MODE not defined."
-  exit
-fi
-
-if [ ! -v LOG_LEVEL ]; then
-  echo "Error : LOG_LEVEL not defined."
-  exit
-fi
-
-if [ ! -v LOGGLY_TOKEN ]; then
-  echo "Error : LOGGLY_TOKEN not defined."
-  exit
-fi
-
-if [ ! -v BASIC_USER ]; then
-  echo "Error : BASIC_USER not defined."
-  exit
-fi
-
-if [ ! -v BASIC_PASSWORD ]; then
-  echo "Error : BASIC_PASSWORD not defined."
-  exit
-fi
-
-if [ ! -v REMOTE_PATH_1 ]; then
-  echo "Error : REMOTE_PATH_1 not defined."
-  exit
-fi
-
-if [ ! -v REMOTE_PATH_2 ]; then
-  echo "Error : REMOTE_PATH_2 not defined."
-  exit
-fi
-
 # flying
 git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
 
@@ -134,7 +99,7 @@ rm -f delegate.zip
 
 # ***** ttrss *****
 
-htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
+# htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
 # time git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss
 wait
