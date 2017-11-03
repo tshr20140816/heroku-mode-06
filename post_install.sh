@@ -39,6 +39,7 @@ if [ ! -v REMOTE_PATH_2 ]; then
   exit
 fi
 
+# flying
 git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
 
 # ***** delegate *****
