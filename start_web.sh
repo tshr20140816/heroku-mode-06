@@ -14,7 +14,6 @@ fi
 
 export TZ=JST-9
 
-apachectl -v
 httpd -V
 httpd -M
 php --version
