@@ -34,6 +34,8 @@ if [ ! -v REMOTE_PATH_2 ]; then
   exit
 fi
 
+# ***** delegate *****
+
 export HOME2=${PWD}
 export PATH="${HOME2}/usr/local/bin:${PATH}"
 
@@ -121,6 +123,26 @@ pushd ${HOME2}
 rm -rf ./usr
 rm -rf ./ccache
 rm -f delegate.zip
+
+# ***** ttrss *****
+
+htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
+
+time git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss
+
+mkdir -m 777 -p www/ttrss/css
+cp ttrss/css/* www/ttrss/css/
+
+mkdir -m 777 -p www/ttrss/images
+cp ttrss/images/* www/ttrss/images/
+
+mkdir -m 777 -p www/ttrss/js
+cp ttrss/js/* www/ttrss/js/
+
+mkdir -m 777 -p www/ttrss/lib
+cp -r ttrss/lib/* www/ttrss/lib/
+
+rm -rf ttrss
 
 chmod 755 ./start_web.sh
 chmod 755 ./loggly.php
