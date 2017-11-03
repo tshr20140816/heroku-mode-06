@@ -22,8 +22,6 @@ whereis php
 if [ ${MODE} = 'APACHE' ]; then
 
   if [ ! -v LOG_LEVEL ]; then
-    # echo "Error : LOG_LEVEL not defined."
-    # exit
     export LOG_LEVEL="warn"
   fi
 
@@ -51,5 +49,10 @@ if [ ${MODE} = 'APACHE' ]; then
   
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
-  ./delegate/delegated -r -v -P${PORT} +=/app/delegate/delegate.conf
+
+  if [ ! -v DELEGATE_OPTION ]; then
+    export DELEGATE_OPTION="-v"
+  fi
+  
+  ./delegate/delegated -r ${DELEGATE_OPTION} -P${PORT} +=/app/delegate/delegate.conf
 fi
