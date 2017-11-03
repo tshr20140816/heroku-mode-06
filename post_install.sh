@@ -16,7 +16,7 @@ mkdir -m 777 delegate
 mkdir -m 777 -p delegate/icons
 mkdir -m 777 -p delegate/tmp
 mkdir -m 777 -p delegate/tmp/resolvy
-mkdir -m 777 -p delegate/cache
+# mkdir -m 777 -p delegate/cache
 
 # apache
 mkdir -m 777 www
