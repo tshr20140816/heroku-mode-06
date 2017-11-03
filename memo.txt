@@ -6,3 +6,5 @@ REMOTE_PATH_1 https://---.herokuapp.com/mail/---
 REMOTE_PATH_2 https://---.ddns.net/---
 LOG_LEVEL warn
 LOGGLY_TOKEN
+BASIC_USER
+BASIC_PASSWORD
