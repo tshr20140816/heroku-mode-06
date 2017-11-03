@@ -23,6 +23,7 @@ mkdir -m 777 -p www/icons
 touch www/index.html
 mv 502.html www/
 mv favicon.ico www/
+mv phpinfo.php www/
 
 mkdir -m 777 -p usr/local
 mkdir -m 777 ccache
