@@ -39,6 +39,8 @@ if [ ! -v REMOTE_PATH_2 ]; then
   exit
 fi
 
+git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
+
 # ***** delegate *****
 
 export HOME2=${PWD}
@@ -133,7 +135,8 @@ rm -f delegate.zip
 
 htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
-time git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss
+# time git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss
+wait
 
 mkdir -m 777 -p www/ttrss/css
 cp ttrss/css/* www/ttrss/css/
