@@ -19,12 +19,6 @@ mkdir -m 777 -p delegate/icons
 chmod 777 www
 mkdir -m 777 -p www/icons
 
-# apache
-touch www/index.html
-mv 502.html www/
-mv favicon.ico www/
-mv phpinfo.php www/
-
 mkdir -m 777 -p usr/local
 mkdir -m 777 ccache
 
@@ -100,9 +94,6 @@ rm -f delegate.zip
 
 # ***** ttrss *****
 
-# htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
-
-# time git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss
 wait
 
 mkdir -m 777 -p www/ttrss/css
