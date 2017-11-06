@@ -16,7 +16,7 @@ mkdir -m 777 delegate
 mkdir -m 777 -p delegate/icons
 
 # apache
-mkdir -m 777 www
+chmod 777 www
 mkdir -m 777 -p www/icons
 
 # apache
