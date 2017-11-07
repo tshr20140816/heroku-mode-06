@@ -10,11 +10,12 @@ $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' .
 error_log($pid . ' ' . $url);
 
 $message =
-  $_SERVER['SERVER_NAME'] . " " .
-  $_SERVER['HTTP_X_FORWARDED_FOR'] . " " .
-  $_SERVER['REMOTE_USER'] . " " .
-  $_SERVER['REQUEST_METHOD'] . " " .
-  $_SERVER['REQUEST_URI'] . " " .
+  'D ' .
+  $_SERVER['SERVER_NAME'] . ' ' .
+  $_SERVER['HTTP_X_FORWARDED_FOR'] . ' ' .
+  $_SERVER['REMOTE_USER'] . ' ' .
+  $_SERVER['REQUEST_METHOD'] . ' ' .
+  $_SERVER['REQUEST_URI'] . ' ' .
   $_SERVER['HTTP_USER_AGENT'];
 
 $context = array(
