@@ -3,9 +3,10 @@ $stdin = fopen('php://stdin', 'r');
 ob_implicit_flush(true);
 while ($line = fgets($stdin))
 {
-  $array = explode(' ', $line, 3);
-  $servername = $array[1];
-  $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $servername . '/';
+  //$array = explode(' ', $line, 3);
+  //$servername = $array[1];
+  //$url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $servername . '/';
+  $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/Error/';
   
   $context = array(
   "http" => array(
