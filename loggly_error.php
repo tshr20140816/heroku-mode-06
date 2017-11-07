@@ -3,7 +3,7 @@ $stdin = fopen('php://stdin', 'r');
 ob_implicit_flush(true);
 while ($line = fgets($stdin))
 {
-  $tag = 'Error';
+  $tag = 'Unknown';
   if (file_exists('/app/servername'))
   {
     $tag = file_get_contents('/app/servername');
