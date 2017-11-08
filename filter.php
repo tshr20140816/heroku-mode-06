@@ -28,9 +28,9 @@ $context = array(
     )
   );
 
-//$res = file_get_contents($url, false, stream_context_create($context));
+$res = file_get_contents($url, false, stream_context_create($context));
 
-//error_log($pid . ' ' . $res);
+error_log($pid . ' ' . $res);
 
 
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']))
