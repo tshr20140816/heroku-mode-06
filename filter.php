@@ -5,8 +5,6 @@ error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI'])
 
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 
-$url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
-
 error_log($pid . ' ' . $url);
 
 /*
@@ -119,8 +117,13 @@ if (strpos($header, 'Content-Type: text/html') !== false)
 
 echo $buf;
 
+$url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
+
+$http_status_code = explode(' ', $header, 3)[1];
+
 $message =
   'D ' .
+  $http_status_code . ' ' .
   $_SERVER['SERVER_NAME'] . ' ' .
   $_SERVER['HTTP_X_FORWARDED_FOR'] . ' ' .
   $_SERVER['REMOTE_USER'] . ' ' .
