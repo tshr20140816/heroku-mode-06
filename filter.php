@@ -9,6 +9,7 @@ $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' .
 
 error_log($pid . ' ' . $url);
 
+/*
 $message =
   'D ' .
   $_SERVER['SERVER_NAME'] . ' ' .
@@ -25,16 +26,13 @@ $context = array(
       "Content-Type: text/plain"
       ),
     "content" => $message
-    ),
-  "ssl" => array(
-    'verify_peer_name' => false
     )
   );
 
 $res = file_get_contents($url, false, stream_context_create($context));
 
 error_log($pid . ' ' . $res);
-
+*/
 
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']))
 {
@@ -120,6 +118,29 @@ if (strpos($header, 'Content-Type: text/html') !== false)
 }
 
 echo $buf;
+
+$message =
+  'D ' .
+  $_SERVER['SERVER_NAME'] . ' ' .
+  $_SERVER['HTTP_X_FORWARDED_FOR'] . ' ' .
+  $_SERVER['REMOTE_USER'] . ' ' .
+  $_SERVER['REQUEST_METHOD'] . ' ' .
+  $_SERVER['REQUEST_URI'] . ' ' .
+  $_SERVER['HTTP_USER_AGENT'];
+
+$context = array(
+  "http" => array(
+    "method" => "POST",
+    "header" => array(
+      "Content-Type: text/plain"
+      ),
+    "content" => $message
+    )
+  );
+
+$res = file_get_contents($url, false, stream_context_create($context));
+
+error_log($pid . ' ' . $res);
 
 error_log($pid . ' ***** FILTER MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
 ?>
