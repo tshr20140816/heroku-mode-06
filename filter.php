@@ -25,6 +25,9 @@ $context = array(
       "Content-Type: text/plain"
       ),
     "content" => $message
+    ),
+  "ssl" => array(
+    'verify_peer_name' => false
     )
   );
 
