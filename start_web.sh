@@ -2,6 +2,13 @@
 
 set -x
 
+export TZ=JST-9
+
+httpd -V
+httpd -M
+php --version
+whereis php
+
 if [ ! -v MODE ]; then
   echo "Error : MODE not defined."
   exit
@@ -11,13 +18,6 @@ if [ ! -v LOGGLY_TOKEN ]; then
   echo "Error : LOGGLY_TOKEN not defined."
   exit
 fi
-
-export TZ=JST-9
-
-httpd -V
-httpd -M
-php --version
-whereis php
 
 if [ ${MODE} = 'APACHE' ]; then
 
@@ -44,6 +44,13 @@ if [ ${MODE} = 'APACHE' ]; then
     echo "Error : REMOTE_PATH_2 not defined."
     exit
   fi
+
+  if [ ! -v HOME_FQDN ]; then
+    echo "Error : HOME_FQDN not defined."
+    exit
+  fi
+  
+  export HOME_IP_ADDRESS=$(nslookup ${HOME_FQDN} 8.8.8.8 | grep ^A | grep -v 8.8.8.8 | awk '{print $2}')
   
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
   
