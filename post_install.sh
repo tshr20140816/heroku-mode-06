@@ -118,9 +118,7 @@ pushd self_repository
 
 last_update=$(git log | grep Date)
 
-cat << '__HEREDOC__' > ../www/last_update.html
-<HTML><BODY>$last_update</BODY></HTML>
-__HEREDOC__
+echo "<HTML><BODY>${last_update}</BODY></HTML>" > ../www/last_update.html
 
 popd
 
