@@ -57,7 +57,7 @@ if [ ${MODE} = 'APACHE' ]; then
     | awk '{print $2}')
 
   url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/${home_fqdn}/"
-  curl -H 'User-Agent : curl 2-33-9-51' -H 'content-type:text/plain' -d "${home_fqdn} ${HOME_IP_ADDRESS}" ${url}
+  curl -i -v -H 'content-type:text/plain' -d "${home_fqdn} ${HOME_IP_ADDRESS}" ${url}
 
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
