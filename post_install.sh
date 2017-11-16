@@ -14,6 +14,8 @@ time ./configure --prefix=../usr2/local
 time make -j2
 time make install
 popd
+ls -lang ./usr2/local/
+ls -lang ./usr2/local/bin/
 
 # ***** delegate *****
 
