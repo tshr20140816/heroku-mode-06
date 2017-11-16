@@ -54,6 +54,8 @@ if [ ${MODE} = 'APACHE' ]; then
   # export HOME_IP_ADDRESS=$(nslookup ${HOME_FQDN} 8.8.8.8 | grep ^A | grep -v 8.8.8.8 | awk '{print $2}')
   export HOME_IP_ADDRESS=$(nslookup $(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}') 8.8.8.8 | grep ^A | grep -v 8.8.8.8 | awk '{print $2}')
   
+  echo $HOME_IP_ADDRESS
+  
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
   
   vendor/bin/heroku-php-apache2 -C apache.conf www
