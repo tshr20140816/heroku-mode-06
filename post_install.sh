@@ -7,6 +7,14 @@ date
 # flying
 git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
 
+time wget http://ftp.jaist.ac.jp/pub/GNU/jwhois/jwhois-4.0.tar.gz
+time tar xf jwhois-4.0.tar.gz
+pushd jwhois*
+time ./configure --prefix=/app/usr/local
+time make -j2
+time make install
+popd
+
 # ***** delegate *****
 
 export HOME2=${PWD}
