@@ -8,6 +8,7 @@ httpd -V
 httpd -M
 php --version
 whereis php
+printenv
 
 if [ ! -v MODE ]; then
   echo "Error : MODE not defined."
