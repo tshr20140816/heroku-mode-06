@@ -6,10 +6,9 @@ error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI'])
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 error_log($pid . ' X-Forwarded-For ' . $_SERVER['HTTP_X_FORWARDED_FOR']);
 
-$tmp = explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']);
-$ipaddress = end($tmp);
+$forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
 
-error_log($pid . ' Check ip address ' . $ipaddress);
+error_log($pid . ' Forwarded Count ' . $forward_count);
 
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
 
