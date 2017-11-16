@@ -7,6 +7,8 @@ date
 # flying
 git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
 
+git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git self_repository &
+
 # ***** delegate *****
 
 export HOME2=${PWD}
@@ -109,6 +111,16 @@ mkdir -m 777 -p www/ttrss/lib
 cp -r ttrss/lib/* www/ttrss/lib/
 
 rm -rf ttrss
+
+# ***** last update *****
+
+pushd self_repository
+
+git log | grep Date > ../last_update.txt
+
+popd
+
+rm -rf self_repository
 
 chmod 755 ./start_web.sh
 chmod 755 ./loggly.php
