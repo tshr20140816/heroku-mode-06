@@ -44,21 +44,17 @@ if [ ${MODE} = 'APACHE' ]; then
     echo "Error : REMOTE_PATH_2 not defined."
     exit
   fi
-  
-  # HOME_FQDN=echo ${REMOTE_PATH_2} | awk -F/ '{print $3}'
-  # export HOME_IP_ADDRESS=$(nslookup ${HOME_FQDN} 8.8.8.8 | grep ^A | grep -v 8.8.8.8 | awk '{print $2}')
+
   export HOME_IP_ADDRESS=$(nslookup $(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}') 8.8.8.8 | grep ^A | grep -v 8.8.8.8 | awk '{print $2}')
-  
-  echo $HOME_IP_ADDRESS
-  
+
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
-  
+
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
 
   if [ ! -v DELEGATE_OPTION ]; then
     export DELEGATE_OPTION="-v"
   fi
-  
+
   ./delegate/delegated -r ${DELEGATE_OPTION} -P${PORT} +=/app/delegate/delegate.conf
 fi
