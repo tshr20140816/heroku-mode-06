@@ -12,9 +12,9 @@ error_log($pid . ' Forwarded Count ' . $forward_count);
 
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
 
-if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']))
+if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) && $forward_count != 3)
 {
-  error_log($pid . ' #*#*#*#*# IE or Edge #*#*#*#*#');
+  error_log($pid . ' #*#*#*#*# IE or Edge or Direct Connect #*#*#*#*#');
   header('HTTP', true, 403);
   
   $message =
