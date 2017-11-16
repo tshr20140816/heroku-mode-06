@@ -116,10 +116,10 @@ rm -rf ttrss
 
 pushd self_repository
 
-$last_update=$(git log | grep Date)
+last_update=$(git log | grep Date)
 
 cat << '__HEREDOC__' > ../www/last_update.html
-<HTML><BODY>${last_update}</BODY></HTML>
+<HTML><BODY>$last_update</BODY></HTML>
 __HEREDOC__
 
 popd
