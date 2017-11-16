@@ -8,7 +8,6 @@ httpd -V
 httpd -M
 php --version
 whereis php
-whereis whois
 
 if [ ! -v MODE ]; then
   echo "Error : MODE not defined."
