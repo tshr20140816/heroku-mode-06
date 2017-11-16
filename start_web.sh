@@ -45,8 +45,9 @@ if [ ${MODE} = 'APACHE' ]; then
     exit
   fi
 
-  export HOME_IP_ADDRESS=$(nslookup $(echo ${REMOTE_PATH_2} \
-    | awk -F/ '{print $3}') 8.8.8.8 \
+  nslookup $(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}') 8.8.8.8
+
+  export HOME_IP_ADDRESS=$(nslookup $(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}') 8.8.8.8 \
     | grep ^Address \
     | grep -v 8.8.8.8 \
     | awk '{print $2}')
