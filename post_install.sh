@@ -7,20 +7,23 @@ date
 # flying
 git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
 
-time wget http://ftp.jaist.ac.jp/pub/GNU/jwhois/jwhois-4.0.tar.gz
-time tar xf jwhois-4.0.tar.gz
-pushd jwhois*
-time ./configure --prefix=../usr2/local
-time make -j2
-time make install
-popd
-ls -lang ./usr2/local/
-ls -lang ./usr2/local/bin/
 
 # ***** delegate *****
 
 export HOME2=${PWD}
 export PATH="${HOME2}/usr/local/bin:${PATH}"
+
+
+time wget http://ftp.jaist.ac.jp/pub/GNU/jwhois/jwhois-4.0.tar.gz
+time tar xf jwhois-4.0.tar.gz
+pushd jwhois*
+time ./configure --prefix=${HOME2}/usr2/local
+time make -j2
+time make install
+popd
+ls -lang ${HOME2}/usr2/local
+ls -lang ${HOME2}/usr2/local/bin/
+
 
 mkdir -m 777 delegate
 mkdir -m 777 -p delegate/icons
