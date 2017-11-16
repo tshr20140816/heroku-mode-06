@@ -44,11 +44,6 @@ if [ ${MODE} = 'APACHE' ]; then
     echo "Error : REMOTE_PATH_2 not defined."
     exit
   fi
-
-  if [ ! -v HOME_FQDN ]; then
-    echo "Error : HOME_FQDN not defined."
-    exit
-  fi
   
   # HOME_FQDN=echo ${REMOTE_PATH_2} | awk -F/ '{print $3}'
   # export HOME_IP_ADDRESS=$(nslookup ${HOME_FQDN} 8.8.8.8 | grep ^A | grep -v 8.8.8.8 | awk '{print $2}')
