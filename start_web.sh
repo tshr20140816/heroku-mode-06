@@ -56,8 +56,9 @@ if [ ${MODE} = 'APACHE' ]; then
     | grep -v 8.8.8.8 \
     | awk '{print $2}')
 
-  url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/APP_START/"
-  curl -i -v -H 'content-type:text/plain' -d "${home_fqdn} ${HOME_IP_ADDRESS}" ${url}
+  # url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/APP_START/"
+  # curl -i -v -H 'content-type:text/plain' -d "${home_fqdn} ${HOME_IP_ADDRESS}" ${url}
+  echo ${HOME_IP_ADDRESS} > /app/HOME_IP_ADDRESS
 
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
