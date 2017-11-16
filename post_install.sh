@@ -14,8 +14,8 @@ export HOME2=${PWD}
 export PATH="${HOME2}/usr/local/bin:${PATH}"
 
 
-time wget http://ftp.jaist.ac.jp/pub/GNU/jwhois/jwhois-4.0.tar.gz
-time tar xf jwhois-4.0.tar.gz
+time wget http://ftp.jaist.ac.jp/pub/GNU/jwhois/jwhois-3.2.3.tar.gz
+time tar xf jwhois-3.2.3.tar.gz
 pushd jwhois*
 time ./configure --prefix=${HOME2}/usr2/local
 time make -j2
