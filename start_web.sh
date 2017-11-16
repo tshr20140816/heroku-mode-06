@@ -36,11 +36,13 @@ if [ ${MODE} = 'APACHE' ]; then
     exit
   fi
 
+  # ml
   if [ ! -v REMOTE_PATH_1 ]; then
     echo "Error : REMOTE_PATH_1 not defined."
     exit
   fi
 
+  # ttrss
   if [ ! -v REMOTE_PATH_2 ]; then
     echo "Error : REMOTE_PATH_2 not defined."
     exit
