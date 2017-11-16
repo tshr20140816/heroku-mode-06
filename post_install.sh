@@ -13,18 +13,6 @@ git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
 export HOME2=${PWD}
 export PATH="${HOME2}/usr/local/bin:${PATH}"
 
-
-time wget http://ftp.jaist.ac.jp/pub/GNU/jwhois/jwhois-3.2.3.tar.gz
-time tar xf jwhois-3.2.3.tar.gz
-pushd jwhois*
-time ./configure --prefix=${HOME2}/usr2/local
-time make -j2
-time make install
-popd
-ls -lang ${HOME2}/usr2/local
-ls -lang ${HOME2}/usr2/local/bin/
-
-
 mkdir -m 777 delegate
 mkdir -m 777 -p delegate/icons
 
