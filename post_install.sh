@@ -7,7 +7,6 @@ date
 # flying
 git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
 
-
 # ***** delegate *****
 
 export HOME2=${PWD}
