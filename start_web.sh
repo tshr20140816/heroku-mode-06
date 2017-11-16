@@ -48,12 +48,16 @@ if [ ${MODE} = 'APACHE' ]; then
     exit
   fi
 
-  nslookup $(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}') 8.8.8.8
+  home_fqdn=$(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}')
+  nslookup ${home_fqdn} 8.8.8.8
 
-  export HOME_IP_ADDRESS=$(nslookup $(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}') 8.8.8.8 \
+  export HOME_IP_ADDRESS=$(nslookup ${home_fqdn} 8.8.8.8 \
     | grep ^Address \
     | grep -v 8.8.8.8 \
     | awk '{print $2}')
+
+  url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/${home_fqdn}/"
+  curl -H 'User-Agent : curl 2-33-9-51' -H 'content-type:text/plain' -d "${home_fqdn} ${HOME_IP_ADDRESS}" ${url}
 
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
