@@ -50,15 +50,15 @@ if [ ${MODE} = 'APACHE' ]; then
     exit
   fi
 
-  home_fqdn=$(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}')
-  nslookup ${home_fqdn} 8.8.8.8
+  export HOME_FQDN=$(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}')
+  nslookup ${HOME_FQDN} 8.8.8.8
 
-  export HOME_IP_ADDRESS=$(nslookup ${home_fqdn} 8.8.8.8 \
+  export HOME_IP_ADDRESS=$(nslookup ${HOME_FQDN} 8.8.8.8 \
     | grep ^Address \
     | grep -v 8.8.8.8 \
     | awk '{print $2}')
 
-  echo "${home_fqdn} ${HOME_IP_ADDRESS}" > /app/HOME_IP_ADDRESS
+  echo "${HOME_FQDN} ${HOME_IP_ADDRESS}" > /app/HOME_IP_ADDRESS
 
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
