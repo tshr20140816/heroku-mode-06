@@ -16,7 +16,7 @@ $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' .
 
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $key != md5_file('/app/www/last_update.txt'))
 {
-  error_log($pid . ' #*#*#*#*# IE or Edge or Direct Connect Or X-Access-Key Unmatch #*#*#*#*#');
+  error_log($pid . ' #*#*#*#*# IE or Edge or Direct Connect or X-Access-Key Unmatch #*#*#*#*#');
   header('HTTP', true, 403);
   
   $message =
