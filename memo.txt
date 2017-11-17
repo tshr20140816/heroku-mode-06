@@ -3,9 +3,11 @@
 
 MANDATORY
 MODE APACHE or else
+LOGGLY_TOKEN
+
+MANDATORY (MODE APACHE ONLY)
 REMOTE_PATH_1 https://---.herokuapp.com/mail/---
 REMOTE_PATH_2 https://---.ddns.net/---
-LOGGLY_TOKEN
 BASIC_USER
 BASIC_PASSWORD
 
