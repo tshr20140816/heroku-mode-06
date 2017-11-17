@@ -118,7 +118,7 @@ pushd self_repository
 
 last_update=$(git log | grep Date | grep -o "\w\{3\} .\+$")
 
-echo "<HTML><BODY>${last_update}</BODY></HTML>" > ../www/last_update.html
+echo "${last_update}" > ../www/last_update.txt
 
 popd
 
