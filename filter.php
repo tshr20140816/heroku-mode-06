@@ -7,7 +7,7 @@ error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 
 error_log($pid . ' X-Key ' . $_SERVER['HTTP_X_KEY']);
 $key = $_SERVER['HTTP_X_KEY'];
-error_log($pid . ' file_ ' . md5_file('/app/last_update.html'));
+error_log($pid . ' file_ ' . md5_file('/app/www/last_update.html'));
 
 error_log($pid . ' X-Forwarded-For ' . $_SERVER['HTTP_X_FORWARDED_FOR']);
 $forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
