@@ -4,6 +4,7 @@ $pid = getmypid();
 error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI']);
 
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
+error_log($pid . ' X-Key ' . $_SERVER['HTTP_X_KEY']);
 error_log($pid . ' X-Forwarded-For ' . $_SERVER['HTTP_X_FORWARDED_FOR']);
 
 $forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
