@@ -20,6 +20,8 @@ if [ ! -v LOGGLY_TOKEN ]; then
   exit
 fi
 
+export x_key=$(md5sum www/last_update.html | awk '{print $1}')
+
 if [ ${MODE} = 'APACHE' ]; then
 
   if [ ! -v LOG_LEVEL ]; then
