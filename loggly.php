@@ -23,7 +23,7 @@ while ($line = fgets($stdin)) {
           'header' => array(
             'Content-Type: text/plain'
           ),
-        'content' => "S ${home_ip_address} ${server_name} ${last_update}"
+        'content' => "S ${home_ip_address} * ${server_name} * ${last_update}"
         ));
       $res = file_get_contents($url, false, stream_context_create($context));
     }
