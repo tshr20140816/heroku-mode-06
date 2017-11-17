@@ -116,7 +116,7 @@ rm -rf ttrss
 
 pushd self_repository
 
-last_update=$(git log | grep Date)
+last_update=$(git log | grep Date | grep -o "\w\{3\} .\+$")
 
 echo "<HTML><BODY>${last_update}</BODY></HTML>" > ../www/last_update.html
 
