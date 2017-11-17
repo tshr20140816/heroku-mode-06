@@ -5,8 +5,8 @@ error_log($pid . ' ***** FILTER MESSAGE START ***** ' . $_SERVER['REQUEST_URI'])
 
 error_log($pid . ' ' . $_SERVER['HTTP_USER_AGENT']);
 
-error_log($pid . ' file_ ' . md5_file('/app/www/last_update.html'));
-error_log($pid . ' X-Key ' . $_SERVER['HTTP_X_KEY']);
+error_log($pid . ' file_ ' . md5_file('/app/www/last_update.txt'));
+error_log($pid . ' X-Access-Key ' . $_SERVER['HTTP_X_ACCESS_KEY']);
 $key = $_SERVER['HTTP_X_KEY'];
 
 error_log($pid . ' X-Forwarded-For ' . $_SERVER['HTTP_X_FORWARDED_FOR']);
@@ -16,9 +16,9 @@ error_log($pid . ' Forwarded Count ' . $forward_count);
 
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
 
-if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $key != md5_file('/app/www/last_update.html'))
+if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $key != md5_file('/app/www/last_update.txt'))
 {
-  error_log($pid . ' #*#*#*#*# IE or Edge or Direct Connect Or X-Key Unmatch #*#*#*#*#');
+  error_log($pid . ' #*#*#*#*# IE or Edge or Direct Connect Or X-Access-Key Unmatch #*#*#*#*#');
   header('HTTP', true, 403);
   
   $message =
