@@ -22,7 +22,7 @@ while ($line = fgets($stdin)) {
           "header" => array(
             "Content-Type: text/plain"
           ),
-        "content" => $prefix . ' ' . $line
+        "content" => 'S ' . $home_ip_address . ' ' . $servername
         ));
       $res = file_get_contents($url, false, stream_context_create($context));
     }
