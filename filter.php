@@ -12,8 +12,6 @@ $key = $_SERVER['HTTP_X_ACCESS_KEY'];
 error_log($pid . ' X-Forwarded-For ' . $_SERVER['HTTP_X_FORWARDED_FOR']);
 $forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
 
-error_log($pid . ' Forwarded Count ' . $forward_count);
-
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
 
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $key != md5_file('/app/www/last_update.txt'))
