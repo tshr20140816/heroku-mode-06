@@ -79,7 +79,15 @@ if (strpos($header, 'Content-Type: text/html') !== false)
     // 自動更新追加
     $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $body);
   }
-  $body = str_replace('</TITLE>', '</TITLE></HEAD>', $body);
+  $replace_text = <<< __HEREDOC__
+</TITLE>
+<STYLE TYPE='text/css'>
+a { text-decoration: none; }
+</STYLE>
+</HEAD>
+__HEREDOC__
+  //$body = str_replace('</TITLE>', '</TITLE></HEAD>', $body);
+  $body = str_replace('</TITLE>', $replace_text, $body);
 
   // アイコンはフロント側から取得
   $body = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/-/builtin/icons/ysato/', '/icons/', $body);
