@@ -82,8 +82,7 @@ if (strpos($header, 'Content-Type: text/html') !== false)
   $replace_text = <<< __HEREDOC__
 </TITLE>
 <STYLE TYPE='text/css'>
-a { text-decoration: none; }
-a:link { font-weight: normal; }
+a { text-decoration: none; font-weight: 200; }
 </STYLE>
 </HEAD>
 __HEREDOC__;
