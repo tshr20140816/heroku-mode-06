@@ -83,6 +83,7 @@ if (strpos($header, 'Content-Type: text/html') !== false)
 </TITLE>
 <STYLE TYPE='text/css'>
 a { text-decoration: none; }
+a:link { font-weight: normal; }
 </STYLE>
 </HEAD>
 __HEREDOC__;
