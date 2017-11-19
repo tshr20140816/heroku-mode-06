@@ -106,6 +106,7 @@ __HEREDOC__;
   $body = preg_replace('/<small>.+?<\/small>/s', '', $body, 3);
   
   $body = preg_replace('/<(s|\/s)mall>/s', '', $body);
+  $body = str_replace('</DT>', '</DT><BR>', $body);
   
   // 空白削除
   $body = preg_replace('/^ *\r\n/m', '', $body);
