@@ -86,8 +86,8 @@ a { text-decoration: none; }
 </STYLE>
 </HEAD>
 __HEREDOC__
-  //$body = str_replace('</TITLE>', '</TITLE></HEAD>', $body);
-  $body = str_replace('</TITLE>', $replace_text, $body);
+  $body = str_replace('</TITLE>', '</TITLE></HEAD>', $body);
+  //$body = str_replace('</TITLE>', $replace_text, $body);
 
   // アイコンはフロント側から取得
   $body = str_replace('http://' . $_SERVER['SERVER_NAME'] . ':80/-/builtin/icons/ysato/', '/icons/', $body);
