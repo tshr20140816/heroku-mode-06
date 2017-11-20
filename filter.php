@@ -120,6 +120,7 @@ __HEREDOC__;
   error_log("\r\n");
   error_log($body);
 
+  // 圧縮
   $buf = $header;
   $body = gzencode($body, 9);
 
