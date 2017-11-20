@@ -16,6 +16,7 @@ $forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
 
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
 
+// IE Edge 不可
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $access_key != md5_file('/app/www/last_update.txt'))
 {
   error_log($pid . ' #*#*#*#*# IE or Edge or Direct Connect or X-Access-Key Unmatch #*#*#*#*#');
