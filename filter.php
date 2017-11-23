@@ -56,7 +56,7 @@ stream_set_blocking($fp , FALSE);
 if (stream_select($r = array($fp), $w = null, $e = null, 15) === 0)
 {
   error_log($pid . ' ***** STDIN FINISH ***** TIME OUT ' . $_SERVER['REQUEST_URI']);
-  exec('/app/start_web.sh &');
+  exec('nohup /app/start_web.sh &');
   exit();
 } else {
   while ($b = fread($fp, 1024))
