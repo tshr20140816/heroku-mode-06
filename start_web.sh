@@ -72,4 +72,6 @@ else
   chmod 777 ./delegate/tmp/
 
   ./delegate/delegated -r ${DELEGATE_OPTION} -P${PORT} +=/app/delegate/delegate.conf
+  sleep 300
+  ./delegate/delegated -r ${DELEGATE_OPTION} -P${PORT} +=/app/delegate/delegate.conf
 fi
