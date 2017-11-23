@@ -197,5 +197,10 @@ $res = file_get_contents($url, false, stream_context_create($context));
 
 error_log($pid . ' ' . $res);
 
+if ($timeout === TRUE)
+{
+  exec('nohup /app/start_web.sh > /dev/null &');
+}
+
 error_log($pid . ' ***** FILTER MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
 ?>
