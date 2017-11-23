@@ -55,7 +55,7 @@ $context = array(
     "timeout" => 10
     )
   );
-$buf = file_get_contents('php://stdin, false, $context');
+$buf = file_get_contents('php://stdin', false, $context);
 error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
