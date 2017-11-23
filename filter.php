@@ -50,12 +50,13 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
 }
 
 error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
-/*
+
 $fp = fopen('php://stdin', 'rb');
 stream_set_blocking($fp , FALSE);
 if (stream_select($r = array($fp), $w = null, $e = null, 15) === 0)
 {
   error_log($pid . ' ***** STDIN FINISH ***** TIME OUT ' . $_SERVER['REQUEST_URI']);
+  exec('nohup /app/start_web.sh > /dev/null &');
   exit();
 } else {
   while ($b = fread($fp, 1024))
@@ -63,8 +64,8 @@ if (stream_select($r = array($fp), $w = null, $e = null, 15) === 0)
     $buf .= $b;
   }
 }
-*/
-$buf = file_get_contents('php://stdin');
+
+//$buf = file_get_contents('php://stdin');
 error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
