@@ -54,9 +54,8 @@ error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 $fp = fopen('php://stdin', 'rb');
 while ($b = fread($fp, 64))
 {
-  $b .= $b;
+  $buf .= $b;
 }
-$buf = $b;
 error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
