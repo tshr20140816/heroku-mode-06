@@ -61,7 +61,7 @@ while ($b = fread($fp, 64))
 */
 $fp = fopen('php://stdin', 'rb');
 stream_set_blocking($fp , FALSE);
-if (stream_select($r = array($fp), $w = null, $e = null, 15) === FALSE)
+if (stream_select($r = array($fp), $w = null, $e = null, 15) === 0)
 {
   // time out
   error_log($pid . ' ***** STDIN FINISH ***** TIME OUT ' . $_SERVER['REQUEST_URI']);
