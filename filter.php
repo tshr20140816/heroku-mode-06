@@ -51,13 +51,32 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
 
 error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 
+$timeout = FALSE;
 $fp = fopen('php://stdin', 'rb');
 stream_set_blocking($fp , FALSE);
 if (stream_select($r = array($fp), $w = null, $e = null, 15) === 0)
 {
+  $timeout = TRUE;
   error_log($pid . ' ***** STDIN FINISH ***** TIME OUT ' . $_SERVER['REQUEST_URI']);
-  exec('nohup /app/start_web.sh > /dev/null &');
-  exit();
+  //exec('nohup /app/start_web.sh > /dev/null &');
+  //exit();
+  $buf = <<< __HEREDOC__
+HTTP/1.1 200 OK
+Date: Thu, 23 Nov 2017 16:06:59 GMT
+Server: Apache
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<html>
+<head>
+<meta http-equiv='refresh' content='30'>
+<title>Time Out</title>
+</head>
+<body>
+<div>Auto Retry...</div>
+</body>
+</html>
+__HEREDOC__
 } else {
   while ($b = fread($fp, 1024))
   {
@@ -154,11 +173,9 @@ __HEREDOC__;
 
 echo $buf;
 
-$http_status_code = explode(' ', $header, 3)[1];
-
 $message =
   'D ' .
-  $http_status_code . ' ' .
+  explode(' ', $header, 3)[1] . ' ' .
   $_SERVER['SERVER_NAME'] . ' ' .
   $_SERVER['HTTP_X_FORWARDED_FOR'] . ' ' .
   $_SERVER['REMOTE_USER'] . ' ' .
