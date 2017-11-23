@@ -69,5 +69,7 @@ else
     export DELEGATE_OPTION="-v"
   fi
 
+  chmod 777 ./delegate/tmp/
+
   ./delegate/delegated -r ${DELEGATE_OPTION} -P${PORT} +=/app/delegate/delegate.conf
 fi
