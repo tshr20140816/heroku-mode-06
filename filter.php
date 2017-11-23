@@ -144,8 +144,6 @@ __HEREDOC__;
   $body = preg_replace('/<(s|\/s)mall>/s', '', $body);
   $body = str_replace('</DT>', '</DT><BR><BR>', $body);
   
-  $body = preg_replace('/<FORM ACTION=\/(.+?)\/.+?\/(\d+?)\?ViewerControl METHOD=POST>/s', '<FORM ACTION=/ml/$2?ViewerControl METHOD=POST>', $body);
-  
   // 空白削除
   $body = preg_replace('/^ *\r\n/m', '', $body);
   $body = preg_replace('/^  /m', ' ', $body);
