@@ -76,7 +76,7 @@ Content-Type: text/html; charset=utf-8
 <div>Auto Retry...</div>
 </body>
 </html>
-__HEREDOC__
+__HEREDOC__;
 } else {
   while ($b = fread($fp, 1024))
   {
