@@ -55,6 +55,7 @@ $fp = fopen('php://stdin', 'rb');
 while ($b = fread($fp, 64))
 {
   $buf .= $b;
+  error_log($pid . ' ' . strlen($buf));
 }
 error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
