@@ -51,12 +51,28 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
 
 error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
 //$buf = file_get_contents('php://stdin');
+/*
 $fp = fopen('php://stdin', 'rb');
 while ($b = fread($fp, 64))
 {
   $buf .= $b;
   error_log($pid . ' ' . strlen($buf));
 }
+*/
+$fp = fopen('php://stdin', 'rb');
+stream_set_blocking($fp , FALSE);
+if (stream_select(array($fp), null, null, 15))
+{
+  while ($b = fread($fp, 1024))
+  {
+    $buf .= $b;
+  }
+} else {
+  // time out
+  error_log($pid . ' ***** STDIN FINISH ***** TIME OUT ' . $_SERVER['REQUEST_URI']);
+  exit();
+}
+
 error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
