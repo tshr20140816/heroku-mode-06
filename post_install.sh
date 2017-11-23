@@ -94,6 +94,9 @@ rm -rf ./usr
 rm -rf ./ccache
 rm -f delegate.zip
 
+mkdir -m 777 -p delegate/cache
+mkdir -m 777 -p delegate/tmp
+
 # ***** ttrss *****
 
 wait
