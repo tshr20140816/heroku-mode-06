@@ -50,12 +50,15 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
 }
 
 error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
+/*
 $context = array(
   "http" => array(
     "timeout" => 10
     )
   );
 $buf = file_get_contents('php://stdin', false, $context);
+*/
+$buf = file_get_contents('php://stdin');
 error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
