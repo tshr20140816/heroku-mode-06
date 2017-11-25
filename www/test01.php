@@ -45,6 +45,7 @@ for ($i = 0; $i < $rc; $i++) {
   $items[] = $tmp;
 }
 
+/*
 $xml_root_text = <<< '__HEREDOC__'
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
@@ -60,5 +61,5 @@ $xml_root_text = <<< '__HEREDOC__'
 
 header('Content-Type: application/xml; charset=UTF-8');
 echo str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text);
-
+*/
 ?>
