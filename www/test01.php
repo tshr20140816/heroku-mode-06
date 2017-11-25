@@ -12,7 +12,7 @@ $html = mb_convert_encoding(file_get_contents($url), 'UTF-8', $encoding);
 $rc = preg_match($global_pattern, $html, $matches);
 
 error_log($rc);
-error_log(var_dump($matches));
+error_log($matches[1]);
 /*
 feed_title
 feed_link
