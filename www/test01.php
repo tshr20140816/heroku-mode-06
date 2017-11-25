@@ -7,7 +7,9 @@ $item_pattern = '/<td><a href="(.+?)"><img src=".+?".+<h3>(.+?)<\/h3>/s';
 
 $html = file_get_contents($url);
 
-$rc = preg_match()
+$html = mb_convert_encoding(file_get_contents($url), $encoding, 'UTF-8');
+
+error_log($html);
 
 /*
 feed_title
