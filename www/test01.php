@@ -10,7 +10,7 @@ $feed_link = 'http://shop.rcc.jp/store/';
 
 $item_title = '__3__';
 $item_link = 'http://shop.rcc.jp__1__';
-$item_content = '<img src="http://shop.rcc.jp__2__"/>__3__';
+$item_content = '&lt;img src="http://shop.rcc.jp__2__"/&gt;__3__';
 
 $html = mb_convert_encoding(file_get_contents($url), 'UTF-8', $encoding);
 
@@ -50,7 +50,7 @@ $xml_root_text = <<< __HEREDOC__
 <rss version="2.0">
   <channel>
     <title>${feed_title}</title>
-    <link>${$feed_link}</link>
+    <link>${feed_link}</link>
     <description/>
     <language>ja</language>
     __ITEMS__
