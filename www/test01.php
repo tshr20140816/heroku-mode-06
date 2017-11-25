@@ -17,10 +17,10 @@ $rc = preg_match($global_pattern, $html, $matches1);
 $rc = preg_match_all($item_pattern, $matches1[1], $matches2, PREG_SET_ORDER);
 
 error_log($rc);
-error_log($matches2[1][0]);
 error_log($matches2[1][1]);
-error_log($matches2[2][0]);
+error_log($matches2[1][2]);
 error_log($matches2[2][1]);
+error_log($matches2[2][2]);
 
 /*
 feed_title
