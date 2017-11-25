@@ -12,25 +12,16 @@ $item_title = '__3__';
 $item_link = 'http://shop.rcc.jp__1__';
 $item_content = '&lt;img src="http://shop.rcc.jp__2__"/&gt;__3__';
 
-$html = mb_convert_encoding(file_get_contents($url), 'UTF-8', $encoding);
+$items_template = "<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>";
 
-//error_log($html);
+$html = mb_convert_encoding(file_get_contents($url), 'UTF-8', $encoding);
 
 $rc = preg_match($global_pattern, $html, $matches1);
 
-//error_log($rc);
-//error_log($matches1[1]);
+$items = array();
 
 $rc = preg_match_all($item_pattern, $matches1[1], $matches2, PREG_SET_ORDER);
-
-$items_template = "<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>";
-
-$items = array();
-error_log($rc);
 for ($i = 0; $i < $rc; $i++) {
-  error_log($matches2[$i][1]);
-  error_log($matches2[$i][2]);
-  error_log($matches2[$i][3]);
   $title = $item_title;
   $link = $item_link;
   $content = $item_content;
