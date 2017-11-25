@@ -10,6 +10,7 @@ REMOTE_PATH_1 https://---.herokuapp.com/mail/---
 REMOTE_PATH_2 https://---.ddns.net/---
 BASIC_USER
 BASIC_PASSWORD
+RSS_TEMPLATE_URL
 
 OPTIONAL
 LOG_LEVEL warn
