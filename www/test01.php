@@ -10,7 +10,7 @@ $feed_link = 'http://shop.rcc.jp/store/';
 
 $item_title = '__3__';
 $item_link = 'http://shop.rcc.jp__1__';
-$item_content = '&lt;img src="http://shop.rcc.jp__2__"/&gt;__3__';
+$item_description = '&lt;img src="http://shop.rcc.jp__2__"/&gt;__3__';
 
 $items_template = "<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>";
 
@@ -24,15 +24,15 @@ $rc = preg_match_all($item_pattern, $matches1[1], $matches2, PREG_SET_ORDER);
 for ($i = 0; $i < $rc; $i++) {
   $title = $item_title;
   $link = $item_link;
-  $content = $item_content;
+  $description = $item_description;
   for ($j = 1; $j < count($matches2[$i]); $j++) {
     $title = str_replace('__' . $j . '__', $matches2[$i][$j], $title);
     $link = str_replace('__' . $j . '__', $matches2[$i][$j], $link);
-    $content = str_replace('__' . $j . '__', $matches2[$i][$j], $content);
+    $description = str_replace('__' . $j . '__', $matches2[$i][$j], $description);
   }
   $tmp = str_replace('__TITLE__', $title, $items_template);
   $tmp = str_replace('__LINK__', $link, $tmp);
-  $tmp = str_replace('__DESCRIPTION__', $content, $tmp);
+  $tmp = str_replace('__DESCRIPTION__', $description, $tmp);
   $items[] = $tmp;
 }
 
