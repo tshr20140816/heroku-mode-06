@@ -27,14 +27,14 @@ $items_template = "<item><title>__TITLE__</title><link>__LINK__</link><descripti
 
 $items = array();
 error_log($rc);
-for($i = 0; $i < $rc; $i++) {
+for ($i = 0; $i < $rc; $i++) {
   error_log($matches2[$i][1]);
   error_log($matches2[$i][2]);
   error_log($matches2[$i][3]);
   $title = $item_title;
   $link = $item_link;
   $content = $item_content;
-  for($j = 1; $j < count($matches2[$i]); $j++) {
+  for ($j = 1; $j < count($matches2[$i]); $j++) {
     $title = str_replace('__' . $j . '__', $matches2[$i][$j], $title);
     $link = str_replace('__' . $j . '__', $matches2[$i][$j], $link);
     $content = str_replace('__' . $j . '__', $matches2[$i][$j], $content);
