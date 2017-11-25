@@ -17,7 +17,7 @@ $rc = preg_match($global_pattern, $html, $matches1);
 $rc = preg_match_all($item_pattern, $matches1[1], $matches2, PREG_SET_ORDER);
 
 error_log($rc);
-for($i = 1; $i < $rc + 1; $i++) {
+for($i = 0; $i < $rc; $i++) {
   error_log($matches2[$i][1]);
   error_log($matches2[$i][2]);
   error_log($matches2[$i][3]);
