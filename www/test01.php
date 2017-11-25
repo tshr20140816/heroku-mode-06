@@ -7,7 +7,7 @@ $item_pattern = '/<td><a href="(.+?)"><img src=".+?".+<h3>(.+?)<\/h3>/s';
 
 $html = file_get_contents($url);
 
-$html = mb_convert_encoding(file_get_contents($url), $encoding, 'UTF-8');
+$html = mb_convert_encoding(file_get_contents($url), 'UTF-8', $encoding);
 
 error_log($html);
 
