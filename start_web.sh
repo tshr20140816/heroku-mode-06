@@ -49,6 +49,11 @@ if [ ${MODE} = 'APACHE' ]; then
     echo "Error : REMOTE_PATH_2 not defined."
     exit
   fi
+  
+  if [ ! -v RSS_TEMPLATE_URL ]; then
+    echo "Error : RSS_TEMPLATE_URL not defined."
+    exit  
+  fi
 
   export HOME_FQDN=$(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}' | awk -F: '{print $1}')
   nslookup ${HOME_FQDN} 8.8.8.8
