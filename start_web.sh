@@ -20,6 +20,10 @@ if [ ! -v LOGGLY_TOKEN ]; then
   exit
 fi
 
+$mode_name=$(cat /proc/cpuinfo | grep "model name " | head -n 1)
+
+echo $model_name
+
 export X_ACCESS_KEY=$(md5sum www/last_update.txt | awk '{print $1}')
 
 if [ ${MODE} = 'APACHE' ]; then
