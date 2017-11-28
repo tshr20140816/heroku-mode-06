@@ -20,7 +20,7 @@ if [ ! -v LOGGLY_TOKEN ]; then
   exit
 fi
 
-$mode_name="$(cat /proc/cpuinfo | grep "model name" | head -n 1)"
+mode_name="$(cat /proc/cpuinfo | grep "model name" | head -n 1)"
 
 echo $model_name
 
