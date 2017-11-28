@@ -22,7 +22,7 @@ fi
 
 ip_address=$(ip address | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $4}')
 
-model_name="$(cat /proc/cpuinfo | grep "model name" | head -n 1)"
+model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
 
 url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
 curl -i -v -H 'content-type:text/plain' -d "${ip_address} ${model_name:13}" ${url}
