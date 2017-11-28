@@ -22,7 +22,7 @@ fi
 
 model_name="$(cat /proc/cpuinfo | grep "model name" | head -n 1)"
 
-echo $model_name
+echo ${model_name:15}
 
 export X_ACCESS_KEY=$(md5sum www/last_update.txt | awk '{print $1}')
 
