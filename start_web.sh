@@ -22,12 +22,18 @@ if [ ! -v LOGGLY_TOKEN ]; then
   exit
 fi
 
+url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
+
 export IP_ADDRESS=$(ip address | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $4}')
 
-model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
+linux_version="$(cat /proc/version)"
+curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${linux_version}" ${url}
 
-url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
+model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
 curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${model_name:13}" ${url}
+
+curl_version="$(curl --version | head -n 1)"
+curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${curl_version}" ${url}
 
 echo ${IP_ADDRESS} > /app/IP_ADDRESS
 
