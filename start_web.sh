@@ -25,7 +25,7 @@ export IP_ADDRESS=$(ip address | grep 'inet ' | grep -v '127.0.0.1' | awk '{prin
 model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
 
 url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
-curl -i -H 'content-type:text/plain' -d "${IP_ADDRESS} ${model_name:13}" ${url}
+curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${model_name:13}" ${url}
 
 echo ${IP_ADDRESS} > /app/IP_ADDRESS
 
