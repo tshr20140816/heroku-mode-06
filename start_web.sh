@@ -22,7 +22,8 @@ fi
 
 model_name="$(cat /proc/cpuinfo | grep "model name" | head -n 1)"
 
-echo ${model_name:13}
+url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
+curl -i -v -H 'content-type:text/plain' -d "${model_name:13}" ${url}
 
 export X_ACCESS_KEY=$(md5sum www/last_update.txt | awk '{print $1}')
 
