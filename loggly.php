@@ -7,10 +7,12 @@ $stdin = fopen('php://stdin', 'r');
 ob_implicit_flush(true);
 
 while ($line = fgets($stdin)) {
+  error_log('CHECK POINT 0010 ${line}');
   if ($type == 'A') {
     $array = explode(' ', $line, 3);
     $server_name = $array[1];
     file_put_contents('/app/SERVER_NAME', $server_name);
+    error_log('CHECK POINT 0020 ${server_name}');
     
     if (file_exists('/app/HOME_IP_ADDRESS')) {
       $home_ip_address = file_get_contents('/app/HOME_IP_ADDRESS');
