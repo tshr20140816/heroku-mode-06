@@ -15,7 +15,9 @@ while ($line = fgets($stdin)) {
     if (file_exists('/app/HOME_IP_ADDRESS')) {
       $home_ip_address = file_get_contents('/app/HOME_IP_ADDRESS');
       unlink('/app/HOME_IP_ADDRESS');
+      error_log('CHECK POINT 0100 ${ip_address}');
       $ip_address = file_get_contents('/app/IP_ADDRESS');
+      error_log('CHECK POINT 0200 ${ip_address}');
       $last_update = file_get_contents('/app/www/last_update.txt');
       $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . "/tag/START/";
       $context = array(
@@ -27,6 +29,7 @@ while ($line = fgets($stdin)) {
         'content' => "S ${ip_address} * ${server_name} * ${home_ip_address} * ${last_update}"
         ));
       $res = file_get_contents($url, false, stream_context_create($context));
+      error_log('CHECK POINT 0300 ${res}');
     }
   } else {
     $server_name = 'Unknown';
