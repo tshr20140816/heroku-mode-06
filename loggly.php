@@ -3,26 +3,19 @@
 $type = $argv[1]; // 'A' or 'E'
 $prefix = $argv[2];
 
-ini_set('error_log', 'php://stderr');
-error_log('***** CHECK POINT 0000 ${type}');
-
 $stdin = fopen('php://stdin', 'r');
 ob_implicit_flush(true);
 
 while ($line = fgets($stdin)) {
-  error_log('***** CHECK POINT 0010 ${line}');
   if ($type == 'A') {
     $array = explode(' ', $line, 3);
     $server_name = $array[1];
     file_put_contents('/app/SERVER_NAME', $server_name);
-    error_log('***** CHECK POINT 0020 ${server_name}');
     
     if (file_exists('/app/HOME_IP_ADDRESS')) {
       $home_ip_address = file_get_contents('/app/HOME_IP_ADDRESS');
       unlink('/app/HOME_IP_ADDRESS');
-      error_log('***** CHECK POINT 0100 ${ip_address}');
       $ip_address = file_get_contents('/app/IP_ADDRESS');
-      error_log('***** CHECK POINT 0200 ${ip_address}');
       $last_update = file_get_contents('/app/www/last_update.txt');
       $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . "/tag/START/";
       $context = array(
@@ -34,7 +27,6 @@ while ($line = fgets($stdin)) {
         'content' => "S ${ip_address} * ${server_name} * ${home_ip_address} * ${last_update}"
         ));
       $res = file_get_contents($url, false, stream_context_create($context));
-      error_log('***** CHECK POINT 0300 ${res}');
     }
   } else {
     $server_name = 'Unknown';
