@@ -3,6 +3,7 @@
 $type = $argv[1]; // 'A' or 'E'
 $prefix = $argv[2];
 
+ini_set('error_log', 'php://stderr');
 error_log('***** CHECK POINT 0000 ${type}');
 
 $stdin = fopen('php://stdin', 'r');
