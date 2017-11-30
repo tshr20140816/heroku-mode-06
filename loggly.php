@@ -32,7 +32,7 @@ while ($line = fgets($stdin)) {
     }
     
     // de
-    if (file_exists('/app/HOME_IP_ADDRESS')) {
+    if (file_exists('/app/IP_ADDRESS')) {
       $ip_address = file_get_contents('/app/IP_ADDRESS');
       unlink('/app/IP_ADDRESS');
       $last_update = file_get_contents('/app/www/last_update.txt');
