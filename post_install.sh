@@ -5,7 +5,7 @@ set -x
 date
 
 # flying
-git clone --depth 1 https://tt-rss.org/git/tt-rss.git ttrss &
+git clone --depth 1 -b 17.4 https://tt-rss.org/git/tt-rss.git ttrss &
 
 git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git self_repository &
 
