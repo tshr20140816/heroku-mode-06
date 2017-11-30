@@ -12,10 +12,12 @@ while ($line = fgets($stdin)) {
     $server_name = $array[1];
     file_put_contents('/app/SERVER_NAME', $server_name);
     
+    // mx
     if (file_exists('/app/HOME_IP_ADDRESS')) {
       $home_ip_address = file_get_contents('/app/HOME_IP_ADDRESS');
       unlink('/app/HOME_IP_ADDRESS');
       $ip_address = file_get_contents('/app/IP_ADDRESS');
+      unlink('/app/IP_ADDRESS');
       $last_update = file_get_contents('/app/www/last_update.txt');
       $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . "/tag/START/";
       $context = array(
@@ -25,6 +27,23 @@ while ($line = fgets($stdin)) {
             'Content-Type: text/plain'
           ),
         'content' => "S ${ip_address} * ${server_name} * ${home_ip_address} * ${last_update}"
+        ));
+      $res = file_get_contents($url, false, stream_context_create($context));
+    }
+    
+    // de
+    if (file_exists('/app/HOME_IP_ADDRESS')) {
+      $ip_address = file_get_contents('/app/IP_ADDRESS');
+      unlink('/app/IP_ADDRESS');
+      $last_update = file_get_contents('/app/www/last_update.txt');
+      $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . "/tag/START/";
+      $context = array(
+        'http' => array(
+          'method' => 'POST',
+          'header' => array(
+            'Content-Type: text/plain'
+          ),
+        'content' => "S ${ip_address} * ${server_name} * ${last_update}"
         ));
       $res = file_get_contents($url, false, stream_context_create($context));
     }
