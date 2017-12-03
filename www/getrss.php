@@ -27,9 +27,9 @@ for ($i = 0; $i < $rc; $i++) {
   $link = $item_link;
   $description = $item_description;
   for ($j = 1; $j < count($matches2[$i]); $j++) {
-    $title = str_replace('__' . $j . '__', $matches2[$i][$j], $title);
-    $link = str_replace('__' . $j . '__', $matches2[$i][$j], $link);
-    $description = str_replace('__' . $j . '__', $matches2[$i][$j], $description);
+    $title = str_replace("__${j}__", $matches2[$i][$j], $title);
+    $link = str_replace("__${j}__", $matches2[$i][$j], $link);
+    $description = str_replace("__${j}__", $matches2[$i][$j], $description);
   }
   $tmp = str_replace('__TITLE__', $title, $items_template);
   $tmp = str_replace('__LINK__', $link, $tmp);
