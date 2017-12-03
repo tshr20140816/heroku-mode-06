@@ -13,7 +13,7 @@ $item_title = $data[6];
 $item_link = $data[7];
 $item_description = $data[8];
 
-$items_template = "<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>";
+$items_template = '<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>';
 
 $html = mb_convert_encoding(file_get_contents($url), 'UTF-8', $encoding);
 
