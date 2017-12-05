@@ -109,7 +109,7 @@ __HEREDOC__;
   $body = preg_replace('/<small>.+?<\/small>/s', '', $body, 3);
   
   $body = preg_replace('/<(s|\/s)mall>/s', '', $body);
-  $body = str_replace('</DT>', '</DT><BR><BR>', $body);
+  $body = str_replace('</DT>', '</DT><BR><BR></B>', $body);
   
   $body = str_replace('<FORM ACTION="" METHOD=GET>', '', $body);
   $body = str_replace('</FORM>', '', $body);
