@@ -6,12 +6,12 @@ error_log("${pid} ***** FILTER MESSAGE START ***** " . $_SERVER['REQUEST_URI']);
 error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
 
 // 最終コミット日時のハッシュを比較し一致した場合のみ許可
-error_log($pid . ' last_update.txt ' . md5_file('/app/www/last_update.txt'));
-error_log($pid . ' X-Access-Key*** ' . $_SERVER['HTTP_X_ACCESS_KEY']);
+error_log("${pid} last_update.txt " . md5_file('/app/www/last_update.txt'));
+error_log("${pid} X-Access-Key*** " . $_SERVER['HTTP_X_ACCESS_KEY']);
 $access_key = $_SERVER['HTTP_X_ACCESS_KEY'];
 
 // 多段接続のみ許可
-error_log($pid . ' X-Forwarded-For ' . $_SERVER['HTTP_X_FORWARDED_FOR']);
+error_log("${pid} X-Forwarded-For " . $_SERVER['HTTP_X_FORWARDED_FOR']);
 $forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
 
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
@@ -19,7 +19,7 @@ $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' .
 // IE Edge 不可
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $access_key != md5_file('/app/www/last_update.txt'))
 {
-  error_log($pid . ' #*#*#*#*# IE or Edge or Direct Connect or X-Access-Key Unmatch #*#*#*#*#');
+  error_log("${pid} #*#*#*#*# IE or Edge or Direct Connect or X-Access-Key Unmatch #*#*#*#*#");
   header('HTTP', true, 403);
   
   $message =
@@ -43,16 +43,16 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
 
   $res = file_get_contents($url, false, stream_context_create($context));
 
-  error_log($pid . ' ' . $res);
+  error_log("${pid} ${res}");
     
-  error_log($pid . ' ***** FILTER MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
+  error_log("${pid} ***** FILTER MESSAGE FINISH ***** " . $_SERVER['REQUEST_URI']);
   return;
 }
 
-error_log($pid . ' ***** STDIN START ***** ' . $_SERVER['REQUEST_URI']);
+error_log("${pid} ***** STDIN START ***** " . $_SERVER['REQUEST_URI']);
 
 $buf = file_get_contents('php://stdin');
-error_log($pid . ' ***** STDIN FINISH ***** ' . $_SERVER['REQUEST_URI']);
+error_log("${pid} ***** STDIN FINISH ***** " . $_SERVER['REQUEST_URI']);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
@@ -165,7 +165,7 @@ $context = array(
 
 $res = file_get_contents($url, false, stream_context_create($context));
 
-error_log($pid . ' ' . $res);
+error_log("${pid} ${res}");
 
-error_log($pid . ' ***** FILTER MESSAGE FINISH ***** ' . $_SERVER['REQUEST_URI']);
+error_log("${pid} ***** FILTER MESSAGE FINISH ***** " . $_SERVER['REQUEST_URI']);
 ?>
