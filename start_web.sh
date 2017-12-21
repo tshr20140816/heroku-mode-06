@@ -37,6 +37,9 @@ curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${curl_version}" ${url}
 
 echo "${IP_ADDRESS}" > /app/IP_ADDRESS
 
+apache_version="$(httpd -V)"
+curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${apache_version}" ${url}
+
 export X_ACCESS_KEY=$(md5sum www/last_update.txt | awk '{print $1}')
 
 if [ ${MODE} = 'APACHE' ]; then
