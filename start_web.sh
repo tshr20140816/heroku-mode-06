@@ -25,6 +25,7 @@ fi
 url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
 
 export IP_ADDRESS=$(ip address | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $4}')
+echo "${IP_ADDRESS}" > /app/IP_ADDRESS
 
 linux_version="$(cat /proc/version)"
 curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${linux_version}" ${url}
@@ -32,10 +33,11 @@ curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${linux_version}" ${url
 model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
 curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${model_name:13}" ${url}
 
-curl_version="$(curl --version | head -n 1)"
-curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${curl_version}" ${url}
+# curl_version="$(curl --version | head -n 1)"
+# curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${curl_version}" ${url}
 
-echo "${IP_ADDRESS}" > /app/IP_ADDRESS
+php_version="$(php -v | head -n 1)"
+curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${php_version}" ${url}
 
 apache_version="$(httpd -v)"
 curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${apache_version}" ${url}
