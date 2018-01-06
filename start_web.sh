@@ -39,6 +39,10 @@ curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${ph
 apache_version="$(httpd -v)"
 curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
 
+echo ${HEROKU_APP_NAME}
+echo ${HEROKU_RELEASE_CREATED_AT}
+echo ${HEROKU_RELEASE_VERSION}
+
 export X_ACCESS_KEY=$(md5sum www/last_update.txt | awk '{print $1}')
 
 if [ ${MODE} = 'APACHE' ]; then
