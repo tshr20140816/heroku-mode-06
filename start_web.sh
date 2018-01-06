@@ -28,19 +28,16 @@ export IP_ADDRESS=$(ip address | grep 'inet ' | grep -v '127.0.0.1' | awk '{prin
 echo "${IP_ADDRESS}" > /app/IP_ADDRESS
 
 linux_version="$(cat /proc/version)"
-curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${linux_version}" ${url}
+curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${linux_version}" ${url}
 
 model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
-curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${model_name:13}" ${url}
-
-# curl_version="$(curl --version | head -n 1)"
-# curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${curl_version}" ${url}
+curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${model_name:13}" ${url}
 
 php_version="$(php -v | head -n 1)"
-curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${php_version}" ${url}
+curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${php_version}" ${url}
 
 apache_version="$(httpd -v)"
-curl -i -H 'content-type:text/plain' -d "S ${IP_ADDRESS} ${apache_version}" ${url}
+curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
 
 export X_ACCESS_KEY=$(md5sum www/last_update.txt | awk '{print $1}')
 
