@@ -28,7 +28,7 @@ mkdir -m 777 -p www/icons
 mkdir -m 777 -p usr/local
 mkdir -m 777 ccache
 
-if [ -e ccache_cache.zip && ${DEVELOP_MODE} = 'OFF' ]; then
+if [ ${DEVELOP_MODE} = 'OFF' ]; then
   time unzip -q ccache_cache.zip
 fi
 rm -f ccache_cache.zip
