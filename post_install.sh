@@ -30,8 +30,8 @@ mkdir -m 777 ccache
 
 if [ -e ccache_cache.zip && ${DEVELOP_MODE} = 'OFF' ]; then
   time unzip -q ccache_cache.zip
-  rm -f ccache_cache.zip
 fi
+rm -f ccache_cache.zip
 
 export CFLAGS="-O2 -march=native"
 export CXXFLAGS="$CFLAGS"
