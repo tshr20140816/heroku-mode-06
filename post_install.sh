@@ -98,8 +98,8 @@ rm -rf ./usr
 rm -f delegate.zip
 
 if [ ${DEVELOP_MODE} != 'OFF' ]; then
-  zip -9r ccache-cache.zip ./ccache
-  mv ccache-cache.zip ./www/
+  zip -9r ccache_cache.zip ./ccache
+  mv ccache_cache.zip ./www/
 fi
 rm -rf ./ccache
 
