@@ -5,7 +5,7 @@ set -x
 date
 
 if [ ! -v DEVELOP_MODE ]; then
-  export DEVELOP_MODE="OFF"
+  export DEVELOP_MODE='OFF'
 fi
 
 # flying
@@ -28,7 +28,7 @@ mkdir -m 777 -p www/icons
 mkdir -m 777 -p usr/local
 mkdir -m 777 ccache
 
-if [ -e ccache_cache.zip ]; then
+if [ -e ccache_cache.zip && ${DEVELOP_MODE} = 'OFF' ]; then
   time unzip -q ccache_cache.zip
   rm -f ccache_cache.zip
 fi
