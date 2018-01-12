@@ -4,6 +4,10 @@ set -x
 
 date
 
+if [ ! -v DEVELOP_MODE ]; then
+  export DEVELOP_MODE="OFF"
+fi
+
 # flying
 git clone --depth 1 -b 17.4 https://tt-rss.org/git/tt-rss.git ttrss &
 
@@ -91,8 +95,13 @@ ccache -s
 pushd ${HOME2}
 
 rm -rf ./usr
-rm -rf ./ccache
 rm -f delegate.zip
+
+if [ ${DEVELOP_MODE} != 'OFF' ]; then
+  zip -9r ccache-cache.zip ./ccache
+  mv ccache-cache.zip ./www/
+fi
+rm -rf ./ccache
 
 mkdir -m 777 -p delegate/cache
 mkdir -m 777 -p delegate/tmp
