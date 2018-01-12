@@ -4,6 +4,9 @@ set -x
 
 date
 
+cat /proc/version
+cat /proc/cpuinfo
+
 if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
 fi
