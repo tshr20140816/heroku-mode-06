@@ -10,12 +10,12 @@ if (!isset($_POST['message']) || $_POST['message'] === '') {
   exit();
 }
 
-$content = $_POST['content'];
+$message = $_POST['message'];
 $country_name = '';
 
-error_log($content);
+error_log($message);
 
-if (preg_match('/ \d+\.\d+\.\d+\.\d+ /', $content, $matches) === 1) {
+if (preg_match('/ \d+\.\d+\.\d+\.\d+ /', $message, $matches) === 1) {
   $url = 'http://freegeoip.net/json/' . trim($matches[0]);
   $json = json_decode(file_get_contents($url), true);
   $country_name = $json['country_name'];
@@ -31,7 +31,7 @@ $context = [
     'header' => array(
       'Content-Type: text/plain'
     ),
-    'content' => $content . ' ' . $country_name
+    'content' => $message . ' ' . $country_name
   ]];
 $res = file_get_contents($url, false, stream_context_create($context));
 
