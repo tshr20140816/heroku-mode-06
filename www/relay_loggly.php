@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_POST['tag']) || $_POST['tag'] === '') {
-  error_log('content is tag.');
+  error_log('tag is None.');
   exit();
 }
 
