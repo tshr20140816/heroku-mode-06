@@ -1,10 +1,12 @@
 <?php
 
 if (!isset($_POST['content']) || $_POST['content'] === '') {
+  error_log('content is None.');
   exit();
 }
 
 if (!isset($_POST['tag']) || $_POST['tag'] === '') {
+  error_log('content is tag.');
   exit();
 }
 
