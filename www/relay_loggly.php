@@ -5,8 +5,8 @@ if (!isset($_POST['tag']) || $_POST['tag'] === '') {
   exit();
 }
 
-if (!isset($_POST['content']) || $_POST['content'] === '') {
-  error_log('content is None.');
+if (!isset($_POST['message']) || $_POST['message'] === '') {
+  error_log('message is None.');
   exit();
 }
 
