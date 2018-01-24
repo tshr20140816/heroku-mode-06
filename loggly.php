@@ -19,14 +19,14 @@ while ($line = fgets($stdin)) {
       unlink('/app/IP_ADDRESS');
       $last_update = file_get_contents('/app/www/last_update.txt');
       $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . "/tag/START/";
-      $context = array(
-        'http' => array(
+      $context = [
+        'http' => [
           'method' => 'POST',
-          'header' => array(
+          'header' => [
             'Content-Type: text/plain'
-          ),
+          ],
         'content' => "S ${ip_address} * ${server_name} * ${home_ip_address} * ${last_update}"
-        ));
+        ]];
       $res = file_get_contents($url, false, stream_context_create($context));
     }
   } else {
@@ -39,14 +39,14 @@ while ($line = fgets($stdin)) {
   
   $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . "/tag/${server_name}/";
   
-  $context = array(
-    'http' => array(
+  $context = [
+    'http' => [
       'method' => 'POST',
-      'header' => array(
+      'header' => [
         'Content-Type: text/plain'
-      ),
+      ],
       'content' => "${prefix} ${line}"
-    ));
+    ]];
   $res = file_get_contents($url, false, stream_context_create($context));
 }
 
