@@ -31,15 +31,14 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
     $_SERVER['REQUEST_URI'] . ' ' .
     $_SERVER['HTTP_USER_AGENT'];
 
-  $context = array(
-    "http" => array(
+  $context = [
+    "http" => [
       "method" => "POST",
-      "header" => array(
+      "header" => [
         "Content-Type: text/plain"
-        ),
+        ],
       "content" => $message
-      )
-    );
+      ]];
 
   $res = file_get_contents($url, false, stream_context_create($context));
 
@@ -153,15 +152,14 @@ $message =
   $_SERVER['REQUEST_URI'] . ' ' .
   $_SERVER['HTTP_USER_AGENT'];
 
-$context = array(
-  "http" => array(
+$context = [
+  "http" => [
     "method" => "POST",
-    "header" => array(
+    "header" => [
       "Content-Type: text/plain"
-      ),
+      ],
     "content" => $message
-    )
-  );
+    ]]:
 
 $res = file_get_contents($url, false, stream_context_create($context));
 
