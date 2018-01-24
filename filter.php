@@ -159,7 +159,7 @@ $context = [
       "Content-Type: text/plain"
       ],
     "content" => $message
-    ]]:
+    ]];
 
 $res = file_get_contents($url, false, stream_context_create($context));
 
