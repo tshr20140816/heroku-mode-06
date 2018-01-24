@@ -28,9 +28,9 @@ $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' .
 $context = [
   'http' => [
     'method' => 'POST',
-    'header' => array(
+    'header' => [
       'Content-Type: text/plain'
-    ),
+    ],
     'content' => $message . ' ' . $country_name
   ]];
 $res = file_get_contents($url, false, stream_context_create($context));
