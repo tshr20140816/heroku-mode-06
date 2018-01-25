@@ -125,6 +125,10 @@ cp ttrss/js/* www/ttrss/js/
 mkdir -m 777 -p www/ttrss/lib
 cp -r ttrss/lib/* www/ttrss/lib/
 
+pushd www/ttrss/lib/ttrss/lib/dojo/nls/ja
+gzip -c colors.js > colors.js.gz
+popd
+
 rm -rf ttrss
 
 # ***** last update *****
