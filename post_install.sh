@@ -127,7 +127,7 @@ cp -r ttrss/lib/* www/ttrss/lib/
 
 pushd www/ttrss/lib/dojo/nls/ja
 gzip -c colors.js > colors.js.gz
-# rm -f colors.js
+rm -f colors.js
 popd
 
 rm -rf ttrss
