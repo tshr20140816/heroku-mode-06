@@ -5,7 +5,7 @@ set -x
 date
 
 whereis pear
-pear channel-discover https://logging.apache.org/log4php
+pear channel-discover logging.apache.org/log4php
 pear install log4php/Apache_log4php
 
 cat /proc/version
