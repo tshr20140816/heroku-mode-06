@@ -16,11 +16,15 @@ $country_name = '';
 error_log($message);
 
 if (preg_match('/ \d+\.\d+\.\d+\.\d+ /', $message, $matches) === 1) {
-  $url = 'http://freegeoip.net/json/' . trim($matches[0]);
-  $json = json_decode(file_get_contents($url), true);
-  $country_name = $json['country_name'];
-  
-  file_put_contents('/tmp/' . trim($matches[0]), $json['country_name']);
+  $ip_address = trim($matches[0]);
+  if (file_exists($ip_address)) {
+    $country_name = file_get_contents($ip_address);
+  } else {
+    $url = 'http://freegeoip.net/json/' . $ip_address;
+    $json = json_decode(file_get_contents($url), true);
+    $country_name = $json['country_name'];
+    file_put_contents('/tmp/' . $ip_address, $json['country_name']);
+  }  
 }
 
 error_log($country_name);
