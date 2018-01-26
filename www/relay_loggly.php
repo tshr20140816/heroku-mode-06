@@ -17,8 +17,8 @@ error_log($message);
 
 if (preg_match('/ \d+\.\d+\.\d+\.\d+ /', $message, $matches) === 1) {
   $ip_address = trim($matches[0]);
-  if (file_exists($ip_address)) {
-    $country_name = file_get_contents($ip_address);
+  if (file_exists('/tmp/' . $ip_address)) {
+    $country_name = file_get_contents('/tmp/' . $ip_address);
   } else {
     $url = 'http://freegeoip.net/json/' . $ip_address;
     $json = json_decode(file_get_contents($url), true);
