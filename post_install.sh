@@ -5,6 +5,8 @@ set -x
 date
 
 whereis pear
+pear channel-discover pear.apache.org/log4php
+pear install log4php/Apache_log4php
 
 cat /proc/version
 cat /proc/cpuinfo
