@@ -4,6 +4,8 @@ set -x
 
 date
 
+whereis pear
+
 cat /proc/version
 cat /proc/cpuinfo
 
