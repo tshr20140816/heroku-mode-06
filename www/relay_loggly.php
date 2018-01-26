@@ -19,6 +19,8 @@ if (preg_match('/ \d+\.\d+\.\d+\.\d+ /', $message, $matches) === 1) {
   $url = 'http://freegeoip.net/json/' . trim($matches[0]);
   $json = json_decode(file_get_contents($url), true);
   $country_name = $json['country_name'];
+  
+  file_put_contents('/tmp/' . trim($matches[0]), $json['country_name']);
 }
 
 error_log($country_name);
