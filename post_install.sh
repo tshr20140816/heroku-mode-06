@@ -7,6 +7,9 @@ date
 cat /proc/version
 cat /proc/cpuinfo
 
+whereis java
+java --version
+
 if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
 fi
