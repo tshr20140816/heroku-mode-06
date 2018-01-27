@@ -137,6 +137,12 @@ cp -r ttrss/lib/* www/ttrss/lib/
 # rm -f colors.js
 # popd
 
+pushd www/ttrss/css
+# dijit.css
+mv dijit.css dijit.css.org
+time ~/jre*/bin/java -jar ~/yuicompressor-2.4.8.jar --type css -o dijit.css dijit.css.org
+popd
+
 rm -rf ttrss
 
 # ***** last update *****
