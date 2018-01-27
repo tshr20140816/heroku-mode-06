@@ -154,6 +154,10 @@ rm -rf self_repository
 chmod 755 ./start_web.sh
 chmod 755 ./loggly.php
 
+rm -rf jre*
+rm java.tar.gz
+rm yuicompressor-2.4.8.jar
+
 popd
 
 date
