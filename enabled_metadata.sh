@@ -2,13 +2,9 @@
 
 set -x
 
-if [ ! -v APPNAME ]; then
-  echo "Error : APPNAME not defined."
+if [ ! -v APP_NAME ]; then
+  echo "Error : APP_NAME not defined."
   exit
 fi
 
-cd ~
-cd heroku-cli-*
-cd bin
-
-./heroku labs:enable runtime-dyno-metadata -a ${APPNAME}
+./heroku labs:enable runtime-dyno-metadata -a ${APP_NAME}
