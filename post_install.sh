@@ -8,7 +8,7 @@ cat /proc/version
 cat /proc/cpuinfo
 
 whereis java
-/usr/share/java --version
+tree /usr/share/java
 
 if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
