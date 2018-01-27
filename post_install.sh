@@ -140,6 +140,12 @@ cp -r ttrss/lib/* www/ttrss/lib/
 mv www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
 time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
 
+mv www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
+time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
+
+mv www/ttrss/js/functions.js www/ttrss/js/functions.js.org
+time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/js/functions.js www/ttrss/js/functions.js.org
+
 rm -rf ttrss
 
 # ***** last update *****
