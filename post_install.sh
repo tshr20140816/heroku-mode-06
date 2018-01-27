@@ -16,6 +16,8 @@ git clone --depth 1 -b 17.4 https://tt-rss.org/git/tt-rss.git ttrss &
 
 git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git self_repository &
 
+wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar &
+
 # ***** delegate *****
 
 export HOME2=${PWD}
@@ -129,6 +131,12 @@ cp -r ttrss/lib/* www/ttrss/lib/
 # gzip -9c colors.js > colors.js.gz
 # rm -f colors.js
 # popd
+
+mv www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
+time java -jar ./yuicompressor.jar \
+ --type css \
+ -o www/ttrss/css/dijit.css \
+ www/ttrss/css/dijit.css.org
 
 rm -rf ttrss
 
