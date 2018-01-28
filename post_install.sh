@@ -137,14 +137,17 @@ cp -r ttrss/lib/* www/ttrss/lib/
 # rm -f colors.js
 # popd
 
-mv www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
-time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org &
+find ./www/ttrss/ -name "*.css" -type f -print0 > /tmp/css_files.txt
+cat /tmp/css_files.txt
 
-mv www/ttrss/css/tt-rss.css www/ttrss/css/tt-rss.css.org
-time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/tt-rss.css www/ttrss/css/tt-rss.css.org &
+# mv www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
+# time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org &
 
-mv www/ttrss/lib/dijit/themes/claro/claro.css www/ttrss/lib/dijit/themes/claro/claro.css.org
-time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/lib/dijit/themes/claro/claro.css www/ttrss/lib/dijit/themes/claro/claro.css.org &
+# mv www/ttrss/css/tt-rss.css www/ttrss/css/tt-rss.css.org
+# time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/tt-rss.css www/ttrss/css/tt-rss.css.org &
+
+# mv www/ttrss/lib/dijit/themes/claro/claro.css www/ttrss/lib/dijit/themes/claro/claro.css.org
+# time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/lib/dijit/themes/claro/claro.css www/ttrss/lib/dijit/themes/claro/claro.css.org &
 
 mv www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
 time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org &
