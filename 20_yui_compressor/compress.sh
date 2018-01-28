@@ -5,6 +5,11 @@ set -x
 # mv www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
 # time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
 
+curl https://java.com/en/download/manual.jsp \
+ | grep 'Download Java software for Linux x64"' \
+ | head -n 1 \
+ | grep -oP 'http:.+?BundleId=[0-9a-z_]+'
+
 wget $(curl https://java.com/en/download/manual.jsp \
  | grep 'Download Java software for Linux x64"' \
  | head -n 1 \
