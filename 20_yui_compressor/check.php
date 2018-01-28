@@ -7,16 +7,23 @@ $pdo = new PDO(
   $connection_info['pass']);
 
 $sql = <<< __HEREDOC__
-SELECT *
+SELECT COUNT('X') cnt
   FROM t_file_yui_compressor
+ WHERE file_name = :b_file_name
+   AND file_hash = :b_file_hash
 __HEREDOC__;
-$rc = $pdo->query($sql);
 
-if ($rc === FALSE) {
-  $rc = 0;
-}
+$statement = $pdo->prepare($sql);
 
+$statement->execute(
+  [':b_file_name' => $argv[1],
+   ':b_file_hash' => $argv[2],
+  ]);
+
+$result = $statement->fetch();
+  
 $pdo = null;
 
-return $rc;
+return $result['cnt'];
+
 ?>
