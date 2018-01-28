@@ -140,7 +140,7 @@ cp -r ttrss/lib/* www/ttrss/lib/
 find ./www/ttrss/ -name "*.css" -type f -print0 > /tmp/css_files.txt
 
 cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 mv {} {}.org
-cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o {} {}.org
+time cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o {} {}.org
 
 # mv www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
 # time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
