@@ -149,12 +149,6 @@ time cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicomp
 
 wait
 
-# mv www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
-# time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
-
-# mv www/ttrss/css/tt-rss.css www/ttrss/css/tt-rss.css.org
-# time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/tt-rss.css www/ttrss/css/tt-rss.css.org
-
 # mv www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
 # time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
 
