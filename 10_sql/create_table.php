@@ -14,9 +14,7 @@ CREATE TABLE m_application (
     change_time timestamp DEFAULT localtimestamp NOT NULL
 );
 __HEREDOC__;
-$rc = $pdo->exec($sql);
-error_log($rc);
-echo $rc;
+$pdo->exec($sql) or die(print_r($db->errorInfo(), true));
 
 $pdo = null;
 
