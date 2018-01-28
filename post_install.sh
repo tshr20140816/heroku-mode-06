@@ -142,10 +142,10 @@ find ./www/ttrss/ -name "*.css" -type f -print0 > /tmp/css_files.txt
 cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 mv {} {}.org
 time cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o {} {}.org &
 
-find ./www/ttrss/ -name "*.js" -type f -print0 > /tmp/js_files.txt
+# find ./www/ttrss/ -name "*.js" -type f -print0 > /tmp/js_files.txt
 
-cat /tmp/js_files.txt | xargs -0i -P 4 -n 1 mv {} {}.org
-time cat /tmp/js_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o {} {}.org &
+# cat /tmp/js_files.txt | xargs -0i -P 4 -n 1 mv {} {}.org
+# time cat /tmp/js_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o {} {}.org &
 
 wait
 
