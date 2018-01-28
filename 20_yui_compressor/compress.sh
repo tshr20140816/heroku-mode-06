@@ -12,12 +12,12 @@ wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor
 
 for file in $(find /app/www/ttrss/ -name "*.css" -type f -print); do
   mv ${file} ${file}.org
-  ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o ${file} ${file}.org &
+  time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o ${file} ${file}.org &
 done
 
 for file in $(find /app/www/ttrss/ -name "*.js" -type f -print); do
   mv ${file} ${file}.org
-  ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o ${file} ${file}.org &
+  time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o ${file} ${file}.org &
 done
 
 wait
