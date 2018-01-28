@@ -16,6 +16,10 @@ CREATE TABLE t_file_yui_compressor (
 __HEREDOC__;
 $pdo->query($sql) or die(print_r($db->errorInfo(), true));
 
+$sql = <<< __HEREDOC__
+ALTER TABLE t_file_yui_compressor ADD PRIMARY KEY(file_hash);
+__HEREDOC__;
+
 $pdo = null;
 
 ?>
