@@ -137,11 +137,11 @@ cp -r ttrss/lib/* www/ttrss/lib/
 # rm -f colors.js
 # popd
 
-find ./www/ttrss/ -name "*.css" -type f -print0 > /tmp/css_files.txt
+# find ./www/ttrss/ -name "*.css" -type f -print0 > /tmp/css_files.txt
 
-cat /tmp/css_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 mv {} {}.org
-time cat /tmp/css_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 \
- ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o {} {}.org &
+# cat /tmp/css_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 mv {} {}.org
+# time cat /tmp/css_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 \
+#  ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o {} {}.org &
 
 # find ./www/ttrss/ -name "*.js" -type f -size +5k -print0 > /tmp/js_files.txt
 
@@ -149,7 +149,7 @@ time cat /tmp/css_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo)
 # time cat /tmp/js_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 \
 # ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o {} {}.org &
 
-wait
+# wait
 
 # mv www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
 # time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
