@@ -140,7 +140,14 @@ cp -r ttrss/lib/* www/ttrss/lib/
 find ./www/ttrss/ -name "*.css" -type f -print0 > /tmp/css_files.txt
 
 cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 mv {} {}.org
-time cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o {} {}.org
+time cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o {} {}.org &
+
+find ./www/ttrss/ -name "*.js" -type f -print0 > /tmp/js_files.txt
+
+cat /tmp/js_files.txt | xargs -0i -P 4 -n 1 mv {} {}.org
+time cat /tmp/js_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o {} {}.org &
+
+wait
 
 # mv www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
 # time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/dijit.css www/ttrss/css/dijit.css.org
@@ -148,14 +155,11 @@ time cat /tmp/css_files.txt | xargs -0i -P 4 -n 1 ./jre*/bin/java -jar ./yuicomp
 # mv www/ttrss/css/tt-rss.css www/ttrss/css/tt-rss.css.org
 # time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/css/tt-rss.css www/ttrss/css/tt-rss.css.org
 
-# mv www/ttrss/lib/dijit/themes/claro/claro.css www/ttrss/lib/dijit/themes/claro/claro.css.org
-# time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o www/ttrss/lib/dijit/themes/claro/claro.css www/ttrss/lib/dijit/themes/claro/claro.css.org
+# mv www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
+# time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
 
-mv www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
-time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/lib/prototype.js www/ttrss/lib/prototype.js.org
-
-mv www/ttrss/js/functions.js www/ttrss/js/functions.js.org
-time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/js/functions.js www/ttrss/js/functions.js.org
+# mv www/ttrss/js/functions.js www/ttrss/js/functions.js.org
+# time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o www/ttrss/js/functions.js www/ttrss/js/functions.js.org
 
 rm -rf ttrss
 
