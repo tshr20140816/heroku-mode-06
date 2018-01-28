@@ -24,6 +24,6 @@ $result = $statement->fetch();
   
 $pdo = null;
 
-return $result['cnt'];
+exit($result['cnt']);
 
 ?>
