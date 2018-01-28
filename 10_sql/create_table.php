@@ -7,9 +7,9 @@ $pdo = new PDO(
   $connection_info['pass']);
 
 $sql = <<< __HEREDOC__
-CREATE TABLE m_application (
+CREATE TABLE t_file_yui_compressor (
     file_name character varying(255) PRIMARY KEY,
-    file_hash character varying(255) PRIMARY KEY,
+    file_hash character varying(255) NOT NULL,
     file bytea NOT NULL,
     change_time timestamp DEFAULT localtimestamp NOT NULL
 );
