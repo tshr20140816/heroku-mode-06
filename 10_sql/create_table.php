@@ -8,7 +8,7 @@ $pdo = new PDO(
 
 $sql = <<< __HEREDOC__
 CREATE TABLE t_file_yui_compressor (
-    file_name character varying(255) PRIMARY KEY,
+    file_name character varying(255) NOT NULL,
     file_hash character varying(255) NOT NULL,
     file bytea NOT NULL,
     change_time timestamp DEFAULT localtimestamp NOT NULL
@@ -17,7 +17,7 @@ __HEREDOC__;
 $pdo->query($sql) or die(print_r($db->errorInfo(), true));
 
 $sql = <<< __HEREDOC__
-ALTER TABLE t_file_yui_compressor ADD PRIMARY KEY(file_hash);
+ALTER TABLE t_file_yui_compressor ADD CONSTRAINT table_key PRIMARY KEY(file_name, file_hash);
 __HEREDOC__;
 
 $pdo = null;
