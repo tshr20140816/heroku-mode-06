@@ -143,7 +143,7 @@ cat /tmp/css_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1
 time cat /tmp/css_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 \
  ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o {} {}.org &
 
-find ./www/ttrss/js/ -name "*.js" -type f -print0 > /tmp/js_files.txt
+find ./www/ttrss/ -name "*.js" -type f -size +2k -print0 > /tmp/js_files.txt
 
 cat /tmp/js_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 mv {} {}.org
 time cat /tmp/js_files.txt | xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 \
