@@ -21,7 +21,11 @@ for file in $(find /app/www/ttrss/ -name "*.js" -type f -print); do
   php ./check.php ${file} $(sha512sum ${file}.org | awk '{print $1}')
   if [ $? -eq 0 ]; then
     time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o ${file} ${file}.org
+    # update
+    php update.php
   else
+    # dummy
+    # get file
   fi
 done
 
