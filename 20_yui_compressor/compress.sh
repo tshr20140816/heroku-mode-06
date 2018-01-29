@@ -6,6 +6,11 @@ wget $(curl https://java.com/en/download/manual.jsp \
  | grep 'Download Java software for Linux x64"' \
  | head -n 1 \
  | grep -oP 'http:.+?BundleId=[0-9a-z_]+') -O java.tar.gz
+
+if [ ! -e ./java.tar.gz ]; then
+  exit
+fi
+
 tar xvfz java.tar.gz
 
 wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
