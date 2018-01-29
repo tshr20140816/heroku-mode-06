@@ -14,12 +14,17 @@ CREATE TABLE t_file_yui_compressor (
     change_time timestamp DEFAULT localtimestamp NOT NULL
 );
 __HEREDOC__;
-$pdo->query($sql) or die(print_r($db->errorInfo(), true));
+$pdo->query($sql);
 
 $sql = <<< __HEREDOC__
 ALTER TABLE t_file_yui_compressor ADD CONSTRAINT table_key PRIMARY KEY(file_name, file_hash);
 __HEREDOC__;
-$pdo->query($sql) or die(print_r($db->errorInfo(), true));
+$pdo->query($sql);
+
+$sql = <<< __HEREDOC__
+TRUNCATE TABLE t_file_yui_compressor;
+__HEREDOC__;
+$pdo->query($sql);
 
 $pdo = null;
 
