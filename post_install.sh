@@ -137,16 +137,16 @@ cp -r ttrss/lib/* www/ttrss/lib/
 # rm -f colors.js
 # popd
 
-for ext in "${exts[@]}" ; do
-  for file in $(find /app/www/ttrss/ -name "*.${ext}" -type f -print); do
-    mv ${file} ${file}.org
-    hash=$(sha512sum ${file}.org | awk '{print $1}')
-    php ./get_file.php ${file} ${hash}
-    if [ $? -eq 0 ]; then
-      mv ${file}.org ${file}
-    fi
-  done
-done
+# for ext in "${exts[@]}" ; do
+#  for file in $(find /app/www/ttrss/ -name "*.${ext}" -type f -print); do
+#    mv ${file} ${file}.org
+#    hash=$(sha512sum ${file}.org | awk '{print $1}')
+#    php ./20_yui_compressor/get_file.php ${file} ${hash}
+#    if [ $? -eq 0 ]; then
+#      mv ${file}.org ${file}
+#    fi
+#  done
+#done
 
 rm -rf ttrss
 
