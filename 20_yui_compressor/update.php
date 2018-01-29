@@ -6,7 +6,7 @@ $pdo = new PDO(
   $connection_info['user'],
   $connection_info['pass']);
 
-$file_data = file_get_contents($argv[3]);
+$file_data = file_get_contents($argv[1]);
 
 $sql = <<< __HEREDOC__
 INSERT INTO t_file_yui_compressor
