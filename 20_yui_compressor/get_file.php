@@ -1,9 +1,5 @@
 <?php
 
-echo 'START';
-echo $argv[1];
-echo $argv[2];
-
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
   "pgsql:host=${connection_info['host']};dbname=" . substr($connection_info['path'], 1),
@@ -11,7 +7,7 @@ $pdo = new PDO(
   $connection_info['pass']);
 
 $sql = <<< __HEREDOC__
-SELECT COUNT('X') cnt
+SELECT file
   FROM t_file_yui_compressor
  WHERE file_name = :b_file_name
    AND file_hash = :b_file_hash
@@ -26,12 +22,15 @@ $statement->execute(
 
 $result = $statement->fetch();
 
-echo $result['cnt'];
+if ($result === FALSE) {
+  $rc = 0;
+} else {
+  $rc = 1;
+  // ファイル出力
+}
 
 $pdo = null;
 
-echo 'FINISH';
-
-exit($result['cnt']);
+exit($rc);
 
 ?>
