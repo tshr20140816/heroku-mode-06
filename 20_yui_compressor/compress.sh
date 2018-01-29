@@ -24,8 +24,8 @@ for file in $(find /app/www/ttrss/ -name "*.js" -type f -print); do
     # update
     php update.php ${file} ${hash}
   else
-    # dummy
-    # get file
-    a=1
+    echo 'pass '
+    echo ${file}
+    echo -e "\n"
   fi
 done
