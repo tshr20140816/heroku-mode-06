@@ -26,5 +26,6 @@ for file in $(find /app/www/ttrss/ -name "*.js" -type f -print); do
   else
     # dummy
     # get file
+    a=1
   fi
 done
