@@ -1,5 +1,8 @@
 <?php
 
+// $argv[1] : file name
+// $argv[2] : file hash
+
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
   "pgsql:host=${connection_info['host']};dbname=" . substr($connection_info['path'], 1),
@@ -26,7 +29,7 @@ if ($result === FALSE) {
   $rc = 0;
 } else {
   $rc = 1;
-  // ファイル出力
+  file_put_contents($argv[1], pg_unescape_bytea($result['file']));
 }
 
 $pdo = null;
