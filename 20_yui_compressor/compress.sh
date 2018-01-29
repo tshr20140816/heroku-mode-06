@@ -15,17 +15,20 @@ wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor
 #   time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type css -o ${file} ${file}.org
 # done
 
-for file in $(find /app/www/ttrss/ -name "*.js" -type f -print); do
-  mv ${file} ${file}.org
-  hash=$(sha512sum ${file}.org | awk '{print $1}')
-  php ./get_file.php ${file} ${hash}
-  if [ $? -eq 0 ]; then
-    time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o ${file} ${file}.org
-    # update
-    php update.php ${file} ${hash}
-  else
-    echo 'pass '
-    echo ${file}
-    echo -e "\n"
-  fi
+exts=('css','js')
+
+for ext in "${exts[@]}" ; do
+  for file in $(find /app/www/ttrss/ -name "*.${ext}" -type f -print); do
+    mv ${file} ${file}.org
+    hash=$(sha512sum ${file}.org | awk '{print $1}')
+    php ./get_file.php ${file} ${hash}
+    if [ $? -eq 0 ]; then
+      ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type ${ext} -o ${file} ${file}.org
+      php update.php ${file} ${hash}
+    else
+      echo 'pass '
+      echo ${file}
+      echo -e "\n"
+    fi
+  done
 done
