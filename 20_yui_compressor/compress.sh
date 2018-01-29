@@ -17,6 +17,11 @@ wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor
 
 for file in $(find /app/www/ttrss/ -name "*.js" -type f -print); do
   mv ${file} ${file}.org
-  time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o ${file} ${file}.org
+  
+  php ./check.php ${file} $(sha512sum ${file}.org | awk '{print $1}')
+  if [ $? -eq 0 ]; then
+    time ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type js -o ${file} ${file}.org
+  else
+  fi
 done
 
