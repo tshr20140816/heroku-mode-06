@@ -22,7 +22,7 @@ __HEREDOC__;
 
 $statement = $pdo->prepare($sql);
 $statement->execute(
-  [':b_file_name' => $argv[1],
+  [':b_file_name' => pathinfo($argv[1], PATHINFO_BASENAME),
    ':b_file_hash' => $argv[2],
    ':b_file' => pg_escape_bytea($file_data),
   ]);
