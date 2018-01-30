@@ -1,6 +1,6 @@
 <?php
 
-// $argv[1] : file name
+// $argv[1] : file name (full path)
 // $argv[2] : file hash
 
 $connection_info = parse_url(getenv('DATABASE_URL'));
@@ -19,7 +19,7 @@ __HEREDOC__;
 $statement = $pdo->prepare($sql);
 
 $statement->execute(
-  [':b_file_name' => $argv[1],
+  [':b_file_name' => pathinfo($argv[1], PATHINFO_BASENAME),
    ':b_file_hash' => $argv[2],
   ]);
 
