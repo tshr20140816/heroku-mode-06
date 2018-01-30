@@ -8,6 +8,8 @@ $pdo = new PDO(
 
 $file_data = file_get_contents($argv[1]);
 
+error_log(pg_escape_bytea($file_data));
+
 $sql = <<< __HEREDOC__
 INSERT INTO t_file_yui_compressor
 ( file_name
