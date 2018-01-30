@@ -29,6 +29,8 @@ if ($result === FALSE) {
   $rc = 0;
 } else {
   $rc = 1;
+  error_log($result['file']);
+  error_log(pg_unescape_bytea($result['file']));
   file_put_contents($argv[1], pg_unescape_bytea($result['file']));
 }
 
