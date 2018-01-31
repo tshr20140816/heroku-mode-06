@@ -23,10 +23,10 @@ INSERT INTO t_file_yui_compressor
 __HEREDOC__;
 
 $statement = $pdo->prepare($sql);
+$statement->bindColumn(':b_file', $file_data, PDO::PARAM_LOB);
 $statement->execute(
   [':b_file_name' => pathinfo($argv[1], PATHINFO_BASENAME),
-   ':b_file_hash' => $argv[2],
-   ':b_file' => $file_data,
+   ':b_file_hash' => $argv[2]
   ]);
 
 $pdo = null;
