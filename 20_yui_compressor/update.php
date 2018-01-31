@@ -14,19 +14,19 @@ $sql = <<< __HEREDOC__
 INSERT INTO t_file_yui_compressor
 ( file_name
  ,file_hash
- ,file
+ ,file_data
 ) VALUES (
   :b_file_name
  ,:b_file_hash
- ,:b_file
+ ,:b_file_data
 )
 __HEREDOC__;
 
 $statement = $pdo->prepare($sql);
-$statement->bindColumn(':b_file', $file_data, PDO::PARAM_LOB);
 $statement->execute(
   [':b_file_name' => pathinfo($argv[1], PATHINFO_BASENAME),
-   ':b_file_hash' => $argv[2]
+   ':b_file_hash' => $argv[2],
+   ':b_file_data' => $file_data,
   ]);
 
 $pdo = null;
