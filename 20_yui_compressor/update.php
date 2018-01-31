@@ -8,7 +8,7 @@ $pdo = new PDO(
 
 $file_data = file_get_contents($argv[1]);
 
-error_log(pg_escape_bytea($file_data));
+//error_log(pg_escape_bytea($file_data));
 
 $sql = <<< __HEREDOC__
 INSERT INTO t_file_yui_compressor
@@ -26,7 +26,7 @@ $statement = $pdo->prepare($sql);
 $statement->execute(
   [':b_file_name' => pathinfo($argv[1], PATHINFO_BASENAME),
    ':b_file_hash' => $argv[2],
-   ':b_file' => pg_escape_bytea($file_data),
+   ':b_file' => $file_data,
   ]);
 
 $pdo = null;
