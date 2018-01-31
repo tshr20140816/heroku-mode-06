@@ -11,14 +11,6 @@ if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
 fi
 
-wget $(curl https://java.com/en/download/manual.jsp \
- | grep 'Download Java software for Linux x64"' \
- | head -n 1 \
- | grep -oP 'http:.+?BundleId=[0-9a-z_]+') -O java.tar.gz \
- && tar xvfz java.tar.gz &
-
-wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar &
-
 git clone --depth 1 -b 17.4 https://tt-rss.org/git/tt-rss.git ttrss &
 
 git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git self_repository &
@@ -87,8 +79,6 @@ cat << '__HEREDOC__' > ./src/builtin/mssgs/news/artlistfooter.dhtml
 <HR>
 __HEREDOC__
 
-# '__HEREDOC__'
-
 time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
 
 cp ./src/delegated ../delegate/
@@ -139,7 +129,7 @@ cp -r ttrss/lib/* www/ttrss/lib/
 # rm -f colors.js
 # popd
 
-# for ext in "${exts[@]}" ; do
+#for ext in "${exts[@]}" ; do
 #  for file in $(find /app/www/ttrss/ -name "*.${ext}" -type f -print); do
 #    mv ${file} ${file}.org
 #    hash=$(sha512sum ${file}.org | awk '{print $1}')
