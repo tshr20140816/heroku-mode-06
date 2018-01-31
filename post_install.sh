@@ -87,6 +87,8 @@ cat << '__HEREDOC__' > ./src/builtin/mssgs/news/artlistfooter.dhtml
 <HR>
 __HEREDOC__
 
+# dummy
+
 time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
 
 cp ./src/delegated ../delegate/
