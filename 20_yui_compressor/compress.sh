@@ -21,7 +21,7 @@ wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor
 # done
 
 exts[0]='css'
-exts[1]='js'
+# exts[1]='js'
 
 for ext in "${exts[@]}" ; do
   for file in $(find /app/www/ttrss/ -name "*.${ext}" -type f -print); do
