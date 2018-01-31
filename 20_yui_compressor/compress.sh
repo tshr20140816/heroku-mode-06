@@ -25,6 +25,9 @@ exts[0]='css'
 
 for ext in "${exts[@]}" ; do
   for file in $(find /app/www/ttrss/ -name "*.${ext}" -type f -print); do
+    if [ -e ${file}.org ]; then
+      continue
+    fi
     mv ${file} ${file}.org
     hash=$(sha512sum ${file}.org | awk '{print $1}')
     php ./get_file.php ${file} ${hash}
