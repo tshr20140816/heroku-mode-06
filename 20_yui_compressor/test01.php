@@ -7,7 +7,7 @@ $pdo = new PDO(
   $connection_info['pass']);
 
 $sql = <<< __HEREDOC__
-SELECT file, file_name, file_hash
+SELECT file_name, file_hash, file_data
   FROM t_file_yui_compressor
 __HEREDOC__;
 
@@ -19,9 +19,8 @@ $result = $statement->fetch();
 
 error_log($result['file_name']);
 error_log($result['file_hash']);
-error_log($result['file']);
-error_log(pg_unescape_bytea($result['file']));
-file_put_contents('/tmp/test.txt', pg_unescape_bytea($result['file']));
+error_log($result['file_data']);
+file_put_contents('/tmp/test.txt', $result['file_data']);
 
 $pdo = null;
 
