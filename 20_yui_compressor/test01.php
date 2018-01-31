@@ -7,7 +7,7 @@ $pdo = new PDO(
   $connection_info['pass']);
 
 $sql = <<< __HEREDOC__
-SELECT file
+SELECT file, file_name, file_hash
   FROM t_file_yui_compressor
 __HEREDOC__;
 
