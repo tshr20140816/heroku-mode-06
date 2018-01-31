@@ -10,7 +10,7 @@ $sql = <<< __HEREDOC__
 CREATE TABLE t_file_yui_compressor (
     file_name character varying(255) NOT NULL,
     file_hash character varying(255) NOT NULL,
-    file bytea NOT NULL,
+    file text NOT NULL,
     change_time timestamp DEFAULT localtimestamp NOT NULL
 );
 __HEREDOC__;
