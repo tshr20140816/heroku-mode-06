@@ -6,6 +6,8 @@ $pdo = new PDO(
   $connection_info['user'],
   $connection_info['pass']);
 
+$pdo->query('DROP TABLE t_file_yui_compressor;');
+
 $sql = <<< __HEREDOC__
 CREATE TABLE t_file_yui_compressor (
     file_name character varying(255) NOT NULL,
@@ -21,10 +23,7 @@ ALTER TABLE t_file_yui_compressor ADD CONSTRAINT table_key PRIMARY KEY(file_name
 __HEREDOC__;
 $pdo->query($sql);
 
-$sql = <<< __HEREDOC__
-TRUNCATE TABLE t_file_yui_compressor;
-__HEREDOC__;
-$pdo->query($sql);
+$pdo->query('TRUNCATE TABLE t_file_yui_compressor;');
 
 $pdo = null;
 
