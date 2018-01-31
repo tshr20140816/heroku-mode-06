@@ -17,6 +17,8 @@ $statement->execute();
 
 $result = $statement->fetch();
 
+error_log($result['file_name']);
+error_log($result['file_hash']);
 error_log($result['file']);
 error_log(pg_unescape_bytea($result['file']));
 file_put_contents('/tmp/test.txt', pg_unescape_bytea($result['file']));
