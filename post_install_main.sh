@@ -77,8 +77,7 @@ pushd delegate9.9.13
 rm ./src/builtin/mssgs/news/artlistfooter.dhtml
 echo "<HR>" > ./src/builtin/mssgs/news/artlistfooter.dhtml
 
-# time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
-time make ADMIN="admin@localhost"
+time make -j$(grep -c -e processor /proc/cpuinfo) ADMIN="admin@localhost"
 
 cp ./src/delegated ../delegate/
 cp ./src/builtin/icons/ysato/*.gif ../delegate/icons/
