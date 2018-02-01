@@ -131,7 +131,7 @@ exts[0]='css'
 exts[1]='js'
 
 for ext in "${exts[@]}" ; do
-  for file in $(find /app/www/ttrss/ -name "*.${ext}" -type f -print); do
+  for file in $(find ./www/ttrss/ -name "*.${ext}" -type f -print); do
     mv ${file} ${file}.org
     hash=$(sha512sum ${file}.org | awk '{print $1}')
     php ./20_yui_compressor/get_file.php ${file} ${hash}
