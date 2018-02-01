@@ -11,7 +11,7 @@ if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
 fi
 
-git clone --depth 1 -b 17.4 https://tt-rss.org/git/tt-rss.git ttrss &
+bash post_install_main.sh &
 
 git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git self_repository &
 
@@ -106,42 +106,7 @@ rm -rf ./ccache
 mkdir -m 777 -p delegate/cache
 mkdir -m 777 -p delegate/tmp
 
-# ***** ttrss *****
-
 wait
-
-mkdir -m 777 -p www/ttrss/css
-cp ttrss/css/* www/ttrss/css/
-
-mkdir -m 777 -p www/ttrss/images
-cp ttrss/images/* www/ttrss/images/
-
-mkdir -m 777 -p www/ttrss/js
-cp ttrss/js/* www/ttrss/js/
-
-mkdir -m 777 -p www/ttrss/lib
-cp -r ttrss/lib/* www/ttrss/lib/
-
-# pushd www/ttrss/lib/dojo/nls/ja
-# gzip -9c colors.js > colors.js.gz
-# rm -f colors.js
-# popd
-
-exts[0]='css'
-exts[1]='js'
-
-for ext in "${exts[@]}" ; do
-  for file in $(find ./www/ttrss/ -name "*.${ext}" -type f -print); do
-    mv ${file} ${file}.org
-    hash=$(sha512sum ${file}.org | awk '{print $1}')
-    php ./20_yui_compressor/get_file.php ${file} ${hash}
-    if [ $? -eq 0 ]; then
-      mv ${file}.org ${file}
-    fi
-  done
-done
-
-rm -rf ttrss
 
 # ***** last update *****
 
