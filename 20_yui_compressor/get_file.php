@@ -29,7 +29,7 @@ if ($result === FALSE) {
   $rc = 0;
 } else {
   $rc = 1;
-  error_log($result['file_data']);
+  //error_log($result['file_data']);
   file_put_contents($argv[1], $result['file_data']);
 }
 
