@@ -11,7 +11,7 @@ if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
 fi
 
-bash post_install_main.sh &
+bash post_install_sub01.sh &
 
 git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git self_repository &
 
