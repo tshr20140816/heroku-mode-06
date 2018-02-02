@@ -8,8 +8,6 @@ $pdo = new PDO(
   $connection_info['user'],
   $connection_info['pass']);
 
-// t_icon_file
-
 $sql = <<< __HEREDOC__
 SELECT file_data
   FROM t_icon_file
