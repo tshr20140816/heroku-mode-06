@@ -28,7 +28,7 @@ for ext in "${exts[@]}" ; do
   #    mv ${file}.org ${file}
   #  fi
   #done
-  find ./www/ttrss/ -name "*.${ext}" -type f -print0 | xargs -0i -P 32 -n 1 bash ./post_install_sub01_01.sh {}
+  find ./www/ttrss/ -name "*.${ext}" -type f -print0 | xargs -0i -P 64 -n 1 bash ./post_install_sub01_01.sh {}
 done
 
 rm -rf ttrss
