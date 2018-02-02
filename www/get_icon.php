@@ -3,7 +3,9 @@
 // file_name : /ttrss/feed-icons/nnn.ico
 
 $icon_file_name = pathinfo($_GET['file_name'], PATHINFO_BASENAME);
-  
+
+$error_log($icon_file_name);
+
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
   "pgsql:host=${connection_info['host']};dbname=" . substr($connection_info['path'], 1),
