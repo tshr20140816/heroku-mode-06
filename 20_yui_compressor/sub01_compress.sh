@@ -3,6 +3,10 @@
 file=$1
 ext=$2
 
+if [ -e ${file}.org ]; then
+  return
+fi
+
 mv ${file} ${file}.org
 hash=$(sha512sum ${file}.org | awk '{print $1}')
 php ./get_file.php ${file} ${hash}
