@@ -40,6 +40,11 @@ CREATE TABLE t_icon_file (
 __HEREDOC__;
 $pdo->query($sql);
 
+$sql = <<< __HEREDOC__
+ALTER TABLE t_file_yui_compressor ADD CONSTRAINT table_key PRIMARY KEY(file_name);
+__HEREDOC__;
+$pdo->query($sql);
+
 $pdo->query('TRUNCATE TABLE t_icon_file;');
 
 $pdo = null;
