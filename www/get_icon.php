@@ -25,22 +25,29 @@ $statement->execute(
   ]);
 $result = $statement->fetch();
 
-header('Content-Type: image/vnd.microsoft.icon');
 if ($result === FALSE) {
   error_log('File Not Found');
   error_log(getenv('REMOTE_PATH_2'));
   error_log(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
+  $http_response_header = null;
+  $http_response_header[] = '';
   $options['ssl']['verify_peer']=false;
   $options['ssl']['verify_peer_name']=false;
   $result = file_get_contents(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name, false, stream_context_create($options));
-  echo $result;
-  $statement = $pdo->prepare('INSERT INTO t_icon_file (file_name, file_data) VALUES (:b_file_name, :b_file_data)');
-  $statement->execute(
-    [':b_file_name' => $icon_file_name,
-     ':b_file_data' => base64_encode($result),
-    ]);
+  if (strpos($http_response_header[0], '200') !== false) {
+    header('Content-Type: image/vnd.microsoft.icon');
+    echo $result;
+    $statement = $pdo->prepare('INSERT INTO t_icon_file (file_name, file_data) VALUES (:b_file_name, :b_file_data)');
+    $statement->execute(
+      [':b_file_name' => $icon_file_name,
+       ':b_file_data' => base64_encode($result),
+      ]);
+  } else {
+    echo '';
+  }
 } else {
   error_log('File Found');
+  header('Content-Type: image/vnd.microsoft.icon');
   echo base64_decode($result['file_data']);
 }
 
