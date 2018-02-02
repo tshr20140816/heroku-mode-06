@@ -4,7 +4,7 @@
 
 $icon_file_name = pathinfo($_GET['file_name'], PATHINFO_BASENAME);
 
-$error_log($icon_file_name);
+error_log($icon_file_name);
 
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
@@ -27,6 +27,7 @@ $result = $statement->fetch();
 
 header('Content-Type: image/vnd.microsoft.icon');
 if ($result === FALSE) {
+  error_log('File Not Found');
   $result = file_get_contents(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
   echo $result;
   $statement = $pdo->prepare('INSERT INTO t_icon_file (file_name, file_data) VALUES (:b_file_name, :b_file_data)');
@@ -35,6 +36,7 @@ if ($result === FALSE) {
      ':b_file_data' => base64_encode($result),
     ]);
 } else {
+  error_log('File Found');
   echo base64_decode($result['file_data']);
 }
 
