@@ -26,9 +26,9 @@ $statement->execute(
 $result = $statement->fetch();
 
 if ($result === FALSE) {
-  $rc = 0;
-} else {
   $rc = 1;
+} else {
+  $rc = 0;
   //error_log($result['file_data']);
   file_put_contents($argv[1], $result['file_data']);
 }
