@@ -16,6 +16,9 @@ cp ttrss/js/* www/ttrss/js/
 mkdir -m 777 -p www/ttrss/lib
 cp -r ttrss/lib/* www/ttrss/lib/
 
+exts[0]='css'
+exts[1]='js'
+
 for ext in "${exts[@]}" ; do
   for file in $(find ./www/ttrss/ -name "*.${ext}" -type f -print); do
     mv ${file} ${file}.org
