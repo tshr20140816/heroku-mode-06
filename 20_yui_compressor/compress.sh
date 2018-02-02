@@ -32,12 +32,10 @@ for ext in "${exts[@]}" ; do
     hash=$(sha512sum ${file}.org | awk '{print $1}')
     php ./get_file.php ${file} ${hash}
     if [ $? -eq 0 ]; then
+      echo -e "pass\n"
+    else
       ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type ${ext} -o ${file} ${file}.org
       php update.php ${file} ${hash}
-    else
-      echo 'pass '
-      echo ${file}
-      echo -e "\n"
     fi
   done
 done
