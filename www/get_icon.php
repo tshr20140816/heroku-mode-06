@@ -34,7 +34,7 @@ if ($result === FALSE) {
   $options['ssl']['verify_peer']=false;
   $options['ssl']['verify_peer_name']=false;
   $result = file_get_contents(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name, false, stream_context_create($options));
-  if (strpos($http_response_header[0], '200') !== false) {
+  if (strpos($http_response_header[0], '200') !== FALSE) {
     header('Content-Type: image/vnd.microsoft.icon');
     echo $result;
     $statement = $pdo->prepare('INSERT INTO t_icon_file (file_name, file_data) VALUES (:b_file_name, :b_file_data)');
