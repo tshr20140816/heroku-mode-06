@@ -1,4 +1,6 @@
-<?php
+#!/bin/bash
+
+set -x
 
 file=$1
 ext=$2
@@ -16,5 +18,3 @@ if [ $? -ne 0 ]; then
 else
   echo -e "pass\n"
 fi
-
-?>
