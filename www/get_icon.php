@@ -23,10 +23,13 @@ $statement->execute(
   ]);
 $result = $statement->fetch();
 
+header('Content-Type: image/vnd.microsoft.icon');
 if ($result === FALSE) {
-  // toriniyuku & insert
+  $result = file_get_contents(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
+  echo $result;
+  // insert
 } else {
-  // shutsuryoku $result['file_data'])
+  echo base64_decode($result['file_data']);
 }
 
 $pdo = null;
