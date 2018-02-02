@@ -38,5 +38,6 @@ for ext in "${exts[@]}" ; do
   #    echo -e "pass\n"
   #  fi
   #done
-  find /app/www/ttrss/ -name "*.${ext}" -type f -print0 | xargs -0i -P 5 -n 1 bash ./sub01_compress.sh {} ${ext}
+  find /app/www/ttrss/ -name "*.${ext}" -type f -print0 | \
+    xargs -0i -P $(grep -c -e processor /proc/cpuinfo) -n 1 bash ./sub01_compress.sh {} ${ext}
 done
