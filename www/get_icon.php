@@ -43,7 +43,7 @@ if ($result === FALSE) {
        ':b_file_data' => base64_encode($result),
       ]);
   } else {
-    echo '';
+    http_response_code(503);
   }
 } else {
   error_log('File Found');
