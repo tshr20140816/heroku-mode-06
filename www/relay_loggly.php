@@ -37,7 +37,7 @@ $context = [
     'header' => [
       'Content-Type: text/plain'
     ],
-    'content' => $message . ' AttackedCountryName ' . $country_name
+    'content' => $message . ' [ AttackedCountryName : ' . $country_name . ' ]'
   ]];
 $res = file_get_contents($url, false, stream_context_create($context));
 
