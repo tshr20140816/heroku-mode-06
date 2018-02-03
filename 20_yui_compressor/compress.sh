@@ -15,7 +15,8 @@ if [ ! -e ./java.tar.gz ]; then
    https://webproxy.to/includes/process.php?action=update \
    | grep 'Download Java software for Linux x64"' \
    | head -n 1 \
-   | grep -oP 'http:.+?BundleId=[0-9a-z_]+') -O java.tar.gz
+   | grep -oP 'http.+BundleId%3D[0-9a-z_]+' \
+   | php -r "echo urldecode(file_get_contents('php://stdin'));") -O java.tar.gz
    
   if [ ! -e ./java.tar.gz ]; then
     exit
