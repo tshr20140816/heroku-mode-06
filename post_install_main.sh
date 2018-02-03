@@ -116,9 +116,9 @@ popd
 
 pushd ./www/ttrss/css/
 gzip -9c tt-rss.css > tt-rss.css.gz
-rm tt-rss.css
+# rm tt-rss.css
 gzip -9c dijit.css > dijit.css.gz
-rm dijit.css
+# rm dijit.css
 popd
 
 # ***** last update *****
