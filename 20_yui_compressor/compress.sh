@@ -18,9 +18,9 @@ if [ ! -e ./java.tar.gz ]; then
    | head -n 1 \
    | grep -oP 'http:.+?BundleId=[0-9a-z_]+') -O java.tar.gz
    
- if [ ! -e ./java.tar.gz ]; then
-   exit
- fi
+  if [ ! -e ./java.tar.gz ]; then
+    exit
+  fi
 fi
 
 tar xvfz java.tar.gz
