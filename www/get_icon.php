@@ -31,9 +31,17 @@ if ($result === FALSE) {
   error_log(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
   $http_response_header = null;
   $http_response_header[] = '';
-  $options['ssl']['verify_peer']=false;
-  $options['ssl']['verify_peer_name']=false;
-  $result = file_get_contents(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name, false, stream_context_create($options));
+  $context = [
+    'http' => [
+      'method' => 'GET',
+      'header' => [
+        'User-Agent: Love Love Show'
+        ]],
+    'ssl' => [
+      'verify_peer' => false,
+      'verify_peer_name' => false,
+      ]];
+  $result = file_get_contents(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name, false, stream_context_create($context));
   if (strpos($http_response_header[0], '200') !== FALSE) {
     header('Content-Type: image/vnd.microsoft.icon');
     echo $result;
