@@ -109,6 +109,15 @@ mkdir -m 777 -p delegate/tmp
 
 wait
 
+pushd ./www/ttrss/lib/dijit/themes/claro/
+gzip -9c claro.css > claro.css.gz
+popd
+
+pushd ./www/ttrss/css/
+gzip -9c tt-rss.css > tt-rss.css.gz
+gzip -9c dijit.css > dijit.css.gz
+popd
+
 # ***** last update *****
 
 pushd self_repository
