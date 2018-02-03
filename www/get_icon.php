@@ -35,7 +35,7 @@ if ($result === FALSE) {
     'http' => [
       'method' => 'GET',
       'header' => [
-        'User-Agent: Love Love Show'
+        'User-Agent: Love Love Show',
         ]],
     'ssl' => [
       'verify_peer' => false,
