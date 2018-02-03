@@ -8,7 +8,19 @@ wget $(curl https://java.com/en/download/manual.jsp \
  | grep -oP 'http:.+?BundleId=[0-9a-z_]+') -O java.tar.gz
 
 if [ ! -e ./java.tar.gz ]; then
-  exit
+  if [ ! -v PX ]; then
+    echo 'export PX='
+    exit
+  fi
+
+  wget $(curl https://${PX}.appspot.com/pagerelay?param=https://java.com/en/download/manual.jsp \
+   | grep 'Download Java software for Linux x64"' \
+   | head -n 1 \
+   | grep -oP 'http:.+?BundleId=[0-9a-z_]+') -O java.tar.gz
+   
+ if [ ! -e ./java.tar.gz ]; then
+   exit
+ fi
 fi
 
 tar xvfz java.tar.gz
