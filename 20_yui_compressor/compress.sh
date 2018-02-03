@@ -10,7 +10,7 @@ wget $(curl https://java.com/en/download/manual.jsp \
 
 if [ ! -e ./java.tar.gz ]; then
 
-  wget $(curl -b /tmp/cookie -c /tmp/cookie -L --data-urlencode 'u=https://java.com/en/download/manual.jsp \
+  wget $(curl -b /tmp/cookie -c /tmp/cookie -L --data-urlencode 'u=https://java.com/en/download/manual.jsp' \
    -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/58.0' \
    https://webproxy.to/includes/process.php?action=update \
    | grep 'Download Java software for Linux x64"' \
