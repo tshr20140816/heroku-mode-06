@@ -29,7 +29,7 @@ if (preg_match('/ \d+\.\d+\.\d+\.\d+ /', $message, $matches) === 1) {
 
 error_log($country_name);
 
-$url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_POST['tag'] . '/';
+$url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_POST['tag'] . ',AttackedCountryName/';
 
 $context = [
   'http' => [
