@@ -118,6 +118,11 @@ __HEREDOC__;
   $body = preg_replace('/^  /m', ' ', $body);
   $body = preg_replace('/^ +</m', '<', $body);
 
+  $body = str_replace("</TD>\r\n", "</TD>", $body);
+  $body = str_replace("</TR>\r\n", "</TR>", $body);
+  $body = str_replace("</CODE>\r\n", "</CODE>", $body);
+  $body = str_replace("<DD>\r\n", "<DD>", $body);
+  
   error_log($_SERVER['REQUEST_URI']);
   error_log($header);
   error_log("\r\n");
