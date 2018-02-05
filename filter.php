@@ -67,7 +67,7 @@ $header = preg_replace('/^DeleGate.+\n/m', '', $header);
 
 if (strpos($header, 'Content-Type: text/html') !== false)
 {
-  // イメージファイルでは残したいけここでは不要
+  // イメージファイルでは残したいけどここでは不要
   $header = preg_replace('/^Last-Modified.+\n/m', '', $header);
   
   // 元サイズ
