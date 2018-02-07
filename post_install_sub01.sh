@@ -16,11 +16,7 @@ cp ttrss/js/* www/ttrss/js/
 mkdir -m 777 -p www/ttrss/lib
 cp -r ttrss/lib/* www/ttrss/lib/
 
-exts[0]='css'
-exts[1]='js'
-
-for ext in "${exts[@]}" ; do
-  find ./www/ttrss/ -name "*.${ext}" -type f -print0 | xargs -0i -P 20 -n 1 bash ./post_install_sub01_01.sh {}
-done
+find ./www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 20 -n 1 bash ./post_install_sub01_01.sh {}
+find ./www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 1 bash ./post_install_sub01_01.sh {}
 
 rm -rf ttrss
