@@ -119,6 +119,7 @@ __HEREDOC__;
 
   $body = str_replace("</TD>\r\n", "</TD>", $body);
   $body = str_replace("</TR>\r\n", "</TR>", $body);
+  $body = str_replace("<TD>\r\n", "<TR>", $body);
   $body = str_replace("<TR>\r\n", "<TR>", $body);
   $body = str_replace("<CODE>.</CODE>\r\n", '', $body);
   $body = str_replace("<DD>\r\n", "<DD>", $body);
