@@ -6,7 +6,8 @@ error_log("${pid} ***** FILTER MESSAGE START ***** " . $_SERVER['REQUEST_URI']);
 error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
 
 // 最終コミット日時のハッシュを比較し一致した場合のみ許可
-error_log("${pid} last_update.txt " . md5_file('/app/www/last_update.txt'));
+$md5_hash = md5_file('/app/www/last_update.txt');
+error_log("${pid} last_update.txt " . $md5_hash);
 error_log("${pid} X-Access-Key*** " . $_SERVER['HTTP_X_ACCESS_KEY']);
 $access_key = $_SERVER['HTTP_X_ACCESS_KEY'];
 
@@ -17,7 +18,7 @@ $forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
 $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . '/';
 
 // IE Edge 不可
-if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $access_key != md5_file('/app/www/last_update.txt'))
+if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $access_key != $md5_hash)
 {
   error_log("${pid} #*#*#*#*# IE or Edge or Direct Connect or X-Access-Key Unmatch #*#*#*#*#");
   header('HTTP', true, 403);
