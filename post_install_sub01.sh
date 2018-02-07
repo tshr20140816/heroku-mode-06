@@ -20,14 +20,6 @@ exts[0]='css'
 exts[1]='js'
 
 for ext in "${exts[@]}" ; do
-  #for file in $(find ./www/ttrss/ -name "*.${ext}" -type f -print); do
-  #  mv ${file} ${file}.org
-  #  hash=$(sha512sum ${file}.org | awk '{print $1}')
-  #  php ./20_yui_compressor/get_file.php ${file} ${hash}
-  #  if [ $? -eq 0 ]; then
-  #    mv ${file}.org ${file}
-  #  fi
-  #done
   find ./www/ttrss/ -name "*.${ext}" -type f -print0 | xargs -0i -P 20 -n 1 bash ./post_install_sub01_01.sh {}
 done
 
