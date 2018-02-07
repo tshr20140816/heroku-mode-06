@@ -88,8 +88,7 @@ if (strpos($header, 'Content-Type: text/html') !== false)
 </TITLE>
 <STYLE TYPE='text/css'>
 a { text-decoration: none; font-weight: 500; }
-</STYLE>
-</HEAD>
+</STYLE></HEAD>
 __HEREDOC__;
   //$body = str_replace('</TITLE>', '</TITLE></HEAD>', $body);
   $body = str_replace('</TITLE>', $replace_text, $body);
@@ -120,7 +119,8 @@ __HEREDOC__;
 
   $body = str_replace("</TD>\r\n", "</TD>", $body);
   $body = str_replace("</TR>\r\n", "</TR>", $body);
-  $body = str_replace("</CODE>\r\n", "</CODE>", $body);
+  $body = str_replace("<TR>\r\n", "<TR>", $body);
+  $body = str_replace("<CODE>.</CODE>\r\n", '', $body);
   $body = str_replace("<DD>\r\n", "<DD>", $body);
   
   error_log($_SERVER['REQUEST_URI']);
