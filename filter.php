@@ -50,7 +50,6 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
 }
 
 error_log("${pid} ***** STDIN START ***** " . $_SERVER['REQUEST_URI']);
-
 $buf = file_get_contents('php://stdin');
 error_log("${pid} ***** STDIN FINISH ***** " . $_SERVER['REQUEST_URI']);
 
@@ -125,10 +124,12 @@ __HEREDOC__;
   $body = str_replace("<CODE>.</CODE>\r\n", '', $body);
   $body = str_replace("<DD>\r\n", "<DD>", $body);
   
-  error_log($_SERVER['REQUEST_URI']);
+  error_log("${pid} " . $_SERVER['REQUEST_URI']);
   error_log($header);
-  error_log("\r\n");
-  error_log($body);
+  if (getenv('DELEGATE_LOG_LEVEL') != 'simple') {
+    error_log("\r\n");
+    error_log($body);
+  }
 
   // 圧縮
   $buf = $header;
@@ -139,7 +140,7 @@ __HEREDOC__;
   $buf .= "\r\n";
   $buf .= $body;
 } else {
-  error_log($_SERVER['REQUEST_URI']);
+  error_log("${pid} " . $_SERVER['REQUEST_URI']);
   error_log($header);
   $buf = $header;
   //$buf .= "Cache-Control: max-age=86400\r\n";
