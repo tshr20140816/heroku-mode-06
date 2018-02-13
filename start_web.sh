@@ -93,6 +93,10 @@ if [ ${MODE} = 'APACHE' ]; then
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
 
+  if [ ! -v DELEGATE_LOG_LEVEL ]; then
+    export DELEGATE_LOG_LEVEL="simple"
+  fi
+
   if [ ! -v DELEGATE_OPTION ]; then
     export DELEGATE_OPTION="-v"
   fi
