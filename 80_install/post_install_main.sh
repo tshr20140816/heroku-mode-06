@@ -15,9 +15,9 @@ if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
 fi
 
-# bash ./post_install_sub01.sh &
+bash ./post_install_sub01.sh &
 
-# git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git /tmp/self_repository &
+git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git /tmp/self_repository &
 
 # ***** delegate *****
 
@@ -26,15 +26,14 @@ mkdir -m 777 -p /tmp/ccache
 
 export PATH="/tmp/usr/bin:${PATH}"
 
-# mkdir -m 777 ../delegate
-mkdir -m 777 -p ../delegate/icons
+mkdir -m 777 -p delegate/icons
 
 # apache
-chmod 777 ../www
-mkdir -m 777 ../www/icons
+chmod 777 www
+mkdir -m 777 www/icons
 
 if [ ${DEVELOP_MODE} = 'OFF' ]; then
-  mv ../ccache_cache.zip /tmp/
+  mv ccache_cache.zip /tmp/
   pushd /tmp
   unzip -q ccache_cache.zip
   popd
@@ -44,14 +43,11 @@ export CCACHE_DIR=/tmp/ccache
 export CFLAGS="-O2 -march=native"
 export CXXFLAGS="$CFLAGS"
 
-pwd
-ls -lang ../
-if [ -e ../ccache.zip ]; then
+if [ -e ccache.zip ]; then
   mv ccache.zip /tmp/usr/bin/
   pushd /tmp/usr/bin
   unzip ccache.zip
   popd
-  rm -f ../ccache-3.3.4.tar.gz
 else
   pushd /tmp
   wget https://www.samba.org/ftp/ccache/ccache-3.3.4.tar.gz
@@ -76,12 +72,12 @@ popd
 ccache -s
 ccache -z
 
-if [ ! -e ../delegate9.9.13.tar.gz ]; then
+if [ ! -e delegate9.9.13.tar.gz ]; then
   pushd /tmp
   time wget http://delegate.hpcc.jp/anonftp/DeleGate/delegate9.9.13.tar.gz
   popd
 else
-  mv ../delegate9.9.13.tar.gz /tmp/
+  mv delegate9.9.13.tar.gz /tmp/
 fi
 pushd /tmp
 tar xf delegate9.9.13.tar.gz
@@ -115,8 +111,8 @@ if [ ${DEVELOP_MODE} != 'OFF' ]; then
   popd
 fi
 
-mkdir -m 777 -p ../delegate/cache
-mkdir -m 777 -p ../delegate/tmp
+mkdir -m 777 -p delegate/cache
+mkdir -m 777 -p delegate/tmp
 
 wait
 
@@ -135,8 +131,8 @@ echo "${last_update}" > ${HOME2}/www/last_update.txt
 
 popd
 
-chmod 755 ../start_web.sh
-chmod 755 ../loggly.php
+chmod 755 start_web.sh
+chmod 755 loggly.php
 
 popd
 
