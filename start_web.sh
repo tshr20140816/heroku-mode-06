@@ -90,10 +90,8 @@ if [ ${MODE} = 'APACHE' ]; then
     | awk '{print $2}')
 
   echo "${HOME_FQDN} ${HOME_IP_ADDRESS}" > /app/HOME_IP_ADDRESS
-  cat /app/HOME_IP_ADDRESS
 
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
-  cat /app/.htpasswd
 
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
