@@ -44,6 +44,8 @@ export CCACHE_DIR=/tmp/ccache
 export CFLAGS="-O2 -march=native"
 export CXXFLAGS="$CFLAGS"
 
+pwd
+ls -lang ../
 if [ -e ../ccache.zip ]; then
   mv ccache.zip /tmp/usr/bin/
   pushd /tmp/usr/bin
