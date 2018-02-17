@@ -81,7 +81,7 @@ if [ ${MODE} = 'APACHE' ]; then
   mkdir -p /tmp/usr/lib
   cp ./lib/libnghttp2.so.14 /tmp/usr/lib/
 
-  export HOME_FQDN=$(echo ${REMOTE_PATH_2} | awk -F/ '{print $3}' | awk -F: '{print $1}')
+  export HOME_FQDN=$(echo ${REMOTE_PATH_2} | awk -F/ '{print $1}' | awk -F: '{print $1}')
   nslookup ${HOME_FQDN} 8.8.8.8
 
   export HOME_IP_ADDRESS=$(nslookup ${HOME_FQDN} 8.8.8.8 \
