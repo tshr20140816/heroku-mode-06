@@ -15,9 +15,9 @@ if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
 fi
 
-bash ./post_install_sub01.sh &
+# bash ./post_install_sub01.sh &
 
-git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git /tmp/self_repository &
+# git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git /tmp/self_repository &
 
 # ***** delegate *****
 
@@ -63,6 +63,9 @@ else
   popd
   popd
 fi
+
+exit
+
 pushd /tmp/usr/bin
 ln -s ccache gcc
 ln -s ccache g++
