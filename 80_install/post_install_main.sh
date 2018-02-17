@@ -60,8 +60,6 @@ else
   popd
 fi
 
-exit
-
 pushd /tmp/usr/bin
 ln -s ccache gcc
 ln -s ccache g++
