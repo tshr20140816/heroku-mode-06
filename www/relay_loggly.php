@@ -19,6 +19,9 @@ error_log("${pid} ${message}");
 
 if (preg_match('/ \d+\.\d+\.\d+\.\d+ /', $message, $matches) === 1) {
   $ip_address = trim($matches[0]);
+  if ($ip_address == '127.0.0.1') {
+    exit();
+  }
   if (file_exists("/tmp/${ip_address}")) {
     $country_name = file_get_contents("/tmp/${ip_address}");
   } else {
