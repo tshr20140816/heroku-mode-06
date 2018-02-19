@@ -19,3 +19,5 @@ find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 1 bash /tmp/po
 popd
 
 mv /tmp/www/ttrss www/ttrss
+mkdir -m 777 -p www/ttrss/plugins/note
+mv /tmp/ttrss/plugins/note/note.png www/ttrss/plugins/note/
