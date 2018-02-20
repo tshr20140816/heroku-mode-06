@@ -134,4 +134,11 @@ chmod 755 loggly.php
 
 popd
 
+pushd www/ttrss/css
+
+gzip -c tt-rss.css > tt-rss.css.gz
+rm tt-rss.css
+
+popd
+
 date
