@@ -97,6 +97,7 @@ if [ ! -e ${HOME2}/90_binary/delegated ]; then
   # cp ./src/delegated ${HOME2}/www/
 else
   cp ${HOME2}/90_binary/delegated ${HOME2}/delegate/
+  chmod +x ${HOME2}/delegate/delegated
 fi
 cp ./src/builtin/icons/ysato/*.gif ${HOME2}/delegate/icons/
 
