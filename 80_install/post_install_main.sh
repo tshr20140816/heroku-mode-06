@@ -4,6 +4,14 @@ set -x
 
 date
 
+if [ ! -e 90_binary/delegated ]; then
+  echo "File Not Found\n"
+else
+  echo "File Not Found\n"
+fi
+
+exit
+
 export HOME2=${PWD}
 
 cat /proc/version
