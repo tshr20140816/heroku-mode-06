@@ -42,6 +42,6 @@ foreach ($argv as $arg) {
 
 $pdo = null;
 
-exit($rc);
+exit();
 
 ?>
