@@ -43,6 +43,8 @@ export CCACHE_DIR=/tmp/ccache
 export CFLAGS="-O2 -march=native"
 export CXXFLAGS="$CFLAGS"
 
+ls -lang 90_binary/delegated
+
 if [ ! -e 90_binary/delegated ]; then
   if [ -e ccache.zip ]; then
     mv ccache.zip /tmp/usr/bin/
