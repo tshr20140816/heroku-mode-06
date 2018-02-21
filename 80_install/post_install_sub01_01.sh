@@ -6,7 +6,8 @@ echo "START\n"
 
 for file in "$@"; do
   mv ${file} ${file}.org
-  php /tmp/get_file.php ${file}
+  # php /tmp/get_file.php ${file}
+  /tmp/get_file.php ${file}
   if [ $? -ne 0 ]; then
     mv ${file}.org ${file}
   fi
