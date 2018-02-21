@@ -7,7 +7,7 @@ date
 if [ ! -e 90_binary/delegated ]; then
   echo "File Not Found\n"
 else
-  echo "File Not Found\n"
+  echo "File Found\n"
 fi
 
 exit
