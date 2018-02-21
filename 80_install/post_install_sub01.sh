@@ -15,7 +15,7 @@ cp ./20_yui_compressor/get_file.php /tmp/get_file.php
 pushd /tmp
 find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
 find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
-find www/ttrss/css/ -name "*.css" -type f -print0 | xargs -0 -i -P 2 -n 1 gzip -9
+# find www/ttrss/css/ -name "*.css" -type f -print0 | xargs -0 -i -P 2 -n 1 gzip -9
 popd
 
 mv /tmp/www/ttrss www/ttrss
