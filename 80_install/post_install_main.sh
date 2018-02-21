@@ -44,7 +44,6 @@ export CFLAGS="-O2 -march=native"
 export CXXFLAGS="$CFLAGS"
 
 ls -lang 90_binary/delegated
-pwd
 
 if [ ! -e 90_binary/delegated ]; then
   if [ -e ccache.zip ]; then
@@ -75,8 +74,6 @@ if [ ! -e 90_binary/delegated ]; then
   ccache -z
 fi
 
-exit
-
 if [ ! -e delegate9.9.13.tar.gz ]; then
   pushd /tmp
   time wget http://delegate.hpcc.jp/anonftp/DeleGate/delegate9.9.13.tar.gz
@@ -89,7 +86,7 @@ tar xf delegate9.9.13.tar.gz
 
 pushd delegate9.9.13
 
-if [ ! -e 90_binary/delegated ]; then
+if [ ! -e ${HOME2}/90_binary/delegated ]; then
   rm ./src/builtin/mssgs/news/artlistfooter.dhtml
   echo "<HR>" > ./src/builtin/mssgs/news/artlistfooter.dhtml
 
@@ -99,7 +96,7 @@ if [ ! -e 90_binary/delegated ]; then
   cp ./src/delegated ${HOME2}/delegate/
   # cp ./src/delegated ${HOME2}/www/
 else
-  cp 90_binary/delegated ${HOME2}/delegate/
+  cp ${HOME2}/90_binary/delegated ${HOME2}/delegate/
 fi
 cp ./src/builtin/icons/ysato/*.gif ${HOME2}/delegate/icons/
 
