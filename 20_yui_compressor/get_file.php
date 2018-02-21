@@ -1,12 +1,6 @@
 <?php
 
-// $argv[1] : file name (full path)
-
-/*
-foreach ($argv as $arg) {
-
-}
-*/
+// $argv : file name (full path)
 
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
@@ -31,7 +25,7 @@ foreach ($argv as $arg) {
   }
   $statement->execute(
     [':b_file_name' => pathinfo($arg, PATHINFO_BASENAME),
-     ':b_file_hash' => hash('sha512', file_get_contents($arg . '.org'))
+     ':b_file_hash' => hash('sha512', file_get_contents($arg))
     ]);
 
   $result = $statement->fetch();
@@ -40,8 +34,10 @@ foreach ($argv as $arg) {
     $rc = 1;
   } else {
     $rc = 0;
+    rename($arg, $arg . '.org');
     file_put_contents($arg, $result['file_data']);
   }
+  error_log($rc);
 }
 
 $pdo = null;
