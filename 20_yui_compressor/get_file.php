@@ -24,6 +24,7 @@ __HEREDOC__;
 $statement = $pdo->prepare($sql);
 
 foreach ($argv as $arg) {
+  error_log($arg);
   $statement->execute(
     [':b_file_name' => pathinfo($arg, PATHINFO_BASENAME),
      ':b_file_hash' => hash('sha512', file_get_contents($arg . '.org'))
