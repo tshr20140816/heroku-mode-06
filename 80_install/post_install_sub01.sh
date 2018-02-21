@@ -15,8 +15,8 @@ cp ./20_yui_compressor/get_file.php /tmp/get_file.php
 chmod +x /tmp/get_file.php
 
 pushd /tmp
-find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 1 -n 20 php /tmp/get_file.php
-find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 1 -n 20 php /tmp/get_file.php
+find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 2 -n 20 php /tmp/get_file.php
+find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 2 -n 20 php /tmp/get_file.php
 # find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 1 -n 2 bash /tmp/post_install_sub01_01.sh
 # find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 bash /tmp/post_install_sub01_01.sh
 # find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 20 -n 1 bash /tmp/post_install_sub01_01.sh {}
