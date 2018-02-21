@@ -2,6 +2,8 @@
 
 set -x
 
+echo "START\n"
+
 #file=$1
 
 #mv ${file} ${file}.org
@@ -17,3 +19,5 @@ for file in "$@"; do
     mv ${file}.org ${file}
   fi
 done
+
+echo "FINISH\n"
