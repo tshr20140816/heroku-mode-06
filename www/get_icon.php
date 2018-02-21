@@ -31,7 +31,7 @@ if ($result === FALSE) {
   error_log(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
   $http_response_header = null;
   $http_response_header[] = '';
-  $tmp = explode(getenv('REMOTE_PATH_2'), ':');
+  $tmp = explode(':', getenv('REMOTE_PATH_2'));
   $request_server = $tmp[0];
   error_log($request_server);
   $context = [
@@ -39,7 +39,7 @@ if ($result === FALSE) {
       'method' => 'GET',
       'header' => [
         'User-Agent: Love Love Show',
-        "X-Request-Server: " . $request_server,
+        'X-Request-Server: ' . $request_server,
         ]],
     'ssl' => [
       'verify_peer' => false,
