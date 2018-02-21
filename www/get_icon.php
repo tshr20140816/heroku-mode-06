@@ -33,7 +33,7 @@ if ($result === FALSE) {
   $http_response_header[] = '';
   $tmp = explode(':', getenv('REMOTE_PATH_2'));
   $x_key = $tmp[0];
-  error_log($request_server);
+  error_log($x_key);
   $context = [
     'http' => [
       'method' => 'GET',
