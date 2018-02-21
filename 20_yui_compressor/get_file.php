@@ -35,6 +35,8 @@ if ($result === FALSE) {
 
 $pdo = null;
 
+error_log(hash('sha512', file_get_contents($argv[1] . '.org')));
+
 exit($rc);
 
 ?>
