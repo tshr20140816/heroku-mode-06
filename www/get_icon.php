@@ -2,9 +2,11 @@
 
 // file_name : /ttrss/feed-icons/nnn.ico
 
+$pid = getmypid();
+
 $icon_file_name = pathinfo($_GET['file_name'], PATHINFO_BASENAME);
 
-error_log($icon_file_name);
+error_log($pid . ' ' . $icon_file_name);
 
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
@@ -26,14 +28,14 @@ $statement->execute(
 $result = $statement->fetch();
 
 if ($result === FALSE) {
-  error_log('File Not Found');
-  error_log(getenv('REMOTE_PATH_2'));
-  error_log(getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
+  error_log($pid . ' File Not Found');
+  error_log($pid . ' ' . getenv('REMOTE_PATH_2'));
+  error_log($pid . ' ' . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
   $http_response_header = null;
   $http_response_header[] = '';
   $tmp = explode(':', getenv('REMOTE_PATH_2'));
   $x_key = $tmp[0];
-  error_log($x_key);
+  error_log($pid . ' ' . $x_key);
   $context = [
     'http' => [
       'method' => 'GET',
@@ -59,7 +61,7 @@ if ($result === FALSE) {
     http_response_code(503);
   }
 } else {
-  error_log('File Found');
+  error_log($pid . ' File Found');
   header('Content-Type: image/vnd.microsoft.icon');
   echo base64_decode($result['file_data']);
 }
