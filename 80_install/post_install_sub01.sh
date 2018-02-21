@@ -9,7 +9,6 @@ mv /tmp/ttrss/css /tmp/www/ttrss/css
 mv /tmp/ttrss/images /tmp/www/ttrss/images
 mv /tmp/ttrss/js /tmp/www/ttrss/js
 mv /tmp/ttrss/lib /tmp/www/ttrss/lib
-mv /tmp/ttrss/errors.php /tmp/www/ttrss/errors.php
 
 cp ./20_yui_compressor/get_file.php /tmp/get_file.php
 
