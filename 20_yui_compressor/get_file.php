@@ -23,8 +23,12 @@ __HEREDOC__;
 
 $statement = $pdo->prepare($sql);
 
+$is_first = TRUE;
 foreach ($argv as $arg) {
-  error_log($arg);
+  if ($is_first === TRUE) {
+    $is_first = FALSE;
+    continue;
+  }
   $statement->execute(
     [':b_file_name' => pathinfo($arg, PATHINFO_BASENAME),
      ':b_file_hash' => hash('sha512', file_get_contents($arg . '.org'))
