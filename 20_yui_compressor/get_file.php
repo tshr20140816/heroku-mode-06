@@ -37,7 +37,7 @@ foreach ($argv as $arg) {
     rename($arg, $arg . '.org');
     file_put_contents($arg, $result['file_data']);
   }
-  error_log($rc);
+  error_log($rc . ' ' . $arg);
 }
 
 $pdo = null;
