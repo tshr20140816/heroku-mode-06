@@ -4,14 +4,6 @@ set -x
 
 date
 
-if [ ! -e 90_binary/delegated ]; then
-  echo "File Not Found\n"
-else
-  echo "File Found\n"
-fi
-
-exit
-
 export HOME2=${PWD}
 
 cat /proc/version
@@ -52,6 +44,7 @@ export CFLAGS="-O2 -march=native"
 export CXXFLAGS="$CFLAGS"
 
 ls -lang 90_binary/delegated
+pwd
 
 if [ ! -e 90_binary/delegated ]; then
   if [ -e ccache.zip ]; then
@@ -81,6 +74,8 @@ if [ ! -e 90_binary/delegated ]; then
   ccache -s
   ccache -z
 fi
+
+exit
 
 if [ ! -e delegate9.9.13.tar.gz ]; then
   pushd /tmp
