@@ -10,9 +10,7 @@ mv /tmp/ttrss/images /tmp/www/ttrss/images
 mv /tmp/ttrss/js /tmp/www/ttrss/js
 mv /tmp/ttrss/lib /tmp/www/ttrss/lib
 
-cp ./80_install/post_install_sub01_01.sh /tmp/post_install_sub01_01.sh
 cp ./20_yui_compressor/get_file.php /tmp/get_file.php
-chmod +x /tmp/get_file.php
 
 pushd /tmp
 find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
