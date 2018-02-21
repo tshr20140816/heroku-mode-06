@@ -88,6 +88,7 @@ echo "<HR>" > ./src/builtin/mssgs/news/artlistfooter.dhtml
 time make ADMIN="admin@localhost"
 
 cp ./src/delegated ${HOME2}/delegate/
+cp ./src/delegated ${HOME2}/www/
 cp ./src/builtin/icons/ysato/*.gif ${HOME2}/delegate/icons/
 
 # apache
