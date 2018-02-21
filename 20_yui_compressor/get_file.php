@@ -27,7 +27,7 @@ $statement = $pdo->prepare($sql);
 $statement->execute(
   [':b_file_name' => pathinfo($argv[1], PATHINFO_BASENAME),
    //':b_file_hash' => $argv[2],
-   ':b_file_hash' => file_get_contents($argv[1] . '.org')
+   ':b_file_hash' => hash('sha512', file_get_contents($argv[1] . '.org'))
   ]);
 
 $result = $statement->fetch();
