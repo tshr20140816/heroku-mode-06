@@ -1,7 +1,6 @@
 <?php
 
 // $argv[1] : file name (full path)
-// $argv[2] : file hash
 
 /*
 foreach ($argv as $arg) {
@@ -24,25 +23,23 @@ __HEREDOC__;
 
 $statement = $pdo->prepare($sql);
 
-$statement->execute(
-  [':b_file_name' => pathinfo($argv[1], PATHINFO_BASENAME),
-   //':b_file_hash' => $argv[2],
-   ':b_file_hash' => hash('sha512', file_get_contents($argv[1] . '.org'))
-  ]);
+foreach ($argv as $arg) {
+  $statement->execute(
+    [':b_file_name' => pathinfo($arg, PATHINFO_BASENAME),
+     ':b_file_hash' => hash('sha512', file_get_contents($arg . '.org'))
+    ]);
 
-$result = $statement->fetch();
+  $result = $statement->fetch();
 
-if ($result === FALSE) {
-  $rc = 1;
-} else {
-  $rc = 0;
-  //error_log($result['file_data']);
-  file_put_contents($argv[1], $result['file_data']);
+  if ($result === FALSE) {
+    $rc = 1;
+  } else {
+    $rc = 0;
+    file_put_contents($arg, $result['file_data']);
+  }
 }
 
 $pdo = null;
-
-//error_log(hash('sha512', file_get_contents($argv[1] . '.org')));
 
 exit($rc);
 
