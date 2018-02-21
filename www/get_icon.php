@@ -2,11 +2,11 @@
 
 // file_name : /ttrss/feed-icons/nnn.ico
 
-$pid = getmypid();
-
 $icon_file_name = pathinfo($_GET['file_name'], PATHINFO_BASENAME);
 
-error_log($pid . ' ' . $icon_file_name);
+$log_prefix = getmypid() . ' ' . $icon_file_name . ' ';
+
+error_log($log_prefix);
 
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
@@ -28,17 +28,19 @@ $statement->execute(
 $result = $statement->fetch();
 
 if ($result === FALSE) {
-  error_log($pid . ' File Not Found');
-  error_log($pid . ' ' . getenv('REMOTE_PATH_2'));
-  error_log($pid . ' ' . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
+  error_log($log_prefix . 'File Not Found');
+  error_log($log_prefix . getenv('REMOTE_PATH_2'));
+  error_log($log_prefix . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
   $http_response_header = null;
   $http_response_header[] = '';
   $tmp = explode(':', getenv('REMOTE_PATH_2'));
   $x_key = $tmp[0];
-  error_log($pid . ' ' . $x_key);
+  error_log($log_prefix . $x_key);
   $context = [
     'http' => [
+      'ignore_errors' => true,
       'method' => 'GET',
+      'protocol_version' => '1.1',
       'header' => [
         'User-Agent: Love Love Show',
         'X-Key: ' . $x_key,
@@ -49,6 +51,7 @@ if ($result === FALSE) {
       'verify_peer_name' => false,
       ]];
   $result = file_get_contents('https://' . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name, false, stream_context_create($context));
+  error_log($log_prefix . $http_response_header[0]);
   if (strpos($http_response_header[0], '200') !== FALSE) {
     header('Content-Type: image/vnd.microsoft.icon');
     echo $result;
@@ -61,7 +64,7 @@ if ($result === FALSE) {
     http_response_code(503);
   }
 } else {
-  error_log($pid . ' File Found');
+  error_log($log_prefix . 'File Found');
   header('Content-Type: image/vnd.microsoft.icon');
   echo base64_decode($result['file_data']);
 }
