@@ -40,6 +40,7 @@ if ($result === FALSE) {
       'header' => [
         'User-Agent: Love Love Show',
         'X-Key: ' . $x_key,
+        'X-Request-Server: ' . getenv('HEROKU_APP_NAME'),
         ]],
     'ssl' => [
       'verify_peer' => false,
