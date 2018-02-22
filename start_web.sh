@@ -80,6 +80,8 @@ if [ ${MODE} = 'APACHE' ]; then
 
   mkdir -p /tmp/usr/lib
   cp ./lib/libnghttp2.so.14 /tmp/usr/lib/
+  cp ./lib/libbrotlicommon.so.1 /tmp/usr/lib/
+  cp ./lib/libbrotlienc.so.1 /tmp/usr/lib/
 
   export HOME_FQDN=$(echo ${REMOTE_PATH_2} | awk -F: '{print $1}')
   nslookup ${HOME_FQDN} 8.8.8.8
@@ -92,6 +94,8 @@ if [ ${MODE} = 'APACHE' ]; then
   echo "${HOME_FQDN} ${HOME_IP_ADDRESS}" > /app/HOME_IP_ADDRESS
 
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
+
+  export LD_LIBRARY_PATH=/tmp/usr/lib
 
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
