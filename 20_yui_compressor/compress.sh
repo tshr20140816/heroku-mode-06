@@ -31,6 +31,9 @@ wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor
 
 popd
 
+cp ./bin/brotli /tmp/
+chmod +x /tmp/brotli
+
 exts[0]='css'
 exts[1]='js'
 
