@@ -34,7 +34,7 @@ foreach ($argv as $arg) {
     $rc = 1;
   } else {
     $rc = 0;
-    base64_decode(file_put_contents($arg . '.br', $result['file_data']));
+    file_put_contents($arg . '.br', base64_decode($result['file_data']));
   }
   error_log($rc . ' ' . $arg);
 }
