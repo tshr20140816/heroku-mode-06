@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
   /tmp/jre*/bin/java -jar /tmp/yuicompressor-2.4.8.jar --type ${ext} -o ${file} ${file}.org
   php update.php ${file} ${hash}
   /tmp/brotli -q 11 ${file}
-  php update2.php ${file}.br ${hash}
+  php update2.php ${file} ${hash}
 else
   echo -e "pass\n"
 fi
