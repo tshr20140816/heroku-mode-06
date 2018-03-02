@@ -25,7 +25,7 @@ if [ ! -e ./java.tar.gz ]; then
   fi
 fi
 
-tar xvfz java.tar.gz
+tar xf java.tar.gz
 
 wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
 
