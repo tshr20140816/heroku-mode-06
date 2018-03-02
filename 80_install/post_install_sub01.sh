@@ -14,11 +14,11 @@ cp ./20_yui_compressor/get_file.php /tmp/get_file.php
 cp ./20_yui_compressor/get_file3.php /tmp/get_file3.php
 
 pushd /tmp
-find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
-find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
-
 find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file3.php
 find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file3.php
+
+find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
+find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
 popd
 
 mv /tmp/www/ttrss www/ttrss
