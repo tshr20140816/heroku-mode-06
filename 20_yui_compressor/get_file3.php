@@ -10,7 +10,7 @@ $pdo = new PDO(
 
 $sql = <<< __HEREDOC__
 SELECT file_data
-  FROM t_file_yui_compressor
+  FROM t_file_yui_compressor_br
  WHERE file_name = :b_file_name
    AND file_hash = :b_file_hash
 __HEREDOC__;
@@ -34,8 +34,7 @@ foreach ($argv as $arg) {
     $rc = 1;
   } else {
     $rc = 0;
-    rename($arg, $arg . '.org');
-    file_put_contents($arg, $result['file_data']);
+    file_put_contents($arg . '.br', $result['file_data']);
   }
   error_log($rc . ' ' . $arg);
 }
