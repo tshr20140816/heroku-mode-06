@@ -16,6 +16,7 @@ if [ $? -ne 0 ]; then
   # ./jre*/bin/java -jar ./yuicompressor-2.4.8.jar --type ${ext} -o ${file} ${file}.org
   /tmp/jre*/bin/java -jar /tmp/yuicompressor-2.4.8.jar --type ${ext} -o ${file} ${file}.org
   php update.php ${file} ${hash}
+  /tmp/brotli -q 11 ${file}
 else
   echo -e "pass\n"
 fi
