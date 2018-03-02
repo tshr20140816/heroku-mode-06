@@ -17,6 +17,7 @@ export PGPASSWORD=${postgres_password}
 psql -U ${postgres_user} -d ${postgres_dbname} -h ${postgres_server} > /tmp/sql_result.txt << __HEREDOC__
 SELECT *
   FROM t_file_yui_compressor
+ WHERE file_name = 'tt-rss.css'
  LIMIT 3
 __HEREDOC__
 cat /tmp/sql_result.txt
@@ -25,6 +26,7 @@ cat /tmp/sql_result.txt
 psql -U ${postgres_user} -d ${postgres_dbname} -h ${postgres_server} > /tmp/sql_result.txt << __HEREDOC__
 SELECT *
   FROM t_file_yui_compressor_br
+ WHERE file_name = 'tt-rss.css'
  LIMIT 3
 __HEREDOC__
 cat /tmp/sql_result.txt
