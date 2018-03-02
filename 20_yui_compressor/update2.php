@@ -24,7 +24,7 @@ $statement = $pdo->prepare($sql);
 $statement->execute(
   [':b_file_name' => pathinfo($argv[1], PATHINFO_BASENAME),
    ':b_file_hash' => $argv[2],
-   ':b_file_data' => $file_data,
+   ':b_file_data' => base64_encode($file_data),
   ]);
 
 $pdo = null;
