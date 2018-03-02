@@ -29,10 +29,10 @@ tar xf java.tar.gz
 
 wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
 
-popd
+wget https://github.com/tshr20140816/heroku-mode-03/raw/master/bin/brotli
 
-cp ./bin/brotli /tmp/
-chmod +x /tmp/brotli
+chmod +x brotli
+popd
 
 exts[0]='css'
 exts[1]='js'
