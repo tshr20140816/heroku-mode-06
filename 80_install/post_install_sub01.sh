@@ -24,7 +24,7 @@ find www/ttrss/ -name "*.png" -type f -print0 | xargs -0i -P 2 -n 20 /tmp/usr/bi
 
 popd
 
-find /tmp/www/ttrss/ -name "*.png" -type f -print0 | xargs -0i -P 2 -n 1 bash ./80_install/post_install_sub01_01.sh
+find /tmp/www/ttrss/ -name "*.png" -type f -print0 | xargs -0i -P 2 -n 1 bash ./80_install/post_install_sub01_01.sh {}
 
 mv /tmp/www/ttrss www/ttrss
 mkdir -m 777 -p www/ttrss/plugins/note
