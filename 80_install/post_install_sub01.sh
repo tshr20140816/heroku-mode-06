@@ -21,6 +21,8 @@ find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/ge
 # find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
 
 find www/ttrss/ -name "*.png" -type f -print0 | xargs -0i -P 2 -n 20 /tmp/usr/bin/pngquant -s1 --ext .png.compress
+
+find www/ttrss/ -name "*.png" -type f -print0 | xargs -0i -P 2 -n 1 bash ./80_install/post_install_sub01_01.sh
 popd
 
 mv /tmp/www/ttrss www/ttrss
