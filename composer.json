@@ -2,6 +2,7 @@
   "require":
   {
     "php": ">=7.2.1",
+    "ext-acpu": "*",
     "ext-mbstring": "*"
   }
   ,
