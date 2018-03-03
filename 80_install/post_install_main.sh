@@ -125,6 +125,17 @@ fi
 # mkdir -m 777 -p delegate/cache
 # mkdir -m 777 -p delegate/tmp
 
+pushd /tmp
+git clone --depth 1 --recursive https://github.com/kornelski/pngquant.git
+pushd pngquant
+./configure --prefix=/tmp/usr
+time make
+make install
+popd
+popd
+
+cp /tmp/usr/bin/pngquant ./bin/
+
 wait
 
 # ***** last update *****
