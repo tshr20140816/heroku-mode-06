@@ -127,7 +127,7 @@ fi
 
 wait
 
-rm www/ttrss/css/tt-rss.css
+rm www/ttrss/css/tt-rss.css.br
 
 # ***** last update *****
 
