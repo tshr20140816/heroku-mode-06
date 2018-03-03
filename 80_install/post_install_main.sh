@@ -122,15 +122,12 @@ if [ ${DEVELOP_MODE} != 'OFF' ]; then
   popd
 fi
 
-mkdir -m 777 -p delegate/cache
-mkdir -m 777 -p delegate/tmp
+# mkdir -m 777 -p delegate/cache
+# mkdir -m 777 -p delegate/tmp
 
 wait
 
-# pushd ./www/ttrss/css/
-# gzip -9c tt-rss.css > tt-rss.css.gz
-# rm tt-rss.css
-# popd
+rm www/ttrss/css/tt-rss.css
 
 # ***** last update *****
 
