@@ -3,6 +3,7 @@
 set -x
 
 file=${1}
+echo ${file}
 
 size_org=$(wc -c < ${file})
 size_comp=$(wc -c < ${file}.compress)
