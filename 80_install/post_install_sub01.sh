@@ -19,6 +19,8 @@ find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/ge
 
 # find www/ttrss/ -name "*.css" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
 # find www/ttrss/ -name "*.js" -type f -print0 | xargs -0i -P 20 -n 20 php /tmp/get_file.php
+
+find www/ttrss/ -name "*.png" -type f -print0 | xargs -0i -P 2 -n 20 /tmp/usr/bin/pngquant -s1 --ext .png.compress {}
 popd
 
 mv /tmp/www/ttrss www/ttrss
