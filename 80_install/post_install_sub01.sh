@@ -10,7 +10,7 @@ mv /tmp/ttrss/images /tmp/www/ttrss/images
 mv /tmp/ttrss/js /tmp/www/ttrss/js
 mv /tmp/ttrss/lib /tmp/www/ttrss/lib
 
-cp ./20_yui_compressor/get_file.php /tmp/get_file.php
+# cp ./20_yui_compressor/get_file.php /tmp/get_file.php
 cp ./20_yui_compressor/get_file3.php /tmp/get_file3.php
 
 pushd /tmp
