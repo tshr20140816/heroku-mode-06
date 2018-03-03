@@ -127,8 +127,6 @@ fi
 
 wait
 
-rm www/ttrss/css/tt-rss.css.br
-
 # ***** last update *****
 
 pushd /tmp/self_repository
