@@ -32,13 +32,6 @@ wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor
 wget https://github.com/tshr20140816/heroku-mode-03/raw/master/bin/brotli
 chmod +x brotli
 
-git clone --depth 1 --recursive https://github.com/kornelski/pngquant.git
-pushd pngquant
-./configure --prefix=/tmp/usr
-time make
-make install
-popd
-
 popd
 
 exts[0]='css'
