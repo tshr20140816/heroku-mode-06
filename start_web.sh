@@ -103,6 +103,13 @@ if [ ${MODE} = 'APACHE' ]; then
 
   echo "${HOME_FQDN} ${HOME_IP_ADDRESS}" > /app/HOME_IP_ADDRESS
 
+  export HOME_FQDN_SPARE=$(echo ${REMOTE_PATH_3} | awk -F: '{print $1}')
+  nslookup ${HOME_FQDN_SPARE} 8.8.8.8
+  export HOME_IP_ADDRESS_SPARE=$(nslookup ${HOME_FQDN_SPARE} 8.8.8.8 | tail -n2 | grep -o '[0-9]\+.\+')
+  if [ -z "${HOME_IP_ADDRESS_SPARE}" ]; then
+    HOME_IP_ADDRESS_SPARE=127.0.0.1
+  fi  
+  
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
   export LD_LIBRARY_PATH=/tmp/usr/lib
