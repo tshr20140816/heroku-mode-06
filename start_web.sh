@@ -72,6 +72,11 @@ if [ ${MODE} = 'APACHE' ]; then
     echo "Error : REMOTE_PATH_2 not defined."
     exit
   fi
+
+  # ttrss2
+  if [ ! -v REMOTE_PATH_3 ]; then
+    export REMOTE_PATH_3="www.google.com:443"
+  fi
   
   if [ ! -v RSS_TEMPLATE_URL ]; then
     echo "Error : RSS_TEMPLATE_URL not defined."
