@@ -75,7 +75,7 @@ if [ ${MODE} = 'APACHE' ]; then
 
   # ttrss2
   if [ ! -v REMOTE_PATH_3 ]; then
-    export REMOTE_PATH_3="www.google.com:443"
+    export REMOTE_PATH_3="www.google.com:443/"
   fi
   
   if [ ! -v RSS_TEMPLATE_URL ]; then
