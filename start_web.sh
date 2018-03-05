@@ -97,6 +97,10 @@ if [ ${MODE} = 'APACHE' ]; then
 
   export LD_LIBRARY_PATH=/tmp/usr/lib
 
+  cd www
+  ln -s ./ttrss ttrss2
+  cd ..
+
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
 
