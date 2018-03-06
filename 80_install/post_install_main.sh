@@ -25,7 +25,7 @@ git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git /tmp/self
 # ***** pngquant *****
 
 pushd /tmp
-git clone --depth 1 --recursive https://github.com/kornelski/pngquant.git
+git clone --depth 1 --recursive https://github.com/kornelski/pngquant.git pngquant
 pushd pngquant
 ./configure --prefix=/tmp/usr
 time make
