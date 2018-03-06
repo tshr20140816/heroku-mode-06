@@ -49,7 +49,7 @@ export PATH="/tmp/usr/bin:${PATH}"
 mkdir -m 777 -p delegate/icons
 
 if [ ${DEVELOP_MODE} = 'OFF' ]; then
-  mv ccache_cache.zip /tmp/
+  mv 90_binary/ccache_cache.zip /tmp/
   pushd /tmp
   unzip -q ccache_cache.zip
   popd
