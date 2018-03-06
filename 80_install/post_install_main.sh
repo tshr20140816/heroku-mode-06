@@ -135,9 +135,12 @@ if [ ${DEVELOP_MODE} != 'OFF' ]; then
   popd
 fi
 
+# ***** phppgadmin *****
+
 pushd www
 git clone --depth 1 https://github.com/phppgadmin/phppgadmin.git phppgadmin
-# cp 
+cp 70_etc/config.inc.php phppgadmin/
+cp 70_etc/Connection.php phppgadmin/classes/database/
 popd
 
 wait
