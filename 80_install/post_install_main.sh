@@ -135,8 +135,10 @@ if [ ${DEVELOP_MODE} != 'OFF' ]; then
   popd
 fi
 
-# mkdir -m 777 -p delegate/cache
-# mkdir -m 777 -p delegate/tmp
+pushd www
+git clone --depth 1 https://github.com/phppgadmin/phppgadmin.git phppgadmin
+# cp 
+popd
 
 wait
 
