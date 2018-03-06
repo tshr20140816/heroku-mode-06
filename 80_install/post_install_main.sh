@@ -19,6 +19,19 @@ bash ./80_install/post_install_sub01.sh &
 
 git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git /tmp/self_repository &
 
+# ***** pngquant *****
+
+pushd /tmp
+git clone --depth 1 --recursive https://github.com/kornelski/pngquant.git
+pushd pngquant
+./configure --prefix=/tmp/usr
+time make
+make install
+popd
+popd
+
+cp /tmp/usr/bin/pngquant ./bin/
+
 # apache
 chmod 777 www
 mkdir -m 777 www/icons
@@ -124,17 +137,6 @@ fi
 
 # mkdir -m 777 -p delegate/cache
 # mkdir -m 777 -p delegate/tmp
-
-pushd /tmp
-git clone --depth 1 --recursive https://github.com/kornelski/pngquant.git
-pushd pngquant
-./configure --prefix=/tmp/usr
-time make
-make install
-popd
-popd
-
-cp /tmp/usr/bin/pngquant ./bin/
 
 wait
 
