@@ -46,8 +46,8 @@ export CXXFLAGS="$CFLAGS"
 ls -lang 90_binary/delegated
 
 if [ ! -e 90_binary/delegated ]; then
-  if [ -e ./90_binary/ccache.zip ]; then
-    mv ./90_binary/ccache.zip /tmp/usr/bin/
+  if [ -e 90_binary/ccache.zip ]; then
+    mv 90_binary/ccache.zip /tmp/usr/bin/
     pushd /tmp/usr/bin
     unzip ccache.zip
     popd
