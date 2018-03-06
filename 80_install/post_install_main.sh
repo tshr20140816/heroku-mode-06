@@ -15,6 +15,9 @@ if [ ! -v DEVELOP_MODE ]; then
   export DEVELOP_MODE='OFF'
 fi
 
+export CFLAGS="-O2 -march=native"
+export CXXFLAGS="$CFLAGS"
+
 bash ./80_install/post_install_sub01.sh &
 
 git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git /tmp/self_repository &
@@ -52,9 +55,6 @@ if [ ${DEVELOP_MODE} = 'OFF' ]; then
   popd
 fi
 export CCACHE_DIR=/tmp/ccache
-
-export CFLAGS="-O2 -march=native"
-export CXXFLAGS="$CFLAGS"
 
 ls -lang 90_binary/delegated
 
