@@ -3,6 +3,7 @@
 set -x
 
 date
+start_date=$(date)
 
 export HOME2=${PWD}
 
@@ -160,4 +161,5 @@ chmod 755 loggly.php
 
 popd
 
+echo ${start_date}
 date
