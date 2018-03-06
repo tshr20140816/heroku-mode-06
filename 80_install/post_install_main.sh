@@ -139,8 +139,8 @@ fi
 
 pushd www
 git clone --depth 1 https://github.com/phppgadmin/phppgadmin.git phppgadmin
-cp 70_etc/config.inc.php phppgadmin/
-cp 70_etc/Connection.php phppgadmin/classes/database/
+cp ../70_etc/config.inc.php phppgadmin/
+cp ../70_etc/Connection.php phppgadmin/classes/database/
 popd
 
 wait
