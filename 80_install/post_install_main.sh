@@ -74,12 +74,12 @@ if [ ! -e 90_binary/delegated ]; then
   ccache -z
 fi
 
-if [ ! -e delegate9.9.13.tar.gz ]; then
+if [ ! -e 90_binary/delegate9.9.13.tar.gz ]; then
   pushd /tmp
   time wget http://delegate.hpcc.jp/anonftp/DeleGate/delegate9.9.13.tar.gz
   popd
 else
-  mv delegate9.9.13.tar.gz /tmp/
+  mv 90_binary/elegate9.9.13.tar.gz /tmp/
 fi
 pushd /tmp
 tar xf delegate9.9.13.tar.gz
