@@ -144,6 +144,11 @@ cp ../70_etc/config.inc.php phppgadmin/conf/
 cp ../70_etc/Connection.php phppgadmin/classes/database/
 popd
 
+# ***** favicon.ico *****
+
+chmod +x ./bin/brotli
+./bin/brotli -q 11 ./www/favicon.ico
+
 wait
 
 # ***** last update *****
