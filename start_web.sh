@@ -118,6 +118,9 @@ if [ ${MODE} = 'APACHE' ]; then
   ln -s ./ttrss ttrss2
   popd
 
+  # vendor/bin/heroku-php-apache2 -C apache.conf www
+  rm apache.conf
+  wget https://raw.githubusercontent.com/tshr20140816/heroku-mode-03/master/apache.conf
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
 
