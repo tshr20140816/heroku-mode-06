@@ -121,6 +121,7 @@ if [ ${MODE} = 'APACHE' ]; then
   # vendor/bin/heroku-php-apache2 -C apache.conf www
   rm apache.conf
   wget https://raw.githubusercontent.com/tshr20140816/heroku-mode-03/master/apache.conf
+  apachectl configtest apache.conf
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
 
