@@ -122,6 +122,10 @@ if [ ${MODE} = 'APACHE' ]; then
   rm apache.conf
   wget https://raw.githubusercontent.com/tshr20140816/heroku-mode-03/master/apache.conf
   apachectl configtest apache.conf
+  
+  apachectl_configtest="$(apachectl configtest apache.conf)"
+  curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} apachectl configtest ${apachectl_configtest}" ${url}
+  
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
 
