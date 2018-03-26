@@ -74,8 +74,8 @@ $pdo->query('DROP TABLE m_asin;');
 
 $sql = <<< __HEREDOC__
 CREATE TABLE m_asin (
-    asin character varying(10) NOT NULL,
-    memo text NOT NULL,
+    asin character varying(10) PRIMARY KEY,
+    memo text NULL,
     change_time timestamp DEFAULT localtimestamp NOT NULL
 );
 __HEREDOC__;
