@@ -43,7 +43,7 @@ $xml_root_text = <<< __HEREDOC__
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>test</title>
+    <title>Amazon Price</title>
     <link>https://www.amazon.co.jp/</link>
     <description/>
     <language>ja</language>
