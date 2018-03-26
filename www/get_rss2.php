@@ -12,6 +12,9 @@ $options = [
 $context = stream_context_create($options);
 
 foreach($asins as $asin) {
+  if (strlen($asin) < 10) {
+    continue;
+  }
   error_log($asin);
   $url = 'https://www.amazon.co.jp/dp/' . $asin;
   $html = file_get_contents($url, false, $context);
