@@ -29,9 +29,9 @@ foreach($asins as $asin) {
 
   $items_template = '<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>';
 
+  $description = $price . '&lt;br&gt;' . $title;
   $title = $title . ' ' . $price;
   $link = $url . '?dummy=' . $price;
-  $description = $title;
 
   $tmp = str_replace('__TITLE__', $title, $items_template);
   $tmp = str_replace('__LINK__', $link, $tmp);
