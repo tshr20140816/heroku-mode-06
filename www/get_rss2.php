@@ -1,6 +1,6 @@
 <?php
 
-$url = 'https://raw.githubusercontent.com/tshr20140816/heroku-mode-03/master/70_etc/asin.txt';
+$url = 'https://raw.githubusercontent.com/tshr20140816/heroku-mode-03/master/70_etc/asin.txt?' . time();
 $asins = explode("\n", file_get_contents($url));
 
 $options = [
