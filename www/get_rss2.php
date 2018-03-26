@@ -2,6 +2,8 @@
 
 $asin = $_GET['a'];
 
+error_log($asin);
+
 $url='https://www.amazon.co.jp/dp/' . $asin;
 
 $options = [
