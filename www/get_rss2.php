@@ -4,7 +4,7 @@ $asin = $_GET['a'];
 
 error_log($asin);
 
-$url='https://www.amazon.co.jp/dp/' . $asin;
+$url = 'https://www.amazon.co.jp/dp/' . $asin;
 
 $options = [
   'http' => [
@@ -26,4 +26,28 @@ $price = $matches[1];
 
 $items_template = '<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>';
 
-echo 'END';
+$title = $title . ' ' . $price;
+$link = $url . '?dummy=' . $price;
+$description = $title;
+
+$tmp = str_replace('__TITLE__', $title, $items_template);
+$tmp = str_replace('__LINK__', $link, $tmp);
+$tmp = str_replace('__DESCRIPTION__', $description, $tmp);
+$items[] = $tmp;
+
+$xml_root_text = <<< __HEREDOC__
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>test</title>
+    <link>https://www.amazon.co.jp/</link>
+    <description/>
+    <language>ja</language>
+    __ITEMS__
+  </channel>
+</rss>
+__HEREDOC__;
+header('Content-Type: application/xml; charset=UTF-8');
+echo str_replace('__ITEMS__', implode("\r\n", $items), $xml_root_text);
+
+?>
