@@ -16,8 +16,12 @@ $context = stream_context_create($options);
 
 $html = file_get_contents($url, false, $context);
 
-$rc = preg_match('/data-asin-price="(.+?)"/', $html, $matches1);
+$rc = preg_match('/<title>(.+?)<\/title>/', $html, $matches);
+error_log($matches[1]);
+$title = $matches[1];
 
-error_log($matches1[1]);
+$rc = preg_match('/data-asin-price="(.+?)"/', $html, $matches);
+error_log($matches[1]);
+$price = $matches[1];
 
 echo 'END';
