@@ -4,7 +4,8 @@ $asin = $_GET['a'];
 
 error_log($asin);
 
-$url = 'https://www.amazon.co.jp/dp/' . $asin;
+$url = 'https://raw.githubusercontent.com/tshr20140816/heroku-mode-03/master/70_etc/asin.txt';
+$asins = explode("\n", file_get_contents($url));
 
 $options = [
   'http' => [
@@ -14,26 +15,29 @@ $options = [
 ];
 $context = stream_context_create($options);
 
-$html = file_get_contents($url, false, $context);
+foreach($asins as $asin) {
+  $url = 'https://www.amazon.co.jp/dp/' . $asin;
+  $html = file_get_contents($url, false, $context);
+  
+  $rc = preg_match('/<title>(.+?)<\/title>/', $html, $matches);
+  error_log($matches[1]);
+  $title = $matches[1];
 
-$rc = preg_match('/<title>(.+?)<\/title>/', $html, $matches);
-error_log($matches[1]);
-$title = $matches[1];
+  $rc = preg_match('/data-asin-price="(.+?)"/', $html, $matches);
+  error_log($matches[1]);
+  $price = $matches[1];
 
-$rc = preg_match('/data-asin-price="(.+?)"/', $html, $matches);
-error_log($matches[1]);
-$price = $matches[1];
+  $items_template = '<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>';
 
-$items_template = '<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>';
+  $title = $title . ' ' . $price;
+  $link = $url . '?dummy=' . $price;
+  $description = $title;
 
-$title = $title . ' ' . $price;
-$link = $url . '?dummy=' . $price;
-$description = $title;
-
-$tmp = str_replace('__TITLE__', $title, $items_template);
-$tmp = str_replace('__LINK__', $link, $tmp);
-$tmp = str_replace('__DESCRIPTION__', $description, $tmp);
-$items[] = $tmp;
+  $tmp = str_replace('__TITLE__', $title, $items_template);
+  $tmp = str_replace('__LINK__', $link, $tmp);
+  $tmp = str_replace('__DESCRIPTION__', $description, $tmp);
+  $items[] = $tmp;
+}
 
 $xml_root_text = <<< __HEREDOC__
 <?xml version="1.0" encoding="UTF-8"?>
