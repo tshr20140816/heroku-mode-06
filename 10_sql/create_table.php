@@ -68,6 +68,17 @@ $pdo->query($sql);
 
 $pdo->query('TRUNCATE TABLE t_icon_file;');
 
+// m_asin
+
+$sql = <<< __HEREDOC__
+CREATE TABLE m_asin (
+    asin character varying(10) NOT NULL,
+    memo text NOT NULL,
+    change_time timestamp DEFAULT localtimestamp NOT NULL
+);
+__HEREDOC__;
+$pdo->query($sql);
+
 $pdo = null;
 
 ?>
