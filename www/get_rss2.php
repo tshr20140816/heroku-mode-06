@@ -1,9 +1,5 @@
 <?php
 
-$asin = $_GET['a'];
-
-error_log($asin);
-
 $url = 'https://raw.githubusercontent.com/tshr20140816/heroku-mode-03/master/70_etc/asin.txt';
 $asins = explode("\n", file_get_contents($url));
 
@@ -16,6 +12,7 @@ $options = [
 $context = stream_context_create($options);
 
 foreach($asins as $asin) {
+  error_log($asin);
   $url = 'https://www.amazon.co.jp/dp/' . $asin;
   $html = file_get_contents($url, false, $context);
   
