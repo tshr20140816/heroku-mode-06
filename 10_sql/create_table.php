@@ -70,6 +70,8 @@ $pdo->query('TRUNCATE TABLE t_icon_file;');
 
 // m_asin
 
+$pdo->query('DROP TABLE m_asin;');
+
 $sql = <<< __HEREDOC__
 CREATE TABLE m_asin (
     asin character varying(10) NOT NULL,
@@ -78,6 +80,8 @@ CREATE TABLE m_asin (
 );
 __HEREDOC__;
 $pdo->query($sql);
+
+$pdo->query('TRUNCATE TABLE m_asin;');
 
 $pdo = null;
 
