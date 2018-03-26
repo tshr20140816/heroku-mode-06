@@ -18,7 +18,6 @@ $html = file_get_contents($url, false, $context);
 
 $rc = preg_match('/data-asin-price="(.+?)"/', $html, $matches1);
 
-error_log($rc);
 error_log($matches1[1]);
 
-echo $html;
+echo 'END';
