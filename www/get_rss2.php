@@ -24,4 +24,6 @@ $rc = preg_match('/data-asin-price="(.+?)"/', $html, $matches);
 error_log($matches[1]);
 $price = $matches[1];
 
+$items_template = '<item><title>__TITLE__</title><link>__LINK__</link><description>__DESCRIPTION__</description><pubDate/></item>';
+
 echo 'END';
