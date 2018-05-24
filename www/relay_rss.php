@@ -8,6 +8,8 @@ curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
 curl_setopt($ch, CURLOPT_ENCODING, "");
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
 
 $contents = curl_exec($ch);
 
