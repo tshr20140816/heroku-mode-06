@@ -25,6 +25,9 @@ error_log('rc = ' . $rc);
 $items = array();
 
 $rc = preg_match_all($item_pattern, $matches1[1], $matches2, PREG_SET_ORDER);
+
+error_log('rc = ' . $rc);
+
 for ($i = 0; $i < $rc; $i++) {
   error_log('i = ' . $i);
   $title = $item_title;
