@@ -19,14 +19,19 @@ $html = mb_convert_encoding(file_get_contents($url), 'UTF-8', $encoding);
 
 $rc = preg_match($global_pattern, $html, $matches1);
 
+error_log($url);
+error_log('rc = ' . $rc);
+
 $items = array();
 
 $rc = preg_match_all($item_pattern, $matches1[1], $matches2, PREG_SET_ORDER);
 for ($i = 0; $i < $rc; $i++) {
+  error_log('i = ' . $i);
   $title = $item_title;
   $link = $item_link;
   $description = $item_description;
   for ($j = 1; $j < count($matches2[$i]); $j++) {
+    error_log('j = ' . $j);
     $title = str_replace("__${j}__", $matches2[$i][$j], $title);
     $link = str_replace("__${j}__", $matches2[$i][$j], $link);
     $description = str_replace("__${j}__", $matches2[$i][$j], $description);
