@@ -83,7 +83,7 @@ error_log("${pid} FINISH 060");
 function get_contents($url_, $force_) {
   $ch = curl_init();
 
-  curl_setopt($ch, CURLOPT_URL, $url); 
+  curl_setopt($ch, CURLOPT_URL, $url_); 
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
   curl_setopt($ch, CURLOPT_ENCODING, "");
@@ -100,9 +100,7 @@ function get_contents($url_, $force_) {
 
   curl_close($ch);
   
-  error_log("${pid} get_contents ${http_code}");
-  
-  return array($contents, $http_code);
+  return [$contents, $http_code];
 }
 
 function loggly_log($message_) {
