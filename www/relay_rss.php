@@ -82,6 +82,7 @@ loggly_log("200 ${url}");
 error_log("${pid} FINISH 060");
 
 function get_contents($url_, $force_) {
+  $pid = getmypid();
   $ch = curl_init();
 
   curl_setopt($ch, CURLOPT_URL, $url_); 
