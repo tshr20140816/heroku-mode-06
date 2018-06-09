@@ -59,6 +59,8 @@ if ($http_code == '304') {
 
 if (file_exists($cache_file_name)) {
   $cache_contents = file_get_contents($cache_file_name);
+  error_log($pid . ' cache ' . md5($cache_contents);
+  error_log($pid . ' original ' . md5($contents);
   if ($cache_contents == $contents) {
     header('HTTP/1.1 304 Not Modified');
     error_log("${pid} RETURN HTTP STATUS CODE : 304");
