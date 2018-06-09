@@ -64,7 +64,9 @@ if (file_exists($cache_file_name)) {
   $cache_contents = file_get_contents($cache_file_name);
   if (($cache_contents == $contents) ||
      (preg_replace('/<pubDate>.+?<\/pubDate>/', '', $cache_contents, 1) ==
-     preg_replace('/<pubDate>.+?<\/pubDate>/', '', $contents, 1))) {
+     preg_replace('/<pubDate>.+?<\/pubDate>/', '', $contents, 1) ||
+     (preg_replace('/<updated>.+?<\/updated>/', '', $cache_contents, 1) ==
+     preg_replace('/<updated>.+?<\/updated>/', '', $contents, 1))) {
     header('HTTP/1.1 304 Not Modified');
     error_log("${pid} RETURN HTTP STATUS CODE : 304");
     error_log("${pid} FINISH 050");
