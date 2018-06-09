@@ -89,6 +89,7 @@ if (strlen($contents_gzip) < strlen($contents)) {
   echo $contents;
 }
 error_log("${pid} RETURN HTTP STATUS CODE : 200");
+loggly_log("200 ${url}");
 error_log("${pid} FINISH 060");
 
 function loggly_log($message_) {
