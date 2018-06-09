@@ -79,7 +79,7 @@ header('Content-Type: application/xml');
 
 if (strlen($contents_gzip) < strlen($contents)) {
   header('Content-Encoding: gzip');
-  echo gzencode($contents, 9);
+  echo $contents_gzip;
 } else {
   echo $contents;
 }
