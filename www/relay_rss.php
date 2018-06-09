@@ -55,8 +55,6 @@ if (file_exists($cache_file_name)) {
     error_log("${pid} RETURN HTTP STATUS CODE : 304");
     error_log("${pid} FINISH 050");
     exit();
-  } else {
-    preg_replace('/<pubDate>.+?<\/pubDate>/', '', $cache_contents);
   }
 }
 
@@ -67,6 +65,9 @@ if ($http_code == '200') {
 $contents_gzip = gzencode($contents, 9);
 
 header('Content-Type: application/xml');
+if ($timestamp != -1) {
+  header('Last-Modified: ' . gmdate("D, d M Y H:i:s \\G\\M\\T\r\n", $timestamp));
+}
 
 if (strlen($contents_gzip) < strlen($contents)) {
   header('Content-Encoding: gzip');
