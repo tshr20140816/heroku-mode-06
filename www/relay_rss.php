@@ -7,7 +7,7 @@ error_log("${pid} START");
 $url = urldecode($_GET['u']);
 error_log("${pid} URL : ${url}");
 
-list($contents, $http_code) = get_contents($url, FALSE);
+list($contents, $http_code, $timestamp) = get_contents($url, FALSE);
 
 error_log("${pid} ORIGINAL HTTP STATUS CODE : ${http_code}");
 // error_log($contents);
@@ -18,7 +18,7 @@ if ($http_code == '304') {
   header('HTTP/1.1 304 Not Modified');
   if (file_exists($cache_file_name) == FALSE) {
     error_log("${pid} NO CACHE");
-    list($contents, $http_code) = get_contents($url, TRUE);
+    list($contents, $http_code, $timestamp) = get_contents($url, TRUE);
     file_put_contents($cache_file_name, $contents);
   }
   error_log("${pid} RETURN HTTP STATUS CODE : 304");
@@ -89,6 +89,7 @@ function get_contents($url_, $force_) {
   curl_setopt($ch, CURLOPT_ENCODING, "");
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
   curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
+  curl_setopt($ch,  CURLOPT_FILETIME, TRUE);
   curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/60.0'); 
   if ($force_ != TRUE && isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
@@ -97,10 +98,11 @@ function get_contents($url_, $force_) {
 
   $contents = curl_exec($ch);
   $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  $timestamp = curl_getinfo($ch, CURLINFO_FILETIME);
 
   curl_close($ch);
   
-  return [$contents, $http_code];
+  return [$contents, $http_code, $timestamp];
 }
 
 function loggly_log($message_) {
