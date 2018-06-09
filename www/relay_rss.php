@@ -2,6 +2,8 @@
 
 $pid = getmypid();
 
+error_log("${pid} START");
+
 $url = urldecode($_GET['u']);
 error_log("${pid} URL : ${url}");
 
@@ -35,12 +37,15 @@ if ($http_code == '304') {
     error_log("${pid} NO CACHE");
     file_put_contents($cache_file_name, file_get_contents($url));
   }
+  error_log("${pid} FINISH 010");
   exit();
 } else if ($http_code != '200') {
   header('HTTP/1.1 ' . $http_code . ' Warn');
+  error_log("${pid} FINISH 020");
   exit();
 } else if (strlen($contents) == 0 ) {
   header('HTTP/1.1 404 File Not Found');
+  error_log("${pid} FINISH 030");
   exit();
 }
 
@@ -49,6 +54,7 @@ if (file_exists($cache_file_name)) {
   if ($cache_contents == $contents) {
     error_log("${pid} 304");
     header('HTTP/1.1 304 Not Modified');
+    error_log("${pid} FINISH 040");
     exit();
   }
 }
@@ -67,5 +73,6 @@ if (strlen($contents_gzip) < strlen($contents)) {
 } else {
   echo $contents;
 }
+error_log("${pid} FINISH 050");
 
 ?>
