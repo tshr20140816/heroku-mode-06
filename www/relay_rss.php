@@ -43,16 +43,19 @@ if ($http_code == '304') {
 } else if ($http_code == '0') {
   header('HTTP/1.1 500 Warn');
   error_log("${pid} RETURN HTTP STATUS CODE : 500");
+  loggly_log("500 ${url}");
   error_log("${pid} FINISH 020");
   exit();
 } else if ($http_code != '200') {
   header('HTTP/1.1 ' . $http_code . ' Warn');
   error_log("${pid} RETURN HTTP STATUS CODE : ${http_code}");
+  loggly_log("${http_code} ${url}");
   error_log("${pid} FINISH 030");
   exit();
 } else if (strlen($contents) == 0 ) {
   header('HTTP/1.1 404 File Not Found');
   error_log("${pid} RETURN HTTP STATUS CODE : 404");
+  loggly_log("404 ${url}");
   error_log("${pid} FINISH 040");
   exit();
 }
@@ -88,4 +91,16 @@ if (strlen($contents_gzip) < strlen($contents)) {
 error_log("${pid} RETURN HTTP STATUS CODE : 200");
 error_log("${pid} FINISH 060");
 
+function loggly_log($message_) {
+  $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/relay_rss/';
+  $context = [
+  'http' => [
+    'method' => 'POST',
+    'header' => [
+      'Content-Type: text/plain'
+    ],
+    'content' => $message_
+  ]];
+  file_get_contents($url_loggly, false, stream_context_create($context));
+}
 ?>
