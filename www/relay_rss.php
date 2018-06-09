@@ -58,9 +58,7 @@ if (file_exists($cache_file_name)) {
   }
 }
 
-if ($http_code == '200') {
-  file_put_contents($cache_file_name, $contents);
-}
+file_put_contents($cache_file_name, $contents);
 
 $contents_gzip = gzencode($contents, 9);
 
