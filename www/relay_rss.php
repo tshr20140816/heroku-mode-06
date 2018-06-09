@@ -98,14 +98,17 @@ error_log("${pid} FINISH 060");
 
 function loggly_log($message_) {
   $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/relay_rss/';
-  $context = [
-  'http' => [
-    'method' => 'POST',
-    'header' => [
-      'Content-Type: text/plain'
-    ],
-    'content' => $message_
-  ]];
-  file_get_contents($url_loggly, false, stream_context_create($context));
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $url_loggly);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
+  curl_setopt($ch, CURLOPT_ENCODING, '');
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+  curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
+  curl_setopt($ch, CURLOPT_POST, TRUE);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/plain']);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $message_);
+  curl_exec($ch);
+  curl_close($ch);
 }
 ?>
