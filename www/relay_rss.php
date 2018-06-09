@@ -26,7 +26,7 @@ $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 curl_close($ch);
 
-error_log("${pid} HTTP STATUS CODE : ${http_code}");
+error_log("${pid} ORIGINAL HTTP STATUS CODE : ${http_code}");
 // error_log($contents);
 
 $cache_file_name = '/tmp/' . urlencode($url);
