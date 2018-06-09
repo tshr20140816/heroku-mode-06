@@ -79,8 +79,10 @@ header('Content-Type: application/xml');
 
 if (strlen($contents_gzip) < strlen($contents)) {
   header('Content-Encoding: gzip');
+  header('Content-Length: ' . strlen($contents_gzip));
   echo $contents_gzip;
 } else {
+  header('Content-Length: ' . strlen($contents));
   echo $contents;
 }
 error_log("${pid} RETURN HTTP STATUS CODE : 200");
