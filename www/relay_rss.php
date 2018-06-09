@@ -16,7 +16,7 @@ curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/60.0'); 
 if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
   curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
-  error_log(${pid} . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
+  error_log($pid . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
 }
 
 $contents = curl_exec($ch);
