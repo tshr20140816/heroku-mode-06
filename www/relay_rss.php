@@ -100,7 +100,9 @@ function get_contents($url_, $force_) {
 
   curl_close($ch);
   
-  return [$contents, $http_code];
+  error_log("${pid} get_contents ${http_code}");
+  
+  return array($contents, $http_code);
 }
 
 function loggly_log($message_) {
