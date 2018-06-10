@@ -68,9 +68,11 @@ if (is_null($content_type)) {
   header('Content-Type: application/xml');
 } else {
   header('Content-Type: ' . $content_type);
+  error_log("${pid} ORIGINAL Content-Type: " . $content_type);
 }
 if ($timestamp != -1) {
   header('Last-Modified: ' . gmdate("D, d M Y H:i:s \\G\\M\\T\r\n", $timestamp));
+  error_log("${pid} Last-Modified: " . gmdate("D, d M Y H:i:s \\G\\M\\T\r\n", $timestamp));
 }
 
 if (strlen($contents_gzip) < strlen($contents)) {
@@ -84,6 +86,8 @@ if (strlen($contents_gzip) < strlen($contents)) {
 error_log("${pid} RETURN HTTP STATUS CODE : 200");
 loggly_log("200 ${url}");
 error_log("${pid} FINISH 060");
+
+exit();
 
 function get_contents($url_, $force_) {
   $pid = getmypid();
