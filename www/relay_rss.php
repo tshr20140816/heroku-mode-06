@@ -7,7 +7,7 @@ error_log("${pid} START");
 $url = urldecode($_GET['u']);
 error_log("${pid} URL : ${url}");
 
-list($contents, $http_code, $timestamp) = get_contents($url, FALSE);
+list($contents, $http_code, $timestamp, $content_type) = get_contents($url, FALSE);
 
 error_log("${pid} ORIGINAL HTTP STATUS CODE : ${http_code}");
 // error_log($contents);
@@ -18,7 +18,7 @@ if ($http_code == '304') {
   header('HTTP/1.1 304 Not Modified');
   if (file_exists($cache_file_name) == FALSE) {
     error_log("${pid} NO CACHE");
-    list($contents, $http_code, $timestamp) = get_contents($url, TRUE);
+    list($contents, $http_code, $timestamp, $content_type) = get_contents($url, TRUE);
     file_put_contents($cache_file_name, $contents);
   }
   error_log("${pid} RETURN HTTP STATUS CODE : 304");
@@ -64,7 +64,11 @@ file_put_contents($cache_file_name, $contents);
 
 $contents_gzip = gzencode($contents, 9);
 
-header('Content-Type: application/xml');
+if (is_null($content_type) {
+  header('Content-Type: application/xml');
+} else {
+  header('Content-Type: ' . $content_type);
+}
 if ($timestamp != -1) {
   header('Last-Modified: ' . gmdate("D, d M Y H:i:s \\G\\M\\T\r\n", $timestamp));
 }
@@ -101,10 +105,11 @@ function get_contents($url_, $force_) {
   $contents = curl_exec($ch);
   $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
   $timestamp = curl_getinfo($ch, CURLINFO_FILETIME);
+  $content_type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
 
   curl_close($ch);
   
-  return [$contents, $http_code, $timestamp];
+  return [$contents, $http_code, $timestamp, $content_type];
 }
 
 function loggly_log($message_) {
