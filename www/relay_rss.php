@@ -64,7 +64,7 @@ file_put_contents($cache_file_name, $contents);
 
 $contents_gzip = gzencode($contents, 9);
 
-if (is_null($content_type) {
+if (is_null($content_type)) {
   header('Content-Type: application/xml');
 } else {
   header('Content-Type: ' . $content_type);
