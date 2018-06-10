@@ -113,6 +113,8 @@ function get_contents($url_, $force_) {
 
   curl_close($ch);
   
+  error_log("${pid} CURLINFO_FILETIME ${timestamp}");
+  
   return [$contents, $http_code, $timestamp, $content_type];
 }
 
