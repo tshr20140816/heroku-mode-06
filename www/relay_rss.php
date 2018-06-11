@@ -4,7 +4,7 @@ $pid = getmypid();
 
 error_log("${pid} START");
 
-if (!isset($_GET['u']) || $_GET['u'] === '') {
+if (!isset($_GET['u']) || $_GET['u'] === '' || is_array($_GET['u'])) {
   exit();
 }
 
