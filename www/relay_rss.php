@@ -119,7 +119,7 @@ function get_contents($url_, $force_) {
 }
 
 function loggly_log($message_) {
-  $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/relay_rss/';
+  $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/relay_rss,' . getenv('HEROKU_APP_NAME') . '/';
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $url_loggly);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
