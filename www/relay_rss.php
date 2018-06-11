@@ -56,7 +56,7 @@ if (file_exists($cache_file_name)) {
      preg_replace('/<lastBuildDate>.+?<\/lastBuildDate>/', '', $contents, 1))) {
     header('HTTP/1.1 304 Not Modified');
     error_log("${pid} RETURN HTTP STATUS CODE : 304");
-    loggly_log("O${http_code} R304 ${url}");
+    loggly_log("O200 R304 ${url}");
     error_log("${pid} FINISH 050");
     exit();
   }
