@@ -26,7 +26,7 @@ if ($http_code == '304') {
     list($contents, $http_code, $timestamp, $content_type) = get_contents($url, TRUE);
     file_put_contents($cache_file_name, $contents);
   }
-  loggly_log("O304 R304 ${url}");
+  loggly_log("O304 R304.0 ${url}");
   error_log("${pid} FINISH 010");
   exit();
 } else if ($http_code == '0') {
@@ -48,15 +48,21 @@ if ($http_code == '304') {
 
 if (file_exists($cache_file_name)) {
   $cache_contents = file_get_contents($cache_file_name);
-  if (($cache_contents == $contents) ||
-     (preg_replace('/<pubDate>.+?<\/pubDate>/', '', $cache_contents, 1) ==
-     preg_replace('/<pubDate>.+?<\/pubDate>/', '', $contents, 1)) ||
-     (preg_replace('/<updated>.+?<\/updated>/', '', $cache_contents, 1) ==
-     preg_replace('/<updated>.+?<\/updated>/', '', $contents, 1)) ||
-     (preg_replace('/<lastBuildDate>.+?<\/lastBuildDate>/', '', $cache_contents, 1) ==
-     preg_replace('/<lastBuildDate>.+?<\/lastBuildDate>/', '', $contents, 1))) {
+  $sub_code = 0;
+  if ($cache_contents == $contents) {
+    $sub_code = 1;
+  } else {
+    $patterns = ['/<pubDate>.+?<\/pubDate>/', '/<updated>.+?<\/updated>/', '/<lastBuildDate>.+?<\/lastBuildDate>/'];
+    for ($i = 0; $i < count($patterns); $i++) {
+      if (preg_replace($patterns[$i], '', $cache_contents, 1) == preg_replace($patterns[$i], '', $contents, 1)) {
+        $sub_code = $i + 2;
+        break;
+      }
+    }
+  }
+  if ($sub_code > 0) {
     header('HTTP/1.1 304 Not Modified');
-    loggly_log("O200 R304 ${url}");
+    loggly_log("O200 R304.${sub_code} ${url}");
     error_log("${pid} FINISH 050");
     exit();
   }
