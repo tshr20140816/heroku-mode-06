@@ -5,6 +5,7 @@ $pid = getmypid();
 error_log("${pid} START");
 
 if (!isset($_GET['u']) || $_GET['u'] === '' || is_array($_GET['u'])) {
+  error_log("${pid} FINISH 000");
   exit();
 }
 
