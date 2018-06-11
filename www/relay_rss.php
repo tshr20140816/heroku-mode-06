@@ -12,6 +12,11 @@ if (!isset($_GET['u']) || $_GET['u'] === '' || is_array($_GET['u'])) {
 $url = urldecode($_GET['u']);
 error_log("${pid} URL : ${url}");
 
+if (!filter_var($url, FILTER_VALIDATE_URL) || !preg_match('@^https?+://@i', $url)) {
+  error_log("${pid} FINISH 010");
+  exit();
+}
+
 list($contents, $http_code, $timestamp, $content_type) = get_contents($url, FALSE);
 
 // error_log($http_code);
@@ -27,22 +32,22 @@ if ($http_code == '304') {
     file_put_contents($cache_file_name, $contents);
   }
   loggly_log("O304 R304.0 ${url}");
-  error_log("${pid} FINISH 010");
+  error_log("${pid} FINISH 020");
   exit();
 } else if ($http_code == '0') {
   header('HTTP/1.1 500 Warn');
   loggly_log("O- R500 ${url}");
-  error_log("${pid} FINISH 020");
+  error_log("${pid} FINISH 030");
   exit();
 } else if ($http_code != '200') {
   header('HTTP/1.1 ' . $http_code . ' Warn');
   loggly_log("O${http_code} R${http_code} ${url}");
-  error_log("${pid} FINISH 030");
+  error_log("${pid} FINISH 040");
   exit();
 } else if (strlen($contents) == 0 ) {
   header('HTTP/1.1 404 File Not Found');
   loggly_log("O200 R404 ${url}");
-  error_log("${pid} FINISH 040");
+  error_log("${pid} FINISH 050");
   exit();
 }
 
@@ -63,7 +68,7 @@ if (file_exists($cache_file_name)) {
   if ($sub_code > 0) {
     header('HTTP/1.1 304 Not Modified');
     loggly_log("O200 R304.${sub_code} ${url}");
-    error_log("${pid} FINISH 050");
+    error_log("${pid} FINISH 060");
     exit();
   }
 }
@@ -92,7 +97,7 @@ if (strlen($contents_gzip) < strlen($contents)) {
   echo $contents;
 }
 loggly_log("O200 R200 ${url}");
-error_log("${pid} FINISH 060");
+error_log("${pid} FINISH 070");
 
 exit();
 
