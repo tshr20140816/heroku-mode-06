@@ -22,24 +22,25 @@ if ($http_code == '304') {
     file_put_contents($cache_file_name, $contents);
   }
   error_log("${pid} RETURN HTTP STATUS CODE : 304");
+  loggly_log("O304 R304 ${url}");
   error_log("${pid} FINISH 010");
   exit();
 } else if ($http_code == '0') {
   header('HTTP/1.1 500 Warn');
   error_log("${pid} RETURN HTTP STATUS CODE : 500");
-  loggly_log("500 ${url}");
+  loggly_log("O- R500 ${url}");
   error_log("${pid} FINISH 020");
   exit();
 } else if ($http_code != '200') {
   header('HTTP/1.1 ' . $http_code . ' Warn');
   error_log("${pid} RETURN HTTP STATUS CODE : ${http_code}");
-  loggly_log("${http_code} ${url}");
+  loggly_log("O${http_code} R${http_code} ${url}");
   error_log("${pid} FINISH 030");
   exit();
 } else if (strlen($contents) == 0 ) {
   header('HTTP/1.1 404 File Not Found');
   error_log("${pid} RETURN HTTP STATUS CODE : 404");
-  loggly_log("404 ${url}");
+  loggly_log("O200 R404 ${url}");
   error_log("${pid} FINISH 040");
   exit();
 }
@@ -55,6 +56,7 @@ if (file_exists($cache_file_name)) {
      preg_replace('/<lastBuildDate>.+?<\/lastBuildDate>/', '', $contents, 1))) {
     header('HTTP/1.1 304 Not Modified');
     error_log("${pid} RETURN HTTP STATUS CODE : 304");
+    loggly_log("O${http_code} R304 ${url}");
     error_log("${pid} FINISH 050");
     exit();
   }
@@ -84,7 +86,7 @@ if (strlen($contents_gzip) < strlen($contents)) {
   echo $contents;
 }
 error_log("${pid} RETURN HTTP STATUS CODE : 200");
-loggly_log("200 ${url}");
+loggly_log("O200 R200 ${url}");
 error_log("${pid} FINISH 060");
 
 exit();
