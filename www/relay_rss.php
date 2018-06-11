@@ -5,7 +5,7 @@ $pid = getmypid();
 error_log("${pid} START");
 
 if (!isset($_GET['u']) || $_GET['u'] === '' || is_array($_GET['u'])) {
-  error_log("${pid} FINISH 000");
+  loggly_log("FINISH 000 NO URL");
   exit();
 }
 
@@ -13,7 +13,6 @@ $url = urldecode($_GET['u']);
 error_log("${pid} URL : ${url}");
 
 if (!filter_var($url, FILTER_VALIDATE_URL) || !preg_match('@^https?+://@i', $url)) {
-  error_log("${pid} FINISH 010");
   loggly_log("FINISH 010 INVALID URL : ${url}");
   exit();
 }
