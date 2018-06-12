@@ -132,6 +132,11 @@ function get_contents($url_, $force_) {
   
   error_log("${pid} CURLINFO_FILETIME ${timestamp}");
   
+  if ($http_code == '403') {
+    $context = stream_context_create(['http' => ['ignore_errors' => true]]);
+    $contents = file_get_contents($url);
+  }
+  
   return [$contents, $http_code, $timestamp, $content_type];
 }
 
