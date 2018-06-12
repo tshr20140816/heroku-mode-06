@@ -117,6 +117,7 @@ function get_contents($url_, $force_) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
     error_log($pid . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
   }
+  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept-Language: ja,en-US']);
   curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
 
   $contents = curl_exec($ch);
