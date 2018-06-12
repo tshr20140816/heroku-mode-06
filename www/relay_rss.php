@@ -51,6 +51,7 @@ if ($http_code == '304') {
   exit();
 }
 
+$no_cache = '';
 if (file_exists($cache_file_name)) {
   $cache_contents = file_get_contents($cache_file_name);
   $sub_code = 0;
@@ -71,6 +72,8 @@ if (file_exists($cache_file_name)) {
     error_log("${pid} FINISH 060");
     exit();
   }
+} else {
+  $no_cache = ' NO_CACHE';
 }
 
 file_put_contents($cache_file_name, $contents);
@@ -96,7 +99,7 @@ if (strlen($contents_gzip) < strlen($contents)) {
   header('Content-Length: ' . strlen($contents));
   echo $contents;
 }
-loggly_log("O200 R200 ${url}");
+loggly_log("O200 R200 ${url}${no_cache}");
 error_log("${pid} FINISH 070");
 
 exit();
