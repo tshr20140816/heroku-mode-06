@@ -117,10 +117,10 @@ function get_contents($url_, $force_) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
     error_log($pid . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
   }
-  // curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
+  curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
 
   $contents = curl_exec($ch);
-  // error_log(curl_getinfo($ch, CURLINFO_HEADER_OUT));
+  error_log(curl_getinfo($ch, CURLINFO_HEADER_OUT));
   $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
   $timestamp = curl_getinfo($ch, CURLINFO_FILETIME);
   $content_type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
