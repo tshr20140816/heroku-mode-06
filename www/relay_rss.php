@@ -20,7 +20,7 @@ if (!filter_var($url, FILTER_VALIDATE_URL) || !preg_match('@^https?+://@i', $url
 list($contents, $http_code, $timestamp, $content_type) = get_contents($url, FALSE);
 
 // error_log($http_code);
-error_log($contents);
+// error_log($contents);
 
 $cache_file_name = '/tmp/' . urlencode($url);
 
