@@ -133,9 +133,9 @@ function get_contents($url_, $force_) {
   error_log("${pid} CURLINFO_FILETIME ${timestamp}");
   
   if ($http_code == '403') {
-    error_log("${pid} RETRY ${url}");
+    error_log("${pid} RETRY ${url_}");
     $context = stream_context_create(['http' => ['ignore_errors' => true]]);
-    $contents = file_get_contents($url);
+    $contents = file_get_contents($url_, FALSE, $context);
     error_log("${pid} RETRY LINE 1 : " . $http_response_header[0]);
     if (strpos($http_response_header[0], ' 200 ')) {
       $http_code = '200';
