@@ -121,7 +121,8 @@ function get_contents($url_, $force_) {
                                          ,'Accept-Language: ja,en-us;q=0.7,en;q=0.3']);
     error_log($pid . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
   } else {
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept-Language: ja,en-us;q=0.7,en;q=0.3']);
+    // curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept-Language: ja,en-us;q=0.7,en;q=0.3']);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept-Language: ja,en-us']);
   }
   curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
 
