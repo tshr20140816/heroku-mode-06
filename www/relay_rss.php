@@ -114,10 +114,12 @@ function get_contents($url_, $force_) {
   curl_setopt($ch, CURLOPT_FILETIME, TRUE);
   curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/60.0'); 
   if ($force_ != TRUE && isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']
+                                         ,'Accept-Language: ja,en-us;q=0.7,en;q=0.3']);
     error_log($pid . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
+  } else {
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept-Language: ja,en-us;q=0.7,en;q=0.3']);
   }
-  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Accept-Language: ja,en-US']);
   curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
 
   $contents = curl_exec($ch);
