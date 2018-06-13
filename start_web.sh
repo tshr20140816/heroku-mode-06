@@ -101,14 +101,18 @@ if [ ${MODE} = 'APACHE' ]; then
     HOME_IP_ADDRESS=127.0.0.1
   fi
 
-  echo "${HOME_FQDN} ${HOME_IP_ADDRESS}" > /app/HOME_IP_ADDRESS
-
   export HOME_FQDN_SPARE=$(echo ${REMOTE_PATH_3} | awk -F: '{print $1}')
   nslookup ${HOME_FQDN_SPARE} 8.8.8.8
   export HOME_IP_ADDRESS_SPARE=$(nslookup ${HOME_FQDN_SPARE} 8.8.8.8 | tail -n2 | grep -o '[0-9]\+.\+')
   if [ -z "${HOME_IP_ADDRESS_SPARE}" ]; then
     HOME_IP_ADDRESS_SPARE=127.0.0.1
   fi  
+  
+  last_update=$(cat /app/www/last_update.txt)
+  
+  url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
+  
+  curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} * ${HOME_FQDN} ${HOME_IP_ADDRESS} * ${last_update}"  ${url}
   
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
