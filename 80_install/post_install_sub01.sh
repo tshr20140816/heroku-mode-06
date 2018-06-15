@@ -2,7 +2,7 @@
 
 set -x
 
-git clone --depth 1 -b 17.4 https://tt-rss.org/git/tt-rss.git /tmp/ttrss
+git clone --depth 1 -b 17.12 https://tt-rss.org/git/tt-rss.git /tmp/ttrss
 
 mkdir -m 777 -p /tmp/www/ttrss
 mv /tmp/ttrss/css /tmp/www/ttrss/css
