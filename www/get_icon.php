@@ -61,7 +61,9 @@ if ($result === FALSE) {
        ':b_file_data' => base64_encode($result),
       ]);
   } else {
-    http_response_code(503);
+    // http_response_code(503);
+    header('Content-Type: image/vnd.microsoft.icon');
+    echo file_get_contents('/app/www/black.ico');
   }
 } else {
   error_log($log_prefix . 'File Found');
