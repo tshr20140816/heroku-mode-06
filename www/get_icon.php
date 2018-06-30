@@ -8,6 +8,12 @@ $log_prefix = getmypid() . ' ' . $icon_file_name . ' ';
 
 error_log($log_prefix);
 
+if (strpos($_SERVER['HTTP_USER_AGENT'], '2-33-9-51') === FALSE) {
+  header('Content-Type: image/vnd.microsoft.icon');
+  echo file_get_contents('/app/www/black.ico');
+  exit();
+}
+
 $connection_info = parse_url(getenv('DATABASE_URL'));
 $pdo = new PDO(
   "pgsql:host=${connection_info['host']};dbname=" . substr($connection_info['path'], 1),
