@@ -124,7 +124,7 @@ if [ ${MODE} = 'APACHE' ]; then
   
   url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
   
-  curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} * ${HOME_FQDN} ${HOME_IP_ADDRESS} * ${last_update}"  ${url}
+  curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} * ${HOME_FQDN} ${HOME_IP_ADDRESS} * ${HOME_FQDN_SPARE} ${HOME_IP_ADDRESS_SPARE} * ${last_update}"  ${url}
 
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
