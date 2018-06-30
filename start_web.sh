@@ -8,9 +8,16 @@ httpd -V
 httpd -M
 php --version
 whereis php
+php -m
 cat /proc/version
 curl --version
 printenv
+
+current_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
+composer update > /dev/null 2>&1
+new_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
+
+ss -lnt4
 
 if [ ! -v MODE ]; then
   echo "Error : MODE not defined."
@@ -36,8 +43,13 @@ curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${mo
 php_version="$(php -v | head -n 1)"
 curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${php_version}" ${url}
 
+apache_lastest_version=$(curl https://github.com/apache/httpd/releases | grep tag-name | head -n 1 | sed -e 's/<[^>]*>//g' | awk '{print $1}')
+curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} Apache Lastest Version : ${apache_lastest_version}" ${url}
+
 apache_version="$(httpd -v)"
 curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
+
+curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} heroku/heroku-buildpack-php current ${current_version} new ${new_version}" ${url}
 
 echo ${HEROKU_APP_NAME}
 echo ${HEROKU_RELEASE_CREATED_AT}
@@ -113,7 +125,7 @@ if [ ${MODE} = 'APACHE' ]; then
   url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
   
   curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} * ${HOME_FQDN} ${HOME_IP_ADDRESS} * ${last_update}"  ${url}
-  
+
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
   export LD_LIBRARY_PATH=/tmp/usr/lib
@@ -121,6 +133,8 @@ if [ ${MODE} = 'APACHE' ]; then
   pushd www
   ln -s ./ttrss ttrss2
   popd
+
+  ls -lang www
 
   # vendor/bin/heroku-php-apache2 -C apache.conf www
   rm apache.conf
