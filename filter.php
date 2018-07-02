@@ -49,9 +49,15 @@ $tmp = explode('/', $_SERVER['REQUEST_URI']);
 $cache_file_name = '/tmp/cache_delegate/' . end($tmp);
 
 if (file_exists($cache_file_name)) {
-  if (filemtime($cache_file_name) > 1) {
+  if (time() - filemtime($cache_file_name) < 60 * 10) {
+    
+  } else {
   }
 }
+
+error_log('SSSSS');
+error_log($buf);
+error_log('FFFFF');
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
