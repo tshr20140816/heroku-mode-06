@@ -48,6 +48,11 @@ error_log("${pid} ***** STDIN FINISH ***** ${uri}");
 $tmp = explode('/', $_SERVER['REQUEST_URI']);
 $cache_file_name = '/tmp/cache_delegate/' . end($tmp);
 
+if (file_exists($cache_file_name)) {
+  if (filemtime($cache_file_name) > 1) {
+  }
+}
+
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
 $body = $arr_buf[1];
