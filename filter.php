@@ -45,7 +45,7 @@ $buf = file_get_contents('php://stdin');
 error_log("${pid} ***** STDIN FINISH ***** ${uri}");
 
 @mkdir('/tmp/cache_delegate');
-$tmp = explode('/', ${uri});
+$tmp = explode('/', $uri);
 $cache_file_name = '/tmp/cache_delegate/' . end($tmp);
 error_log("${pid} CACHE FILE NAME : ${cache_file_name}");
 
