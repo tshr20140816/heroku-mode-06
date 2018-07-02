@@ -45,19 +45,22 @@ $buf = file_get_contents('php://stdin');
 error_log("${pid} ***** STDIN FINISH ***** ${uri}");
 
 @mkdir('/tmp/cache_delegate');
-$tmp = explode('/', $_SERVER['REQUEST_URI']);
+$tmp = explode('/', ${uri});
 $cache_file_name = '/tmp/cache_delegate/' . end($tmp);
+error_log("${pid} CACHE FILE NAME : ${cache_file_name}");
 
-if (file_exists($cache_file_name)) {
-  if (time() - filemtime($cache_file_name) < 60 * 10) {
-    
-  } else {
-  }
+$last_mail_number = 0;
+if (preg_match('/.+A\sHREF="(\d+)?".+?"latest"/s', $buf, $m)) {
+  $last_mail_number = $m[1];
 }
+error_log("${pid} LAST MAIL NUMBER : ${last_mail_number}");
 
-error_log('SSSSS');
-error_log($buf);
-error_log('FFFFF');
+//if (file_exists($cache_file_name)) {
+//  if (time() - filemtime($cache_file_name) < 60 * 10) {
+//    
+//  } else {
+//  }
+//}
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
