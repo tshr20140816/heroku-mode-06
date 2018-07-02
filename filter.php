@@ -48,6 +48,7 @@ error_log("${pid} ***** STDIN FINISH ***** ${uri}");
 $tmp = explode('/', $uri);
 
 $range_last_number = 0;
+$cache_file_name = null;
 if (strpos(end($tmp), '-') === FALSE) {
   $cache_file_name = null;
 } else {
@@ -65,12 +66,9 @@ if (preg_match('/.+A\sHREF="(\d+)?".+?"latest"/s', $buf, $m)) {
 }
 error_log("${pid} LAST MAIL NUMBER : ${last_mail_number}");
 
-//if (file_exists($cache_file_name)) {
-//  if (time() - filemtime($cache_file_name) < 60 * 10) {
-//    
-//  } else {
-//  }
-//}
+if ($last_mail_number < $range_last_number) {
+  $cache_file_name = null;
+}
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
