@@ -128,6 +128,10 @@ __HEREDOC__;
   $buf .= "Content-Length: " . strlen($body) . "\r\n";
   $buf .= "\r\n";
   $buf .= $body;
+  
+  @mkdir('/tmp/cache_delegate');
+  $tmp = explode('/', $_SERVER['REQUEST_URI']);
+  file_put_contents('/tmp/cache_delegate/' . end($tmp), $buf);
 } else {
   error_log("${pid} " . $_SERVER['REQUEST_URI']);
   error_log($header);
