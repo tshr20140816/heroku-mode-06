@@ -46,8 +46,18 @@ error_log("${pid} ***** STDIN FINISH ***** ${uri}");
 
 @mkdir('/tmp/cache_delegate');
 $tmp = explode('/', $uri);
-$cache_file_name = '/tmp/cache_delegate/' . end($tmp);
+
+$range_last_number = 0;
+if (strpos(end($tmp), '-') === FALSE) {
+  $cache_file_name = null;
+} else {
+  $range = end($tmp);
+  $cache_file_name = '/tmp/cache_delegate/' . $range;
+  $tmp = explode('-', $range);
+  $range_last_number = end($tmp);
+}
 error_log("${pid} CACHE FILE NAME : ${cache_file_name}");
+error_log("${pid} RANGE LAST NUMBER : ${range_last_number}");
 
 $last_mail_number = 0;
 if (preg_match('/.+A\sHREF="(\d+)?".+?"latest"/s', $buf, $m)) {
