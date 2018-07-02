@@ -1,7 +1,9 @@
 <?php
 $pid = getmypid();
 
-error_log("${pid} ***** FILTER MESSAGE START ***** " . $_SERVER['REQUEST_URI']);
+$uri = $_SERVER['REQUEST_URI'];
+
+error_log("${pid} ***** FILTER MESSAGE START ***** ${uri}");
 
 error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
 
@@ -34,13 +36,17 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
 
   error_log("${pid} ${res}");
     
-  error_log("${pid} ***** FILTER MESSAGE FINISH ***** " . $_SERVER['REQUEST_URI']);
+  error_log("${pid} ***** FILTER MESSAGE FINISH ***** ${uri}");
   return;
 }
 
-error_log("${pid} ***** STDIN START ***** " . $_SERVER['REQUEST_URI']);
+error_log("${pid} ***** STDIN START ***** ${uri}");
 $buf = file_get_contents('php://stdin');
-error_log("${pid} ***** STDIN FINISH ***** " . $_SERVER['REQUEST_URI']);
+error_log("${pid} ***** STDIN FINISH ***** ${uri}");
+
+@mkdir('/tmp/cache_delegate');
+$tmp = explode('/', $_SERVER['REQUEST_URI']);
+$cache_file_name = '/tmp/cache_delegate/' . end($tmp);
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
 $header = $arr_buf[0];
@@ -129,9 +135,7 @@ __HEREDOC__;
   $buf .= "\r\n";
   $buf .= $body;
   
-  @mkdir('/tmp/cache_delegate');
-  $tmp = explode('/', $_SERVER['REQUEST_URI']);
-  file_put_contents('/tmp/cache_delegate/' . end($tmp), $buf);
+  file_put_contents($cache_file_name, $buf);
 } else {
   error_log("${pid} " . $_SERVER['REQUEST_URI']);
   error_log($header);
