@@ -13,12 +13,13 @@ error_log("${pid} last_update.txt " . $md5_hash);
 error_log("${pid} X-Access-Key*** " . $_SERVER['HTTP_X_ACCESS_KEY']);
 $access_key = $_SERVER['HTTP_X_ACCESS_KEY'];
 
-// 多段接続のみ許可
-error_log("${pid} X-Forwarded-For " . $_SERVER['HTTP_X_FORWARDED_FOR']);
-$forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
+//// 多段接続のみ許可
+//error_log("${pid} X-Forwarded-For " . $_SERVER['HTTP_X_FORWARDED_FOR']);
+//$forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
 
 // IE Edge 不可
-if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $access_key != $md5_hash)
+//if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $access_key != $md5_hash)
+if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $access_key != $md5_hash)
 {
   error_log("${pid} #*#*#*#*# IE or Edge or Direct Connect or X-Access-Key Unmatch #*#*#*#*#");
   header('HTTP', true, 403);
