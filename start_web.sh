@@ -57,6 +57,8 @@ echo ${HEROKU_RELEASE_VERSION}
 
 export X_ACCESS_KEY=$(sha256sum www/last_update.txt | awk '{print $1}')
 
+export X_HOST_NAME=$(hostname)
+
 if [ ${MODE} = 'APACHE' ]; then
 
   if [ ! -v LOG_LEVEL ]; then
