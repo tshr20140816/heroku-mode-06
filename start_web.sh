@@ -132,7 +132,8 @@ if [ ${MODE} = 'APACHE' ]; then
 
   pushd www
   ln -s ./ttrss ttrss2
-  popd
+  ln -s /tmp/ml ml
+  popd  
 
   ls -lang www
 
