@@ -8,7 +8,7 @@ error_log("${pid} ***** FILTER MESSAGE START ***** ${uri}");
 error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
 
 // IE Edge 不可
-if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $_SERVER['HTTP_X_ACCESS_KEY'] != getenv('X_ACCESS_KEY'))
+if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY'])
 {
   error_log("${pid} #*#*#*#*# IE or Edge or X-Access-Key Unmatch #*#*#*#*#");
   header('HTTP', true, 403);
