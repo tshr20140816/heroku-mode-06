@@ -22,20 +22,20 @@ if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_coun
 {
   error_log("${pid} #*#*#*#*# IE or Edge or Direct Connect or X-Access-Key Unmatch #*#*#*#*#");
   header('HTTP', true, 403);
-  
+
   $message =
     'D 403 ' .
     $_SERVER['SERVER_NAME'] . ' ' .
     $_SERVER['HTTP_X_FORWARDED_FOR'] . ' ' .
     $_SERVER['REMOTE_USER'] . ' ' .
     $_SERVER['REQUEST_METHOD'] . ' ' .
-    $_SERVER['REQUEST_URI'] . ' ' .
+    $uri . ' ' .
     $_SERVER['HTTP_USER_AGENT'];
 
   loggly_log($message);
 
   error_log("${pid} ${res}");
-    
+
   error_log("${pid} ***** FILTER MESSAGE FINISH ***** ${uri}");
   return;
 }
@@ -44,20 +44,15 @@ error_log("${pid} ***** STDIN START ***** ${uri}");
 $buf = file_get_contents('php://stdin');
 error_log("${pid} ***** STDIN FINISH ***** ${uri}");
 
-@mkdir('/tmp/cache_delegate');
 $tmp = explode('/', $uri);
 
+$range = null;
 $range_last_number = 0;
-$cache_file_name = null;
-if (strpos(end($tmp), '-') === FALSE) {
-  $cache_file_name = null;
-} else {
+if (strpos(end($tmp), '-') !== FALSE) {
   $range = end($tmp);
-  $cache_file_name = '/tmp/cache_delegate/' . $range;
   $tmp = explode('-', $range);
   $range_last_number = end($tmp);
 }
-error_log("${pid} CACHE FILE NAME : ${cache_file_name}");
 error_log("${pid} RANGE LAST NUMBER : ${range_last_number}");
 
 $last_mail_number = 0;
@@ -67,7 +62,7 @@ if (preg_match('/.+A\sHREF="(\d+)?".+?"latest"/s', $buf, $m)) {
 error_log("${pid} LAST MAIL NUMBER : ${last_mail_number}");
 
 if ($last_mail_number < $range_last_number) {
-  $cache_file_name = null;
+  $range_last_number = 0;
 }
 
 $arr_buf = preg_split('/^\r\n/m', $buf, 2);
@@ -86,12 +81,12 @@ if (strpos($header, 'Content-Type: text/html') !== false)
 {
   // イメージファイルでは残したいけどここでは不要
   $header = preg_replace('/^Last-Modified.+\n/m', '', $header);
-  
+
   // 元サイズ
   $header = str_replace('Content-Length:', 'X-Content-Length:', $header);
-  
-  $tmp = explode('/', $_SERVER['REQUEST_URI']);
-  
+
+  $tmp = explode('/', $uri);
+
   // レンジ指定の場合のみ自動更新追加
   if (preg_match('/^\d+$/', end($tmp)))
   {
@@ -122,13 +117,13 @@ __HEREDOC__;
   $body = preg_replace('/<FONT .+?>.+?<\/FONT>/s', '', $body, 1);
 
   $body = preg_replace('/<small>.+?<\/small>/s', '', $body, 3);
-  
+
   $body = preg_replace('/<(s|\/s)mall>/s', '', $body);
   $body = str_replace('</DT>', '</DT><BR><BR></B>', $body);
-  
+
   $body = str_replace('<FORM ACTION="" METHOD=GET>', '', $body);
   $body = str_replace('</FORM>', '', $body);
-  
+
   // 空白削除
   $body = preg_replace('/^ *\r\n/m', '', $body);
   $body = preg_replace('/^  /m', ' ', $body);
@@ -140,8 +135,8 @@ __HEREDOC__;
   $body = str_replace("<TR>\r\n", "<TR>", $body);
   $body = str_replace("<CODE>.</CODE>\r\n", '', $body);
   $body = str_replace("<DD>\r\n", "<DD>", $body);
-  
-  error_log("${pid} " . $_SERVER['REQUEST_URI']);
+
+  error_log("${pid} " . $uri);
   error_log($header);
   if (getenv('DELEGATE_LOG_LEVEL') != 'simple') {
     error_log("\r\n");
@@ -150,16 +145,15 @@ __HEREDOC__;
 
   // 圧縮
   $buf = $header;
+  $body_noncompress = $body;
   $body = gzencode($body, 9);
 
   $buf .= "Content-Encoding: gzip\r\n";
   $buf .= "Content-Length: " . strlen($body) . "\r\n";
   $buf .= "\r\n";
   $buf .= $body;
-  
-  file_put_contents($cache_file_name, $buf);
 } else {
-  error_log("${pid} " . $_SERVER['REQUEST_URI']);
+  error_log("${pid} " . $uri);
   error_log($header);
   $buf = $header;
   //$buf .= "Cache-Control: max-age=86400\r\n";
@@ -169,6 +163,10 @@ __HEREDOC__;
 
 echo $buf;
 
+if (!is_null($range)) {
+  for_cache_request(getenv('URL_CACHE'), $range, $body_noncompress);
+}
+
 $message =
   'D ' .
   explode(' ', $header, 3)[1] . ' ' .
@@ -176,18 +174,18 @@ $message =
   $_SERVER['HTTP_X_FORWARDED_FOR'] . ' ' .
   $_SERVER['REMOTE_USER'] . ' ' .
   $_SERVER['REQUEST_METHOD'] . ' ' .
-  $_SERVER['REQUEST_URI'] . ' ' .
+  $uri . ' ' .
   $_SERVER['HTTP_USER_AGENT'];
 
 loggly_log($message);
 
 error_log("${pid} ${res}");
 
-error_log("${pid} ***** FILTER MESSAGE FINISH ***** " . $_SERVER['REQUEST_URI']);
+error_log("${pid} ***** FILTER MESSAGE FINISH ***** " . $uri);
 
 function loggly_log($message_) {
   $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . ',filter.php/';
-  
+
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $url);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -200,7 +198,20 @@ function loggly_log($message_) {
   curl_setopt($ch, CURLOPT_POSTFIELDS, $message_);
   curl_exec($ch);
   curl_close($ch);
-  
-  $count = ($count + 1) % 10;
+}
+
+function for_cache_request($url_, $name_, $data_) {
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $url_);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
+  curl_setopt($ch, CURLOPT_ENCODING, '');
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+  curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
+  curl_setopt($ch, CURLOPT_POST, TRUE);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/html', 'X-Access-Key: ' . $_SERVER['HTTP_X_ACCESS_KEY'], 'X-File-Name: ' . $name_]);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $data_);
+  curl_exec($ch);
+  curl_close($ch);
 }
 ?>
