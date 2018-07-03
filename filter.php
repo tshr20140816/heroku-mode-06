@@ -7,21 +7,10 @@ error_log("${pid} ***** FILTER MESSAGE START ***** ${uri}");
 
 error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
 
-// 最終コミット日時のハッシュを比較し一致した場合のみ許可
-$md5_hash = sha1_file('/app/www/last_update.txt');
-error_log("${pid} last_update.txt " . $md5_hash);
-error_log("${pid} X-Access-Key*** " . $_SERVER['HTTP_X_ACCESS_KEY']);
-$access_key = $_SERVER['HTTP_X_ACCESS_KEY'];
-
-//// 多段接続のみ許可
-//error_log("${pid} X-Forwarded-For " . $_SERVER['HTTP_X_FORWARDED_FOR']);
-//$forward_count = count(explode(' ', $_SERVER['HTTP_X_FORWARDED_FOR']));
-
 // IE Edge 不可
-//if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $forward_count != 3 || $access_key != $md5_hash)
-if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $access_key != $md5_hash)
+if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || $_SERVER['HTTP_X_ACCESS_KEY'] != getenv('X_ACCESS_KEY'))
 {
-  error_log("${pid} #*#*#*#*# IE or Edge or Direct Connect or X-Access-Key Unmatch #*#*#*#*#");
+  error_log("${pid} #*#*#*#*# IE or Edge or X-Access-Key Unmatch #*#*#*#*#");
   header('HTTP', true, 403);
 
   $message =
