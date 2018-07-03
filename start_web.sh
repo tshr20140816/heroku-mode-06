@@ -130,6 +130,9 @@ if [ ${MODE} = 'APACHE' ]; then
 
   export LD_LIBRARY_PATH=/tmp/usr/lib
 
+  pushd /tmp
+  mkdir -m 777 ml
+  popd
   pushd www
   ln -s ./ttrss ttrss2
   ln -s /tmp/ml ml
