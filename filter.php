@@ -8,7 +8,7 @@ error_log("${pid} ***** FILTER MESSAGE START ***** ${uri}");
 error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
 
 // 最終コミット日時のハッシュを比較し一致した場合のみ許可
-$md5_hash = md5_file('/app/www/last_update.txt');
+$md5_hash = sha1_file('/app/www/last_update.txt');
 error_log("${pid} last_update.txt " . $md5_hash);
 error_log("${pid} X-Access-Key*** " . $_SERVER['HTTP_X_ACCESS_KEY']);
 $access_key = $_SERVER['HTTP_X_ACCESS_KEY'];
