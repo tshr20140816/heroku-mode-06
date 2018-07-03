@@ -55,7 +55,7 @@ echo ${HEROKU_APP_NAME}
 echo ${HEROKU_RELEASE_CREATED_AT}
 echo ${HEROKU_RELEASE_VERSION}
 
-export X_ACCESS_KEY=$(sha1sum www/last_update.txt | awk '{print $1}')
+export X_ACCESS_KEY=$(sha256sum www/last_update.txt | awk '{print $1}')
 
 if [ ${MODE} = 'APACHE' ]; then
 
