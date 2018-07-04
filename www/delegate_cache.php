@@ -16,7 +16,7 @@ if (getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY']) {
 // file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], $_POST);
 
 error_log("${pid} POSTDATA START");
-error_log(base64_decode($_POST['data']));
+error_log(gzdecode(base64_decode($_POST['data'])));
 error_log("${pid} POSTDATA FINISH");
 
 $files = scandir('/tmp/ml');
