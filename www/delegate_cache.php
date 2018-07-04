@@ -4,6 +4,10 @@ $pid = getmypid();
 
 error_log("${pid} START");
 
+error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
+error_log("${pid} " . $_SERVER['HTTP_X_ACCESS_KEY']);
+error_log("${pid} " . $_SERVER['HTTP_X_HOST_NAME']);
+
 if (getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY']) {
   exit();
 }
