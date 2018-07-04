@@ -14,8 +14,7 @@ curl --version
 printenv
 
 current_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
-composer update > /dev/null 2>&1
-new_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
+composer update > /dev/null 2>&1 &
 
 ss -lnt4
 
@@ -49,6 +48,8 @@ curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} Apac
 apache_version="$(httpd -v)"
 curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
 
+wait
+new_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
 curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} heroku/heroku-buildpack-php current ${current_version} new ${new_version}" ${url}
 
 echo ${HEROKU_APP_NAME}
