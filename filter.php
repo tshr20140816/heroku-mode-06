@@ -194,6 +194,8 @@ function loggly_log($message_) {
 }
 
 function for_cache_request($url_, $name_, $data_) {
+  // $pid = getmypid();
+  
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $url_);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
