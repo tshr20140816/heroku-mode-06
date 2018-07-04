@@ -11,8 +11,7 @@ error_log("${pid} X-Host-Name: " . $_SERVER['HTTP_X_HOST_NAME']);
 error_log("${pid} X-Url-Delegate-Cache: " . $_SERVER['HTTP_X_URL_DELEGATE_CACHE']);
 
 // IE Edge 不可
-if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY'])
-{
+if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY']) {
   error_log("${pid} #*#*#*#*# IE or Edge or X-Access-Key Unmatch #*#*#*#*#");
   header('HTTP', true, 403);
 
@@ -72,25 +71,20 @@ $header = preg_replace('/^DeleGate.+\n/m', '', $header);
 
 $body_noncompress = null;
 
-if (strpos($header, 'Content-Type: text/html') !== false)
-{
+if (strpos($header, 'Content-Type: text/html') !== false) {
   // イメージファイルでは残したいけどここでは不要
   $header = preg_replace('/^Last-Modified.+\n/m', '', $header);
 
   // 元サイズ
   $header = str_replace('Content-Length:', 'X-Content-Length:', $header);
 
-  $tmp = explode('/', $uri);
-
-  // レンジ指定の場合のみ自動更新追加
-  if (preg_match('/^\d+$/', end($tmp)))
-  {
+  // 最新メールのレンジの場合のみ自動更新追加
+  if (is_null($range)) {
     $body = str_replace('<TITLE>', '<HTML><HEAD><TITLE>', $body);
+  } else {
+    $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $body);    
   }
-  else
-  {
-    $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $body);
-  }
+  
   $replace_text = <<< __HEREDOC__
 </TITLE>
 <STYLE TYPE='text/css'>
