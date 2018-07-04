@@ -8,6 +8,7 @@ error_log("${pid} ***** FILTER MESSAGE START ***** ${uri}");
 error_log("${pid} User-Agent: " . $_SERVER['HTTP_USER_AGENT']);
 error_log("${pid} X-Access-Key: " . $_SERVER['HTTP_X_ACCESS_KEY']);
 error_log("${pid} X-Host-Name: " . $_SERVER['HTTP_X_HOST_NAME']);
+error_log("${pid} X-Url-Delegate-Cache: " . $_SERVER['HTTP_X_URL_DELEGATE_CACHE']);
 
 // IE Edge 不可
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY'])
@@ -156,7 +157,7 @@ __HEREDOC__;
 echo $buf;
 
 if (!is_null($range)) {
-  for_cache_request(getenv('URL_CACHE'), $range, $body_noncompress);
+  for_cache_request($_SERVER['HTTP_X_URL_DELEGATE_CACHE'], $range, $body_noncompress);
 }
 
 $message =
