@@ -131,6 +131,7 @@ if [ ${MODE} = 'APACHE' ]; then
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
   export LD_LIBRARY_PATH=/tmp/usr/lib
+  export URL_DELEGATE_CACHE=https://${HEROKU_APP_NAME}.herokuapp.com/delegate_cache.php
 
   pushd /tmp
   mkdir -m 777 ml
