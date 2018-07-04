@@ -152,6 +152,10 @@ if [ ${MODE} = 'APACHE' ]; then
   
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
+  if [ ! -v URL_CACHE ]; then
+    echo "Error : URL_CACHE not defined."
+    exit
+  fi
 
   if [ ! -v DELEGATE_LOG_LEVEL ]; then
     export DELEGATE_LOG_LEVEL="simple"
