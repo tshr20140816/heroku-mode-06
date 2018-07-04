@@ -145,6 +145,8 @@ if [ ${MODE} = 'APACHE' ]; then
 
   ls -lang www
   ls -lang www/ml
+  ls -lang /app/www/ml/
+  ls -lang /tmp/ml/
 
   # vendor/bin/heroku-php-apache2 -C apache.conf www
   rm apache.conf
