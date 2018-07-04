@@ -21,8 +21,10 @@ $rc = file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base
 
 error_log("${pid} rc : ${rc}");
 
+error_log("${pid} /tmp/ml START");
 $files = scandir('/tmp/ml');
 foreach($files as $file) {
+  error_log("${pid} ${file}");
   if ($file == '.' || $file == '..') {
     continue;
   }
@@ -30,6 +32,7 @@ foreach($files as $file) {
     unlink('/tmp/ml/' . $file);
   }
 }
+error_log("${pid} /tmp/ml FINISH");
 
 error_log("${pid} /app/www/ml START");
 $files = scandir('/app/www/ml');
