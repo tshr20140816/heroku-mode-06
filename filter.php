@@ -209,7 +209,7 @@ function for_cache_request($url_, $name_, $data_) {
   curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-Access-Key: ' . $_SERVER['HTTP_X_ACCESS_KEY'],
                                         'X-Host-Name: ' . $_SERVER['HTTP_X_HOST_NAME'],
                                         'X-File-Name: ' . $name_]);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['data' => $data_]));
+  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['data' => base64_encode($data_)]));
   curl_exec($ch);
   curl_close($ch);
   
