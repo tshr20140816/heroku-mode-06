@@ -70,6 +70,8 @@ $header = preg_replace('/^Expires.+\n/m', '', $header);
 $header = preg_replace('/^Server: DeleGate.+$/m', 'Server: Apache', $header);
 $header = preg_replace('/^DeleGate.+\n/m', '', $header);
 
+$body_noncompress = null;
+
 if (strpos($header, 'Content-Type: text/html') !== false)
 {
   // イメージファイルでは残したいけどここでは不要
@@ -211,5 +213,9 @@ function for_cache_request($url_, $name_, $data_) {
   curl_setopt($ch, CURLOPT_POSTFIELDS, $data_);
   curl_exec($ch);
   curl_close($ch);
+  
+  error_log("${pid} POSTDATA START");
+  error_log($data_);
+  error_log("${pid} POSTDATA FINISH");
 }
 ?>
