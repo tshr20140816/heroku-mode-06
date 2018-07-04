@@ -140,7 +140,7 @@ __HEREDOC__;
 
   // 圧縮
   $buf = $header;
-  $body_noncompress = $body;
+  //$body_noncompress = $body;
   $body = gzencode($body, 9);
 
   $buf .= "Content-Encoding: gzip\r\n";
@@ -159,7 +159,7 @@ __HEREDOC__;
 echo $buf;
 
 if (!is_null($range)) {
-  for_cache_request($_SERVER['HTTP_X_URL_DELEGATE_CACHE'], $range, $body_noncompress);
+  for_cache_request($_SERVER['HTTP_X_URL_DELEGATE_CACHE'], $range, $body);
 }
 
 $message =
