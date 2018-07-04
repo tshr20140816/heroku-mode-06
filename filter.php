@@ -159,7 +159,7 @@ __HEREDOC__;
 echo $buf;
 
 if (!is_null($range)) {
-  for_cache_request($_SERVER['HTTP_X_URL_DELEGATE_CACHE'], $range, $body);
+  for_cache_request($range, $body);
 }
 
 $message =
@@ -195,11 +195,9 @@ function loggly_log($message_) {
   curl_close($ch);
 }
 
-function for_cache_request($url_, $name_, $data_) {
-  $pid = getmypid();
-  
+function for_cache_request($name_, $data_) {
   $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, $url_);
+  curl_setopt($ch, CURLOPT_URL, $_SERVER['HTTP_X_URL_DELEGATE_CACHE']);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
   curl_setopt($ch, CURLOPT_ENCODING, '');
@@ -212,9 +210,5 @@ function for_cache_request($url_, $name_, $data_) {
   curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['data' => base64_encode($data_)]));
   curl_exec($ch);
   curl_close($ch);
-  
-  error_log("${pid} POSTDATA START");
-  error_log($data_);
-  error_log("${pid} POSTDATA FINISH");
 }
 ?>
