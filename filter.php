@@ -206,8 +206,7 @@ function for_cache_request($url_, $name_, $data_) {
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
   curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
   curl_setopt($ch, CURLOPT_POST, TRUE);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/html',
-                                        'X-Access-Key: ' . $_SERVER['HTTP_X_ACCESS_KEY'],
+  curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-Access-Key: ' . $_SERVER['HTTP_X_ACCESS_KEY'],
                                         'X-Host-Name: ' . $_SERVER['HTTP_X_HOST_NAME'],
                                         'X-File-Name: ' . $name_]);
   curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['data' => $data_]));
