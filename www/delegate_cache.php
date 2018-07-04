@@ -43,4 +43,13 @@ foreach($files as $file) {
 error_log("${pid} /app/www/ml FINISH");
 
 error_log("${pid} FINISH");
+
+error_log("${pid} /app/www/ttrss2 START");
+$files = scandir('/app/www/ttrss2');
+foreach($files as $file) {
+  error_log("${pid} ${file}");
+}
+error_log("${pid} /app/www/ttrss2 FINISH");
+
+error_log("${pid} FINISH");
 ?>
