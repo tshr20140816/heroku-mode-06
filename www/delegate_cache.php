@@ -12,12 +12,14 @@ if (getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY']) {
   exit();
 }
 
-@mkdir('/tmp/ml');
-// file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], $_POST);
-
 error_log("${pid} POSTDATA START");
 error_log(gzdecode(base64_decode($_POST['data'])));
 error_log("${pid} POSTDATA FINISH");
+
+@mkdir('/tmp/ml');
+$rc = file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
+
+error_log("${pid} rc : ${rc}");
 
 $files = scandir('/tmp/ml');
 foreach($files as $file) {
