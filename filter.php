@@ -5,7 +5,9 @@ $uri = $_SERVER['REQUEST_URI'];
 
 error_log("${pid} ***** FILTER MESSAGE START ***** ${uri}");
 
-error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
+error_log("${pid} User-Agent: " . $_SERVER['HTTP_USER_AGENT']);
+error_log("${pid} X-Access-Key: " . $_SERVER['HTTP_X_ACCESS_KEY']);
+error_log("${pid} X-Host-Name: " . $_SERVER['HTTP_X_HOST_NAME']);
 
 // IE Edge 不可
 if (preg_match('/(Trident|Edge)/', $_SERVER['HTTP_USER_AGENT']) || getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY'])
