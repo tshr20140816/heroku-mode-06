@@ -31,5 +31,12 @@ foreach($files as $file) {
   }
 }
 
+error_log("${pid} /app/www/ml START");
+$files = scandir('/app/www/ml');
+foreach($files as $file) {
+  error_log("${pid} ${file}");
+}
+error_log("${pid} /app/www/ml FINISH");
+
 error_log("${pid} FINISH");
 ?>
