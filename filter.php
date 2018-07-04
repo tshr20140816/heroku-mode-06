@@ -69,8 +69,6 @@ $header = preg_replace('/^Expires.+\n/m', '', $header);
 $header = preg_replace('/^Server: DeleGate.+$/m', 'Server: Apache', $header);
 $header = preg_replace('/^DeleGate.+\n/m', '', $header);
 
-$body_noncompress = null;
-
 if (strpos($header, 'Content-Type: text/html') !== false) {
   // イメージファイルでは残したいけどここでは不要
   $header = preg_replace('/^Last-Modified.+\n/m', '', $header);
@@ -134,7 +132,6 @@ __HEREDOC__;
 
   // 圧縮
   $buf = $header;
-  //$body_noncompress = $body;
   $body = gzencode($body, 9);
 
   $buf .= "Content-Encoding: gzip\r\n";
