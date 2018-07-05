@@ -19,8 +19,8 @@ error_log("${pid} POSTDATA FINISH");
 //@mkdir('/tmp/ml');
 $rc = file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
 error_log("${pid} rc : ${rc}");
-$rc = file_put_contents('/app/www/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
-error_log("${pid} rc : ${rc}");
+//$rc = file_put_contents('/app/www/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
+//error_log("${pid} rc : ${rc}");
 
 error_log("${pid} /tmp/ml START");
 $files = scandir('/tmp/ml');
@@ -35,6 +35,7 @@ foreach($files as $file) {
 }
 error_log("${pid} /tmp/ml FINISH");
 
+/*
 error_log("${pid} /app/www/ml START");
 $files = scandir('/app/www/ml');
 foreach($files as $file) {
@@ -50,6 +51,6 @@ foreach($files as $file) {
   error_log("${pid} ${file}");
 }
 error_log("${pid} /app/www/ttrss2 FINISH");
-
+*/
 error_log("${pid} FINISH");
 ?>
