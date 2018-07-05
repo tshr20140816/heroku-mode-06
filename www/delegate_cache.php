@@ -19,6 +19,8 @@ error_log("${pid} POSTDATA FINISH");
 //@mkdir('/tmp/ml');
 $rc = file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
 error_log("${pid} rc : ${rc}");
+$rc = chmod('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], 0666);
+error_log("${pid} rc : ${rc}");
 //$rc = file_put_contents('/app/www/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
 //error_log("${pid} rc : ${rc}");
 
