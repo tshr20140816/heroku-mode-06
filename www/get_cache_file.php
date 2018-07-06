@@ -18,9 +18,6 @@ switch (true) {
 
 $range = $_GET['range'];
 
-header('Content-Type: text/plain');
-echo 'DUMMY';
-
 header('Content-Type: text/html');
 
 echo file_get_contents('/tmp/ml/' . $range);
