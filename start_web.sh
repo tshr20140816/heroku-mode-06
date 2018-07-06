@@ -136,7 +136,6 @@ if [ ${MODE} = 'APACHE' ]; then
 
   pushd /tmp
   mkdir -m 777 ml
-  touch ml/dummy
   popd
   pushd www
   ln -s ./ttrss ttrss2
