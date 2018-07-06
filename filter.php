@@ -5,16 +5,14 @@ $uri = $_SERVER['REQUEST_URI'];
 
 error_log("${pid} ***** FILTER MESSAGE START ***** ${uri}");
 
-/*
 error_log("${pid} ***** SERVER START ***** ${uri}");
 error_log(print_r($_SERVER, true));
 error_log("${pid} ***** SERVER FINISH ***** ${uri}");
-*/
 
-error_log("${pid} User-Agent: " . $_SERVER['HTTP_USER_AGENT']);
-error_log("${pid} X-Access-Key: " . $_SERVER['HTTP_X_ACCESS_KEY']);
-error_log("${pid} X-Host-Name: " . $_SERVER['HTTP_X_HOST_NAME']);
-error_log("${pid} X-Url-Delegate-Cache: " . $_SERVER['HTTP_X_URL_DELEGATE_CACHE']);
+error_log("${pid} HTTP_USER_AGENT: " . $_SERVER['HTTP_USER_AGENT']);
+error_log("${pid} HTTP_X_ACCESS_KEY: " . $_SERVER['HTTP_X_ACCESS_KEY']);
+error_log("${pid} HTTP_X_HOST_NAME: " . $_SERVER['HTTP_X_HOST_NAME']);
+error_log("${pid} HTTP_X_URL_DELEGATE_CACHE: " . $_SERVER['HTTP_X_URL_DELEGATE_CACHE']);
 error_log("${pid} HTTP_AUTHORIZATION: " . $_SERVER['HTTP_AUTHORIZATION']);
 
 // IE Edge 不可
