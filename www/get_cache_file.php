@@ -10,15 +10,14 @@ error_log("${pid} RANGE : " . $_GET['range']);
 switch (true) {
   case !isset($_SERVER['HTTP_AUTHORIZATION'], $_GET['range']):
   case !file_exists('/tmp/ml/AUTHORIZATION'):
+  case !file_exists('/tmp/ml/' . $_GET['range']):
   case $_SERVER['HTTP_AUTHORIZATION'] != file_get_contents('/tmp/ml/AUTHORIZATION'):
     header('Content-Type: text/plain');
     echo 'DUMMY';
     exit();
 }
 
-$range = $_GET['range'];
-
-header('Content-Type: text/html');
-
-echo file_get_contents('/tmp/ml/' . $range);
+header('Content-Type: text/html; charset=iso-2022-jp');
+  
+echo file_get_contents('/tmp/ml/' . $_GET['range']);
 ?>
