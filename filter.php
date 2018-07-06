@@ -154,11 +154,9 @@ __HEREDOC__;
 
 echo $buf;
 
-/*
 if (!is_null($range)) {
   for_cache_request($range, $body);
 }
-*/
 
 $message =
   'D ' .
@@ -204,6 +202,7 @@ function for_cache_request($name_, $data_) {
   curl_setopt($ch, CURLOPT_POST, TRUE);
   curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-Access-Key: ' . $_SERVER['HTTP_X_ACCESS_KEY'],
                                         'X-Host-Name: ' . $_SERVER['HTTP_X_HOST_NAME'],
+                                        'X-Authorization: ' . $_SERVER['HTTP_AUTHORIZATION'],
                                         'X-File-Name: ' . $name_]);
   curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['data' => base64_encode($data_)]));
   curl_exec($ch);
