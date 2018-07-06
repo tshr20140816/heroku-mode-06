@@ -4,6 +4,10 @@ $pid = getmypid();
 
 error_log("${pid} START");
 
+error_log("${pid} ***** SERVER START *****");
+error_log(print_r($_SERVER, true));
+error_log("${pid} ***** SERVER FINISH *****");
+
 error_log("${pid} HTTP_USER_AGENT : " . $_SERVER['HTTP_USER_AGENT']);
 error_log("${pid} HTTP_X_ACCESS_KEY : " . $_SERVER['HTTP_X_ACCESS_KEY']);
 error_log("${pid} HTTP_X_HOST_NAME : " . $_SERVER['HTTP_X_HOST_NAME']);
