@@ -1,10 +1,11 @@
 <?php
 $pid = getmypid();
 
-error_log("${pid} ***** SERVER START *****");
-error_log(print_r($_SERVER, true));
-error_log("${pid} ***** SERVER FINISH *****");
+$uri = $_SERVER['REQUEST_URI'];
 
+error_log("${pid} ***** START ***** ${uri}");
+
+error_log("${pid} HTTP_AUTHORIZATION : " . $_SERVER['HTTP_AUTHORIZATION']);
 error_log("${pid} RANGE : " . $_GET['range']);
 
 switch (true) {
@@ -14,10 +15,13 @@ switch (true) {
   case $_SERVER['HTTP_AUTHORIZATION'] != file_get_contents('/tmp/ml/AUTHORIZATION'):
     header('Content-Type: text/plain');
     echo 'DUMMY';
+    error_log("${pid} ***** FINISH ***** ${uri}");
     exit();
 }
 
 header('Content-Type: text/html; charset=iso-2022-jp');
   
 echo file_get_contents('/tmp/ml/' . $_GET['range']);
+
+error_log("${pid} ***** FINISH ***** ${uri}");
 ?>
