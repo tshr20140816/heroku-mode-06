@@ -5,6 +5,10 @@ $uri = $_SERVER['REQUEST_URI'];
 
 error_log("${pid} ***** FILTER MESSAGE START ***** ${uri}");
 
+error_log("${pid} ***** SERVER START ***** ${uri}");
+error_log(print_r($_SERVER, true));
+error_log("${pid} ***** SERVER FINISH ***** ${uri}");
+
 error_log("${pid} User-Agent: " . $_SERVER['HTTP_USER_AGENT']);
 error_log("${pid} X-Access-Key: " . $_SERVER['HTTP_X_ACCESS_KEY']);
 error_log("${pid} X-Host-Name: " . $_SERVER['HTTP_X_HOST_NAME']);
@@ -167,7 +171,7 @@ loggly_log($message);
 
 error_log("${pid} ${res}");
 
-error_log("${pid} ***** FILTER MESSAGE FINISH ***** " . $uri);
+error_log("${pid} ***** FILTER MESSAGE FINISH ***** ${uri}");
 
 function loggly_log($message_) {
   $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . ',filter.php/';
