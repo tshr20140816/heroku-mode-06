@@ -1,31 +1,25 @@
 <?php
 
 $pid = getmypid();
+$uri = $_SERVER['REQUEST_URI'];
 
-error_log("${pid} START");
+error_log("${pid} ***** START ***** ${uri}");
 
-error_log("${pid} ***** SERVER START *****");
-error_log(print_r($_SERVER, true));
-error_log("${pid} ***** SERVER FINISH *****");
-
-error_log("${pid} HTTP_USER_AGENT : " . $_SERVER['HTTP_USER_AGENT']);
 error_log("${pid} HTTP_X_ACCESS_KEY : " . $_SERVER['HTTP_X_ACCESS_KEY']);
 error_log("${pid} HTTP_X_HOST_NAME : " . $_SERVER['HTTP_X_HOST_NAME']);
 error_log("${pid} HTTP_X_AUTHORIZATION : " . $_SERVER['HTTP_X_AUTHORIZATION']);
+error_log("${pid} HTTP_X_FILE_NAME : " . $_SERVER['HTTP_X_FILE_NAME']);
 
-if (getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY'] || gethostname() != $_SERVER['HTTP_X_HOST_NAME']) {
-  exit();
+switch (true) {
+  case !isset($_SERVER['HTTP_X_ACCESS_KEY'], $_SERVER['HTTP_X_HOST_NAME'], $_SERVER['HTTP_X_AUTHORIZATION'], $_SERVER['HTTP_X_FILE_NAME']):
+  case getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY']:
+  case gethostname() != $_SERVER['HTTP_X_HOST_NAME']:
+    error_log("${pid} ***** FINISH ***** ${uri}");
+    exit();
 }
 
-$rc = file_put_contents('/tmp/ml/AUTHORIZATION', $_SERVER['HTTP_X_AUTHORIZATION']);
-error_log("${pid} rc : ${rc}");
-
-error_log("${pid} POSTDATA START");
-error_log(gzdecode(base64_decode($_POST['data'])));
-error_log("${pid} POSTDATA FINISH");
-
-$rc = file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
-error_log("${pid} rc : ${rc}");
+file_put_contents('/tmp/ml/AUTHORIZATION', $_SERVER['HTTP_X_AUTHORIZATION']);
+file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
 
 error_log("${pid} /tmp/ml START");
 $files = scandir('/tmp/ml');
@@ -41,5 +35,5 @@ foreach($files as $file) {
 }
 error_log("${pid} /tmp/ml FINISH");
 
-error_log("${pid} FINISH");
+error_log("${pid} ***** FINISH ***** ${uri}");
 ?>
