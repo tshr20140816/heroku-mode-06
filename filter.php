@@ -153,9 +153,11 @@ __HEREDOC__;
 
 echo $buf;
 
+/*
 if (!is_null($range)) {
   for_cache_request($range, $body);
 }
+*/
 
 $message =
   'D ' .
