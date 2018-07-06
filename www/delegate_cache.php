@@ -31,28 +31,11 @@ foreach($files as $file) {
   if ($file == '.' || $file == '..') {
     continue;
   }
-  if (time() - filemtime('/tmp/ml/' . $file) < 60 * 5) {
-    unlink('/tmp/ml/' . $file);
-  }
+  //if (time() - filemtime('/tmp/ml/' . $file) < 60 * 5) {
+  //  unlink('/tmp/ml/' . $file);
+  //}
 }
 error_log("${pid} /tmp/ml FINISH");
 
-/*
-error_log("${pid} /app/www/ml START");
-$files = scandir('/app/www/ml');
-foreach($files as $file) {
-  error_log("${pid} ${file}");
-}
-error_log("${pid} /app/www/ml FINISH");
-
-error_log("${pid} FINISH");
-
-error_log("${pid} /app/www/ttrss2 START");
-$files = scandir('/app/www/ttrss2');
-foreach($files as $file) {
-  error_log("${pid} ${file}");
-}
-error_log("${pid} /app/www/ttrss2 FINISH");
-*/
 error_log("${pid} FINISH");
 ?>
