@@ -11,10 +11,14 @@ error_log("${pid} ***** SERVER FINISH *****");
 error_log("${pid} HTTP_USER_AGENT : " . $_SERVER['HTTP_USER_AGENT']);
 error_log("${pid} HTTP_X_ACCESS_KEY : " . $_SERVER['HTTP_X_ACCESS_KEY']);
 error_log("${pid} HTTP_X_HOST_NAME : " . $_SERVER['HTTP_X_HOST_NAME']);
+error_log("${pid} HTTP_X_AUTHORIZATION : " . $_SERVER['HTTP_X_AUTHORIZATION']);
 
 if (getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY'] || gethostname() != $_SERVER['HTTP_X_HOST_NAME']) {
   exit();
 }
+
+$rc = file_put_contents('/tmp/ml/AUTHORIZATION', $_SERVER['HTTP_X_AUTHORIZATION']);
+error_log("${pid} rc : ${rc}");
 
 error_log("${pid} POSTDATA START");
 error_log(gzdecode(base64_decode($_POST['data'])));
