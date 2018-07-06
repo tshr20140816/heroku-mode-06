@@ -31,9 +31,10 @@ foreach($files as $file) {
   if ($file == '.' || $file == '..') {
     continue;
   }
-  //if (time() - filemtime('/tmp/ml/' . $file) < 60 * 5) {
-  //  unlink('/tmp/ml/' . $file);
-  //}
+  if (time() - filemtime('/tmp/ml/' . $file) > 60 * 5) {
+    unlink('/tmp/ml/' . $file);
+    error_log("${pid} DELETE FILE : ${file}");
+  }
 }
 error_log("${pid} /tmp/ml FINISH");
 
