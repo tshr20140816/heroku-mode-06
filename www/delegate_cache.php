@@ -4,11 +4,11 @@ $pid = getmypid();
 
 error_log("${pid} START");
 
-error_log("${pid} " . $_SERVER['HTTP_USER_AGENT']);
-error_log("${pid} " . $_SERVER['HTTP_X_ACCESS_KEY']);
-error_log("${pid} " . $_SERVER['HTTP_X_HOST_NAME']);
+error_log("${pid} HTTP_USER_AGENT : " . $_SERVER['HTTP_USER_AGENT']);
+error_log("${pid} HTTP_X_ACCESS_KEY : " . $_SERVER['HTTP_X_ACCESS_KEY']);
+error_log("${pid} HTTP_X_HOST_NAME : " . $_SERVER['HTTP_X_HOST_NAME']);
 
-if (getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY']) {
+if (getenv('X_ACCESS_KEY') != $_SERVER['HTTP_X_ACCESS_KEY'] || gethostname() != $_SERVER['HTTP_X_HOST_NAME']) {
   exit();
 }
 
