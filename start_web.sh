@@ -141,12 +141,7 @@ if [ ${MODE} = 'APACHE' ]; then
   ln -s ./ttrss ttrss2
   popd  
 
-  touch /app/www/ml/100-102
-
   ls -lang www
-  ls -lang www/ml
-  ls -lang /app/www/ml/
-  ls -lang /tmp/ml/
 
   # vendor/bin/heroku-php-apache2 -C apache.conf www
   rm apache.conf
