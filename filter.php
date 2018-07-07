@@ -154,7 +154,7 @@ __HEREDOC__;
 
 echo $buf;
 
-if (!is_null($range)) {
+if (!is_null($range) && $range_last_number != 0) {
   for_cache_request($range, $body);
 }
 
