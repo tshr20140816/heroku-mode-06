@@ -92,7 +92,6 @@ if ($timestamp != -1) {
   error_log("${pid} Last-Modified: " . gmdate("D, d M Y H:i:s \\G\\M\\T\r\n", $timestamp));
 }
 
-/*
 if (strlen($contents_gzip) < strlen($contents)) {
   header('Content-Encoding: gzip');
   header('Content-Length: ' . strlen($contents_gzip));
@@ -101,9 +100,7 @@ if (strlen($contents_gzip) < strlen($contents)) {
   header('Content-Length: ' . strlen($contents));
   echo $contents;
 }
-*/
 
-echo $contents;
 loggly_log("O200 R200 ${url}${no_cache}");
 error_log("${pid} FINISH 070");
 
