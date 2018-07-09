@@ -4,9 +4,11 @@ $pid = getmypid();
 
 error_log("${pid} START");
 
+/*
 error_log("${pid} ***** SERVER ENV START *****");
 error_log(print_r($_SERVER, true));
 error_log("${pid} ***** SERVER ENV FINISH *****");
+*/
 
 if (!isset($_GET['u']) || $_GET['u'] === '' || is_array($_GET['u'])) {
   loggly_log("FINISH 000 NO URL");
