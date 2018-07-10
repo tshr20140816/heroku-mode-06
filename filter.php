@@ -82,7 +82,7 @@ if (strpos($header, 'Content-Type: text/html') !== false) {
   $header = str_replace('Content-Length:', 'X-Content-Length:', $header);
 
   // 最新メールのレンジの場合のみ自動更新追加
-  if (!is_null($range) && $range_last_number == 0) {
+  if ($range !== null && $range_last_number == 0) {
     $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>R ', $body);  
   } else {  
     $body = str_replace('<TITLE>', '<HTML><HEAD><TITLE>', $body);
@@ -154,7 +154,7 @@ __HEREDOC__;
 
 echo $buf;
 
-if (!is_null($range) && $range_last_number != 0) {
+if ($range !== null && $range_last_number != 0) {
   // キャッシュ用データ送信
   for_cache_request($range, $body);
 }
