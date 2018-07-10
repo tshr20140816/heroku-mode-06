@@ -155,6 +155,7 @@ __HEREDOC__;
 echo $buf;
 
 if (!is_null($range) && $range_last_number != 0) {
+  // キャッシュ用データ送信
   for_cache_request($range, $body);
 }
 
