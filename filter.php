@@ -83,7 +83,7 @@ if (strpos($header, 'Content-Type: text/html') !== false) {
 
   // 最新メールのレンジの場合のみ自動更新追加
   if ($range_last_number == 0) {
-    $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>', $body);  
+    $body = str_replace('<TITLE>', '<HTML><HEAD><META HTTP-EQUIV="REFRESH" CONTENT="600"><TITLE>R ', $body);  
   } else {  
     $body = str_replace('<TITLE>', '<HTML><HEAD><TITLE>', $body);
   }
