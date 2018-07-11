@@ -125,6 +125,7 @@ function get_contents($url_, $force_) {
                       CURLOPT_MAXREDIRS => 3,
                       CURLOPT_FILETIME => TRUE,
                       CURLOPT_ENCODING => 'gzip',
+                      CURLOPT_TCP_FASTOPEN => TRUE,
                       CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/61.0'
                     ]);
   /*
