@@ -123,6 +123,7 @@ function get_contents($url_, $force_) {
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
   curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
   curl_setopt($ch, CURLOPT_FILETIME, TRUE);
+  curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
   curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/60.0');
   if ($force_ != TRUE && isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
