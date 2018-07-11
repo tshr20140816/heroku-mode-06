@@ -115,7 +115,19 @@ exit();
 function get_contents($url_, $force_) {
   $pid = getmypid();
   $ch = curl_init();
-
+  curl_setopt_array($ch,
+                    [
+                      CURLOPT_URL => $url_,
+                      CURLOPT_RETURNTRANSFER => TRUE,
+                      CURLOPT_CONNECTTIMEOUT => 20,
+                      CURLOPT_ENCODING => '',
+                      CURLOPT_FOLLOWLOCATION => TRUE,
+                      CURLOPT_MAXREDIRS => 3,
+                      CURLOPT_FILETIME => TRUE,
+                      CURLOPT_ENCODING => 'gzip',
+                      CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/61.0'
+                    ]);
+  /*
   curl_setopt($ch, CURLOPT_URL, $url_); 
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
@@ -125,6 +137,7 @@ function get_contents($url_, $force_) {
   curl_setopt($ch, CURLOPT_FILETIME, TRUE);
   curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
   curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/60.0');
+  */
   if ($force_ != TRUE && isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
     error_log($pid . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
