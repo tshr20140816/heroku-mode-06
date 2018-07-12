@@ -90,8 +90,6 @@ if (file_exists($cache_file_name)) {
 
 file_put_contents($cache_file_name, $contents);
 
-$contents_gzip = gzencode($contents, 9);
-
 if (is_null($content_type)) {
   header('Content-Type: application/xml');
 } else {
@@ -104,6 +102,8 @@ if ($timestamp != -1) {
 }
 
 /*
+$contents_gzip = gzencode($contents, 9);
+
 if (strlen($contents_gzip) < strlen($contents)) {
   header('Content-Encoding: gzip');
   header('Content-Length: ' . strlen($contents_gzip));
