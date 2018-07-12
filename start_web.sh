@@ -34,23 +34,23 @@ export IP_ADDRESS=$(ip address | grep 'inet ' | grep -v '127.0.0.1' | awk '{prin
 echo "${IP_ADDRESS}" > /app/IP_ADDRESS
 
 linux_version="$(cat /proc/version)"
-curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${linux_version}" ${url}
+curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${linux_version}" ${url}
 
 model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
-curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${model_name:13}" ${url}
+curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${model_name:13}" ${url}
 
 php_version="$(php -v | head -n 1)"
-curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${php_version}" ${url}
+curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${php_version}" ${url}
 
 apache_lastest_version=$(curl https://github.com/apache/httpd/releases | grep tag-name | head -n 1 | sed -e 's/<[^>]*>//g' | awk '{print $1}')
-curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} Apache Lastest Version : ${apache_lastest_version}" ${url}
+curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} Apache Lastest Version : ${apache_lastest_version}" ${url}
 
 apache_version="$(httpd -v)"
-curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
+curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
 
 wait
 new_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
-curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} heroku/heroku-buildpack-php current ${current_version} new ${new_version}" ${url} &
+curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} heroku/heroku-buildpack-php current ${current_version} new ${new_version}" ${url} &
 
 echo ${HEROKU_APP_NAME}
 echo ${HEROKU_RELEASE_CREATED_AT}
@@ -127,7 +127,7 @@ if [ ${MODE} = 'APACHE' ]; then
   
   url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
   
-  curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} * ${HOME_FQDN} ${HOME_IP_ADDRESS} * ${HOME_FQDN_SPARE} ${HOME_IP_ADDRESS_SPARE} * ${last_update}"  ${url} &
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} * ${HOME_FQDN} ${HOME_IP_ADDRESS} * ${HOME_FQDN_SPARE} ${HOME_IP_ADDRESS_SPARE} * ${last_update}"  ${url} &
 
   htpasswd -c -b .htpasswd ${BASIC_USER} ${BASIC_PASSWORD}
 
@@ -149,7 +149,7 @@ if [ ${MODE} = 'APACHE' ]; then
   apachectl configtest apache.conf
   
   apachectl_configtest=$(apachectl configtest apache.conf 2>&1)
-  curl -i -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} apachectl configtest ${apachectl_configtest}" ${url} &
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} apachectl configtest ${apachectl_configtest}" ${url} &
   
   vendor/bin/heroku-php-apache2 -C apache.conf www
 else
