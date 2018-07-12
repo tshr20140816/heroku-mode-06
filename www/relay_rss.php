@@ -47,7 +47,7 @@ if ($http_code == '304') {
   error_log("${pid} FINISH 030");
   exit();
 } else if ($http_code != '200') {
-  header('HTTP/1.1 ' . $http_code . ' Warn');
+  header("HTTP/1.1 ${http_code} Warn");
   loggly_log("O${http_code} R${http_code} ${url}");
   error_log("${pid} FINISH 040");
   exit();
