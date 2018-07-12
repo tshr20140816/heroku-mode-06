@@ -4,7 +4,9 @@ $pid = getmypid();
 
 $template_number = $_GET['n'];
 
-$data = explode("\n", file_get_contents(getenv('RSS_TEMPLATE_URL') . "${template_number}.txt"));
+//$data = explode("\n", file_get_contents(getenv('RSS_TEMPLATE_URL') . "${template_number}.txt"));
+list($contents, $http_code) = get_contents(getenv('RSS_TEMPLATE_URL') . "${template_number}.txt");
+$data = explode("\n", $contents);
 $url = $data[0];
 $encoding = $data[1];
 $global_pattern = '/' . $data[2] . '/s';
