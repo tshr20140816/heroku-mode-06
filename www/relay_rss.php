@@ -69,7 +69,7 @@ if (file_exists($cache_file_name)) {
       ['/<pubDate>.+?<\/pubDate>/',
        '/<updated>.+?<\/updated>/',
        '/<lastBuildDate>.+?<\/lastBuildDate>/',
-       '/<updated>.+?<\/updated>.*?<id>.+?<\/id>/',
+       '/<updated>.+?<\/updated>\R *?<id>.+?<\/id>/s',
       ];
     for ($i = 0; $i < count($patterns); $i++) {
       if (preg_replace($patterns[$i], '', $cache_contents, 1) == preg_replace($patterns[$i], '', $contents, 1)) {
