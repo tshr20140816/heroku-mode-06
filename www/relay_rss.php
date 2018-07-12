@@ -130,7 +130,7 @@ function get_contents($url_, $force_) {
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_FILETIME => TRUE,
-                     CURLOPT_ENCODING => 'gzip',
+                     CURLOPT_ENCODING => '',
                      // CURLOPT_TCP_FASTOPEN => TRUE,
                      CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
