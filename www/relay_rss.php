@@ -65,7 +65,12 @@ if (file_exists($cache_file_name)) {
   if ($cache_contents == $contents) {
     $sub_code = 1;
   } else {
-    $patterns = ['/<pubDate>.+?<\/pubDate>/', '/<updated>.+?<\/updated>/', '/<lastBuildDate>.+?<\/lastBuildDate>/'];
+    $patterns =
+      ['/<pubDate>.+?<\/pubDate>/',
+       '/<updated>.+?<\/updated>/',
+       '/<lastBuildDate>.+?<\/lastBuildDate>/',
+       '/<updated>.+?<\/updated>.*?<id>urn:feed.+?<\/id>/',
+      ];
     for ($i = 0; $i < count($patterns); $i++) {
       if (preg_replace($patterns[$i], '', $cache_contents, 1) == preg_replace($patterns[$i], '', $contents, 1)) {
         $sub_code = $i + 2;
