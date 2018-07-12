@@ -120,7 +120,6 @@ function get_contents($url_, $force_) {
                       CURLOPT_URL => $url_,
                       CURLOPT_RETURNTRANSFER => TRUE,
                       CURLOPT_CONNECTTIMEOUT => 20,
-                      CURLOPT_ENCODING => '',
                       CURLOPT_FOLLOWLOCATION => TRUE,
                       CURLOPT_MAXREDIRS => 3,
                       CURLOPT_FILETIME => TRUE,
@@ -182,6 +181,7 @@ function loggly_log($message_) {
   
   $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/relay_rss,' . getenv('HEROKU_APP_NAME') . '/';
   $ch = curl_init();
+  /*
   curl_setopt($ch, CURLOPT_URL, $url_loggly);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
@@ -191,6 +191,21 @@ function loggly_log($message_) {
   curl_setopt($ch, CURLOPT_POST, TRUE);
   curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/plain']);
   curl_setopt($ch, CURLOPT_POSTFIELDS, $message_);
+  */
+  curl_setopt_array($ch,
+                    [
+                      CURLOPT_URL => $url_loggly,
+                      CURLOPT_RETURNTRANSFER => TRUE,
+                      CURLOPT_CONNECTTIMEOUT => 20,
+                      CURLOPT_ENCODING => '',
+                      CURLOPT_FOLLOWLOCATION => TRUE,
+                      CURLOPT_MAXREDIRS => 3,
+                      CURLOPT_POST => TRUE,
+                      CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],
+                      CURLOPT_SSL_FALSESTART => TRUE,
+                      CURLOPT_PATH_AS_IS => TRUE,
+                      CURLOPT_POSTFIELDS => $message_,
+                    ]);
   curl_exec($ch);
   curl_close($ch);
 }
