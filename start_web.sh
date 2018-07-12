@@ -161,7 +161,8 @@ else
     export DELEGATE_OPTION="-v"
   fi
 
-  chmod 777 ./delegate/tmp/
+  mkdir -m 777 ./delegate/tmp/
+  # chmod 777 ./delegate/tmp/
   mkdir -m 777 /tmp/delegate
   mkdir -m 777 /tmp/delegate/adm
   mkdir -m 777 /tmp/delegate/cache
