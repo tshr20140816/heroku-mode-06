@@ -176,36 +176,45 @@ error_log("${pid} ${res}");
 error_log("${pid} ***** FILTER MESSAGE FINISH ***** ${uri}");
 
 function loggly_log($message_) {
-  $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . ',filter.php/';
+  $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . $_SERVER['SERVER_NAME'] . ',filter.php/';
 
   $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-  curl_setopt($ch, CURLOPT_ENCODING, '');
-  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-  curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
-  curl_setopt($ch, CURLOPT_POST, TRUE);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/plain']);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $message_);
+  curl_setopt_array($ch,
+                    [CURLOPT_URL => $url_loggly,
+                     CURLOPT_RETURNTRANSFER => TRUE,
+                     CURLOPT_ENCODING => '',
+                     CURLOPT_CONNECTTIMEOUT => 20,
+                     CURLOPT_FOLLOWLOCATION => TRUE,
+                     CURLOPT_MAXREDIRS => 3,
+                     CURLOPT_POST => TRUE,
+                     CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],
+                     CURLOPT_SSL_FALSESTART => TRUE,
+                     CURLOPT_PATH_AS_IS => TRUE,
+                     CURLOPT_POSTFIELDS => $message_,
+                    ]);
   curl_exec($ch);
   curl_close($ch);
 }
 
 function for_cache_request($name_, $data_) {
   $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, $_SERVER['HTTP_X_URL_DELEGATE_CACHE']);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-  curl_setopt($ch, CURLOPT_ENCODING, '');
-  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-  curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
-  curl_setopt($ch, CURLOPT_POST, TRUE);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-Access-Key: ' . $_SERVER['HTTP_X_ACCESS_KEY'],
-                                        'X-Host-Name: ' . $_SERVER['HTTP_X_HOST_NAME'],
-                                        'X-Authorization: ' . $_SERVER['HTTP_AUTHORIZATION'],
-                                        'X-File-Name: ' . $name_]);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['data' => base64_encode($data_)]));
+  curl_setopt_array($ch,
+                    [CURLOPT_URL => $_SERVER['HTTP_X_URL_DELEGATE_CACHE'],
+                     CURLOPT_RETURNTRANSFER => TRUE,
+                     CURLOPT_ENCODING => '',
+                     CURLOPT_CONNECTTIMEOUT => 20,
+                     CURLOPT_FOLLOWLOCATION => TRUE,
+                     CURLOPT_MAXREDIRS => 3,
+                     CURLOPT_POST => TRUE,
+                     CURLOPT_HTTPHEADER => ['X-Access-Key: ' . $_SERVER['HTTP_X_ACCESS_KEY'],
+                                            'X-Host-Name: ' . $_SERVER['HTTP_X_HOST_NAME'],
+                                            'X-Authorization: ' . $_SERVER['HTTP_AUTHORIZATION'],
+                                            'X-File-Name: ' . $name_,
+                                           ]
+                     CURLOPT_SSL_FALSESTART => TRUE,
+                     CURLOPT_PATH_AS_IS => TRUE,
+                     CURLOPT_POSTFIELDS => http_build_query(['data' => base64_encode($data_)]),
+                    ]);
   curl_exec($ch);
   curl_close($ch);
 }
