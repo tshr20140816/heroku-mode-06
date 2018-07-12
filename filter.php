@@ -210,7 +210,7 @@ function for_cache_request($name_, $data_) {
                                             'X-Host-Name: ' . $_SERVER['HTTP_X_HOST_NAME'],
                                             'X-Authorization: ' . $_SERVER['HTTP_AUTHORIZATION'],
                                             'X-File-Name: ' . $name_,
-                                           ]
+                                           ],
                      CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => http_build_query(['data' => base64_encode($data_)]),
