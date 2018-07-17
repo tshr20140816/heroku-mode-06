@@ -15,6 +15,8 @@ printenv
 
 current_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
 composer update > /dev/null 2>&1 &
+rm -rf /tmp/heroku-mode-06
+git clone --depth 1 https://github.com/tshr20140816/heroku-mode-06.git /tmp/heroku-mode-06
 
 ss -lnt4
 
