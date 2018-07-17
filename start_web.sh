@@ -16,7 +16,7 @@ printenv
 current_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
 composer update > /dev/null 2>&1 &
 rm -rf /tmp/heroku-mode-06
-git clone --depth 1 https://github.com/tshr20140816/heroku-mode-06.git /tmp/heroku-mode-06
+git clone --depth 1 https://github.com/tshr20140816/heroku-mode-06.git /tmp/heroku-mode-06 &
 
 ss -lnt4
 
@@ -147,7 +147,8 @@ if [ ${MODE} = 'APACHE' ]; then
 
   # vendor/bin/heroku-php-apache2 -C apache.conf www
   rm apache.conf
-  wget https://raw.githubusercontent.com/tshr20140816/heroku-mode-06/master/apache.conf
+  # wget https://raw.githubusercontent.com/tshr20140816/heroku-mode-06/master/apache.conf
+  cp /tmp/heroku-mode-06/apache.conf ./
   apachectl configtest apache.conf
   
   apachectl_configtest=$(apachectl configtest apache.conf 2>&1)
