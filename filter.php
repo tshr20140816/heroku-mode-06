@@ -201,7 +201,7 @@ function for_cache_request($name_, $data_) {
   curl_setopt_array($ch,
                     [CURLOPT_URL => $_SERVER['HTTP_X_URL_DELEGATE_CACHE'],
                      CURLOPT_RETURNTRANSFER => TRUE,
-                     CURLOPT_ENCODING => '',
+                     // CURLOPT_ENCODING => '',
                      CURLOPT_CONNECTTIMEOUT => 20,
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
