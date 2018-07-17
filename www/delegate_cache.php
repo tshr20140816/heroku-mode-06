@@ -19,7 +19,8 @@ switch (true) {
 }
 
 file_put_contents('/tmp/ml/AUTHORIZATION', $_SERVER['HTTP_X_AUTHORIZATION']);
-file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
+# file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], gzdecode(base64_decode($_POST['data'])));
+file_put_contents('/tmp/ml/' . $_SERVER['HTTP_X_FILE_NAME'], base64_decode($_POST['data']));
 
 error_log("${pid} /tmp/ml START");
 $files = scandir('/tmp/ml');
