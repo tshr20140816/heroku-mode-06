@@ -137,6 +137,7 @@ __HEREDOC__;
 
   // 圧縮
   $buf = $header;
+  $body_non_compress = $body;
   $body = gzencode($body, 9);
 
   $buf .= "Content-Encoding: gzip\r\n";
@@ -156,7 +157,7 @@ echo $buf;
 
 if ($range !== null && $range_last_number != 0) {
   // キャッシュ用データ送信
-  for_cache_request($range, $body);
+  for_cache_request($range, $body_non_compress);
 }
 
 $message =
@@ -201,7 +202,7 @@ function for_cache_request($name_, $data_) {
   curl_setopt_array($ch,
                     [CURLOPT_URL => $_SERVER['HTTP_X_URL_DELEGATE_CACHE'],
                      CURLOPT_RETURNTRANSFER => TRUE,
-                     // CURLOPT_ENCODING => '',
+                     CURLOPT_ENCODING => '',
                      CURLOPT_CONNECTTIMEOUT => 20,
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
