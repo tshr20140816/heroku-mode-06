@@ -78,6 +78,12 @@ if [ ${MODE} = 'APACHE' ]; then
     exit
   fi
 
+  # ml2
+  if [ ! -v REMOTE_PATH_0 ]; then
+    echo "Error : REMOTE_PATH_0 not defined."
+    exit
+  fi
+
   # ml
   if [ ! -v REMOTE_PATH_1 ]; then
     echo "Error : REMOTE_PATH_1 not defined."
@@ -92,7 +98,8 @@ if [ ${MODE} = 'APACHE' ]; then
 
   # ttrss2
   if [ ! -v REMOTE_PATH_3 ]; then
-    export REMOTE_PATH_3="www.google.com:443/ttrss2/"
+    echo "Error : REMOTE_PATH_3 not defined."
+    exit
   fi
   
   if [ ! -v RSS_TEMPLATE_URL ]; then
