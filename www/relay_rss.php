@@ -180,7 +180,7 @@ function loggly_log($message_) {
   $rc = curl_setopt_array($ch,
                     [CURLOPT_URL => $url_loggly,
                      CURLOPT_RETURNTRANSFER => TRUE,
-                     CURLOPT_ENCODING => '',
+                     # CURLOPT_ENCODING => '',
                      CURLOPT_CONNECTTIMEOUT => 20,
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
