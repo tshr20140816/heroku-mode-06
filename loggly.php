@@ -19,21 +19,24 @@ while ($line = fgets($stdin)) {
 exit();
 
 function loggly_log($message_) {
-  $url = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/' . getenv('HEROKU_APP_NAME') . '/';
+  $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/loggly.php,' . getenv('HEROKU_APP_NAME') . '/';
   
   global $ch, $count;
   if ($count % 10 == 0) {
     $ch = curl_init();
   }
-  curl_setopt($ch, CURLOPT_URL, $url);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-  curl_setopt($ch, CURLOPT_ENCODING, '');
-  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-  curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
-  curl_setopt($ch, CURLOPT_POST, TRUE);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/plain', 'Connection: Keep-Alive']);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $message_);
+  curl_setopt_array($ch,
+                    [CURLOPT_URL => $url_loggly,
+                     CURLOPT_RETURNTRANSFER => TRUE,
+                     CURLOPT_ENCODING => '',
+                     CURLOPT_CONNECTTIMEOUT => 20,
+                     CURLOPT_FOLLOWLOCATION => TRUE,
+                     CURLOPT_MAXREDIRS => 3,
+                     CURLOPT_POST => TRUE,
+                     CURLOPT_HTTPHEADER => ['Content-Type: text/plain', 'Connection: Keep-Alive'],
+                     CURLOPT_PATH_AS_IS => TRUE,
+                     CURLOPT_POSTFIELDS => $message_,
+                    ]);
   curl_exec($ch);
   if ($count % 10 == 9) {
     curl_close($ch);
