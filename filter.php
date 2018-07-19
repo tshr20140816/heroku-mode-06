@@ -189,7 +189,7 @@ function loggly_log($message_) {
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_POST => TRUE,
                      CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],
-                     CURLOPT_SSL_FALSESTART => TRUE,
+                     // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
@@ -212,7 +212,7 @@ function for_cache_request($name_, $data_) {
                                             'X-Authorization: ' . $_SERVER['HTTP_AUTHORIZATION'],
                                             'X-File-Name: ' . $name_,
                                            ],
-                     CURLOPT_SSL_FALSESTART => TRUE,
+                     // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => http_build_query(['data' => base64_encode($data_)]),
                     ]);
