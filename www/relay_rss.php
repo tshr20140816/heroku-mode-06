@@ -191,7 +191,8 @@ function loggly_log($message_) {
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
   error_log("${pid} CURL_SETOPT_ARRAY RC : ${rc}");
-  curl_exec($ch);
+  $rc = curl_exec($ch);
+  error_log("${pid} CURL_EXEC RC : ${rc}");
   curl_close($ch);
 }
 ?>
