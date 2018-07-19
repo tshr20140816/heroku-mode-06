@@ -190,9 +190,9 @@ function loggly_log($message_) {
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
-  error_log("${pid} CURL_SETOPT_ARRAY RC : ${rc}");
+  // error_log("${pid} CURL_SETOPT_ARRAY RC : ${rc}");
   $rc = curl_exec($ch);
-  error_log("${pid} CURL_EXEC RC : ${rc}");
+  // error_log("${pid} CURL_EXEC RC : ${rc}");
   curl_close($ch);
 }
 ?>
