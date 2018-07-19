@@ -105,7 +105,7 @@ function loggly_log($message_) {
   $pid = getmypid();
   error_log("${pid} ${message_}");
   
-  $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/relay_rss,' . getenv('HEROKU_APP_NAME') . '/';
+  $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/get_rss,' . getenv('HEROKU_APP_NAME') . '/';
   $ch = curl_init();
   curl_setopt_array($ch,
                     [CURLOPT_URL => $url_loggly,
