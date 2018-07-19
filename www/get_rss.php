@@ -90,7 +90,7 @@ function get_contents($url_) {
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
                      // CURLOPT_TCP_FASTOPEN => TRUE,
-                     CURLOPT_SSL_FALSESTART => TRUE,
+                     // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/61.0',
                     ]);  
@@ -116,7 +116,7 @@ function loggly_log($message_) {
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_POST => TRUE,
                      CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],
-                     CURLOPT_SSL_FALSESTART => TRUE,
+                     // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
