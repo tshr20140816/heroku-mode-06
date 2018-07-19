@@ -1,10 +1,11 @@
 <?php
 
 $pid = getmypid();
+$requesturi = $_SERVER['REQUEST_URI'];
+error_log("${pid} START ${requesturi}");
 
 $template_number = $_GET['n'];
 
-//$data = explode("\n", file_get_contents(getenv('RSS_TEMPLATE_URL') . "${template_number}.txt"));
 list($contents, $http_code) = get_contents(getenv('RSS_TEMPLATE_URL') . "${template_number}.txt");
 $data = explode("\n", $contents);
 $url = $data[0];
@@ -21,7 +22,7 @@ $items_template = '<item><title>__TITLE__</title><link>__LINK__</link><descripti
 
 list($contents, $http_code) = get_contents($url);
 if ($http_code != '200') {
-  loggly_log("ERROR : HTTP STATUS ${http_code} ${url}");
+  loggly_log("${pid} ERROR : HTTP STATUS ${http_code} ${url}");
   exit();
 }
 $html = mb_convert_encoding($contents, 'UTF-8', $encoding);
@@ -68,20 +69,13 @@ $contents_gzip = gzencode(str_replace('__ITEMS__', implode("\r\n", $items), $xml
 header('Content-Length: ' . strlen($contents_gzip));
 echo $contents_gzip;
 
+error_log("${pid} FINISH");
+
 exit();
 
 function get_contents($url_) {
   $pid = getmypid();
   $ch = curl_init();
-  /*
-  curl_setopt($ch, CURLOPT_URL, $url_); 
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-  curl_setopt($ch, CURLOPT_ENCODING, "");
-  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-  curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
-  curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/60.0');
-  */
   curl_setopt_array($ch,
                     [CURLOPT_URL => $url_,
                      CURLOPT_RETURNTRANSFER => TRUE,
@@ -89,8 +83,6 @@ function get_contents($url_) {
                      CURLOPT_CONNECTTIMEOUT => 20,
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
-                     // CURLOPT_TCP_FASTOPEN => TRUE,
-                     // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/61.0',
                     ]);  
@@ -116,7 +108,6 @@ function loggly_log($message_) {
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_POST => TRUE,
                      CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],
-                     // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
