@@ -1,8 +1,8 @@
 <?php
 
 $pid = getmypid();
-
-error_log("${pid} START");
+$requesturi = $_SERVER['REQUEST_URI'];
+error_log("${pid} START ${requesturi}");
 
 /*
 error_log("${pid} ***** SERVER ENV START *****");
