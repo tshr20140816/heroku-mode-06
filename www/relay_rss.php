@@ -177,7 +177,7 @@ function loggly_log($message_) {
   
   $url_loggly = 'https://logs-01.loggly.com/inputs/' . getenv('LOGGLY_TOKEN') . '/tag/relay_rss,' . getenv('HEROKU_APP_NAME') . '/';
   $ch = curl_init();
-  curl_setopt_array($ch,
+  $rc = curl_setopt_array($ch,
                     [CURLOPT_URL => $url_loggly,
                      CURLOPT_RETURNTRANSFER => TRUE,
                      CURLOPT_ENCODING => '',
@@ -190,6 +190,7 @@ function loggly_log($message_) {
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
+  error_log("${pid} CURL_SETOPT_ARRAY RC : ${rc}");
   curl_exec($ch);
   curl_close($ch);
 }
