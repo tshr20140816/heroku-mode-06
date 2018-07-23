@@ -4,22 +4,6 @@ set -x
 
 export TZ=JST-9
 
-httpd -V
-httpd -M
-php --version
-whereis php
-php -m
-cat /proc/version
-curl --version
-printenv
-
-current_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
-composer update > /dev/null 2>&1 &
-rm -rf /tmp/heroku-mode-06
-git clone --depth 1 https://github.com/tshr20140816/heroku-mode-06.git /tmp/heroku-mode-06 &
-
-ss -lnt4
-
 if [ ! -v MODE ]; then
   echo "Error : MODE not defined."
   exit
@@ -30,42 +14,58 @@ if [ ! -v LOGGLY_TOKEN ]; then
   exit
 fi
 
-url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
-
 export IP_ADDRESS=$(ip address | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $4}')
 echo "${IP_ADDRESS}" > /app/IP_ADDRESS
-
-linux_version="$(cat /proc/version)"
-curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${linux_version}" ${url}
-
-model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
-curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${model_name:13}" ${url}
-
-php_lastest_version=$(curl http://us1.php.net/downloads.php | grep -o -E 'v7\.2\.[0-9]+')
-curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} PHP Lastest Version : ${php_lastest_version}" ${url}
-
-php_version="$(php -v | head -n 1)"
-curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${php_version}" ${url}
-
-apache_lastest_version=$(curl https://github.com/apache/httpd/releases | grep tag-name | head -n 1 | sed -e 's/<[^>]*>//g' | awk '{print $1}')
-curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} Apache Lastest Version : ${apache_lastest_version}" ${url}
-
-apache_version="$(httpd -v)"
-curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
-
-wait
-new_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
-curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} heroku/heroku-buildpack-php current ${current_version} new ${new_version}" ${url} &
-
-echo ${HEROKU_APP_NAME}
-echo ${HEROKU_RELEASE_CREATED_AT}
-echo ${HEROKU_RELEASE_VERSION}
-
+  
 export X_ACCESS_KEY=$(sha256sum www/last_update.txt | awk '{print $1}')
 
 export X_HOST_NAME=$(hostname)
-
+  
 if [ ${MODE} = 'APACHE' ]; then
+
+  httpd -V
+  httpd -M
+  php --version
+  whereis php
+  php -m
+  cat /proc/version
+  curl --version
+  printenv
+
+  current_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
+  composer update > /dev/null 2>&1 &
+  rm -rf /tmp/heroku-mode-06
+  git clone --depth 1 https://github.com/tshr20140816/heroku-mode-06.git /tmp/heroku-mode-06 &
+
+  ss -lnt4
+
+  url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
+
+  linux_version="$(cat /proc/version)"
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${linux_version}" ${url}
+
+  model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${model_name:13}" ${url}
+
+  php_lastest_version=$(curl http://us1.php.net/downloads.php | grep -o -E 'v7\.2\.[0-9]+')
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} PHP Lastest Version : ${php_lastest_version}" ${url}
+
+  php_version="$(php -v | head -n 1)"
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${php_version}" ${url}
+
+  apache_lastest_version=$(curl https://github.com/apache/httpd/releases | grep tag-name | head -n 1 | sed -e 's/<[^>]*>//g' | awk '{print $1}')
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} Apache Lastest Version : ${apache_lastest_version}" ${url}
+
+  apache_version="$(httpd -v)"
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
+
+  wait
+  new_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} heroku/heroku-buildpack-php current ${current_version} new ${new_version}" ${url} &
+
+  echo ${HEROKU_APP_NAME}
+  echo ${HEROKU_RELEASE_CREATED_AT}
+  echo ${HEROKU_RELEASE_VERSION}
 
   if [ ! -v LOG_LEVEL ]; then
     export LOG_LEVEL="warn"
