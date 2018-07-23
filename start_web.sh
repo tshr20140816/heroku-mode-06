@@ -41,6 +41,9 @@ curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${linux
 model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
 curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${model_name:13}" ${url}
 
+php_lastest_version=$(url http://us1.php.net/downloads.php | grep -o -E 'v7\.2\.[0-9]+')
+curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} PHP Lastest Version : ${php_lastest_version}" ${url}
+
 php_version="$(php -v | head -n 1)"
 curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${php_version}" ${url}
 
