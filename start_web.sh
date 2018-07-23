@@ -41,11 +41,12 @@ if [ ${MODE} = 'APACHE' ]; then
 
   url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
 
-  linux_version="$(cat /proc/version)"
+  linux_version=$(cat /proc/version)
   curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${linux_version}" ${url}
 
-  model_name="$(cat /proc/cpuinfo | grep 'model name' | head -n 1)"
-  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${model_name:13}" ${url}
+  model_name=$(cat /proc/cpuinfo | grep 'model name' | head -n 1)
+  cpu_count=$(cat /proc/cpuinfo | grep processor | wc -l)
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${model_name:13} x ${cpu_count}" ${url}
 
   php_lastest_version=$(curl http://us1.php.net/downloads.php | grep -o -E 'v7\.2\.[0-9]+')
   curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} PHP Lastest Version : ${php_lastest_version}" ${url}
