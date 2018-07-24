@@ -14,6 +14,8 @@ if [ ! -v LOGGLY_TOKEN ]; then
   exit
 fi
 
+export USER_AGENT=$(curl https://raw.githubusercontent.com/tshr20140816/heroku-mode-06/master/useragent.txt)
+
 export IP_ADDRESS=$(ip address | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $4}')
 echo "${IP_ADDRESS}" > /app/IP_ADDRESS
   
