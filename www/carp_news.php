@@ -1,47 +1,37 @@
 <?php
 
 $url = 'http://www.carp.co.jp/news18/index.html';
-$content = get_contents('http://www.carp.co.jp/news18/index.html');
+$contents = get_contents('http://www.carp.co.jp/news18/index.html');
 
-$content = preg_replace('/<(img|link|script|a|span|meta n|meta c|div).+?>/', '', $content);
-$content = preg_replace('/<\/(script|a|span|div)>/', '', $content);
-$content = preg_replace('/ class=".+?"/', '', $content);
-$content = preg_replace('/<h1.+?<\/ul>/s', '', $content, 1);
-$content = preg_replace('/<!--.*?-->/s', '', $content);
-$content = preg_replace('/<style.+?<\/style>/s', '', $content, 1);
-$content = preg_replace('/<noscript.+?<\/noscript>/s', '', $content, 1);
-$content = preg_replace('/<body.+?>/', '<body>', $content, 1);
-$content = preg_replace('/^ +/m', '', $content);
-$content = preg_replace('/^ *\n/m', '', $content);
-$content = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $content);
-$content = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $content);
+$contents = preg_replace('/<(img|link|script|a|span|meta n|meta c|div).+?>/', '', $contents);
+$contents = preg_replace('/<\/(script|a|span|div)>/', '', $contents);
+$contents = preg_replace('/ class=".+?"/', '', $contents);
+$contents = preg_replace('/<h1.+?<\/ul>/s', '', $contents, 1);
+$contents = preg_replace('/<!--.*?-->/s', '', $contents);
+$contents = preg_replace('/<style.+?<\/style>/s', '', $contents, 1);
+$contents = preg_replace('/<noscript.+?<\/noscript>/s', '', $contents, 1);
+$contents = preg_replace('/<body.+?>/', '<body>', $contents, 1);
+$contents = preg_replace('/^ +/m', '', $contents);
+$contents = preg_replace('/^ *\n/m', '', $contents);
+$contents = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $contents);
+$contents = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $contents);
 
 @mkdir('/tmp/cache_rss');
 // $cache_file_name = '/tmp/cache_rss/' . hash('sha256', $url);
 $cache_file_name = '/tmp/cache_rss/' . urlencode($url);
 if (file_exists($cache_file_name) === FALSE) {
-  $rc = file_put_contents($cache_file_name, $contents);
-  $content = str_replace('<title>...</title>', '<title>first</title>', $content);
-  $cache_contents = file_get_contents($cache_file_name);
-  error_log($cache_file_name);
-  error_log($rc);
-  error_log('----- START -----');
-  error_log($cache_contents);
-  error_log('----- FINISH -----');
+  file_put_contents($cache_file_name, $contents);
+  $contents = str_replace('<title>...</title>', '<title>first</title>', $contents);
 } else {
   $cache_contents = file_get_contents($cache_file_name);
   if ($cache_contents === $contents) {
-    $content = str_replace('<title>...</title>', '<title>' . date('Hi') . '</title>', $content);
+    $contents = str_replace('<title>...</title>', '<title>' . date('Hi') . '</title>', $contents);
   } else {
     file_put_contents($cache_file_name, $contents);
-    error_log('OLD ' . hash('sha256', $cache_contents));
-    error_log($cache_contents);
-    error_log('NEW ' . hash('sha256', $content));
-    error_log($content);
-    $content = str_replace('<title>...</title>', '<title>update</title>', $content);
+    $contents = str_replace('<title>...</title>', '<title>update</title>', $contents);
   }
 }
-echo $content;
+echo $contents;
 
 function get_contents($url_) {
   $pid = getmypid();
