@@ -27,6 +27,10 @@ if (file_exists($cache_file_name) === FALSE) {
     $content = str_replace('<title>...</title>', '<title>' . date('Hi') . '</title>', $content);
   } else {
     file_put_contents($cache_file_name, $contents);
+    error_log('OLD ' . hash('sha256', $cache_contents));
+    error_log($cache_contents);
+    error_log('NEW ' . hash('sha256', $content));
+    error_log($content);
     $content = str_replace('<title>...</title>', '<title>update</title>', $content);
   }
 }
