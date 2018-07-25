@@ -84,7 +84,7 @@ function get_contents($url_) {
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_PATH_AS_IS => TRUE,
-                     CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; rv:56.0) Gecko/20100101 Firefox/61.0',
+                     CURLOPT_USERAGENT => getenv('USER_AGENT'),
                     ]);  
   $contents = curl_exec($ch);
   $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);  
