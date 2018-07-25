@@ -1,5 +1,6 @@
 <?php
 
+$url = 'http://www.carp.co.jp/news18/index.html';
 $content = get_contents('http://www.carp.co.jp/news18/index.html');
 
 $content = preg_replace('/<(img|link|script|a|span|meta n|meta c|div).+?>/', '', $content);
@@ -14,6 +15,9 @@ $content = preg_replace('/^ +/m', '', $content);
 $content = preg_replace('/^ *\n/m', '', $content);
 $content = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $content);
 $content = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $content);
+
+mkdir('/tmp/cache/');
+file_put_contents('/tmp/cache/' . hash('sha256', $url), $content);
 
 echo $content;
 
