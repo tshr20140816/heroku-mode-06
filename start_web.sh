@@ -32,7 +32,7 @@ if [ ${MODE} = 'APACHE' ]; then
   php -m
   cat /proc/version
   curl --version
-  printenv
+  printenv | sort
 
   current_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
   composer update > /dev/null 2>&1 &
