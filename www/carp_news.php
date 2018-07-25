@@ -16,9 +16,19 @@ $content = preg_replace('/^ *\n/m', '', $content);
 $content = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $content);
 $content = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $content);
 
-mkdir('/tmp/cache/');
-file_put_contents('/tmp/cache/' . hash('sha256', $url), $content);
-
+@mkdir('/tmp/cache_page');
+$cache_file_name = '/tmp/cache_page/' . urlencode($url);
+if (file_exists($cache_file_name) === FALSE) {
+  file_put_contents($cache_file_name, $contents);
+} else {
+  $cache_contents = file_get_contents($cache_file_name);
+  if ($cache_contents === $contents) {
+    $content = str_replace('<title>...</title>', '<title>first</title>', $content);
+  } else {
+    file_put_contents($cache_file_name, $contents);
+    $content = str_replace('<title>...</title>', '<title>update</title>', $content);
+  }
+}
 echo $content;
 
 function get_contents($url_) {
