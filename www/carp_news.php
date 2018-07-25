@@ -16,7 +16,7 @@ $content = preg_replace('/^ *\n/m', '', $content);
 $content = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $content);
 $content = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $content);
 
-$cache_file_name = '/tmp/' . urlencode($url);
+$cache_file_name = '/tmp/' . hash('sha256', $url);
 if (file_exists($cache_file_name) === FALSE) {
   $rc = file_put_contents($cache_file_name, $contents);
   $content = str_replace('<title>...</title>', '<title>first</title>', $content);
