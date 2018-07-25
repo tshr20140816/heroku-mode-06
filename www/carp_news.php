@@ -13,6 +13,7 @@ $content = preg_replace('/<body.+?>/', '<body>', $content, 1);
 $content = preg_replace('/^ +/m', '', $content);
 $content = preg_replace('/^ *\n/m', '', $content);
 $content = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $content);
+$content = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $content);
 
 echo $content;
 
