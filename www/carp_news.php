@@ -20,10 +20,11 @@ $content = str_replace('<head>', '<head><meta http-equiv="refresh" content="600"
 $cache_file_name = '/tmp/cache_page/' . urlencode($url);
 if (file_exists($cache_file_name) === FALSE) {
   file_put_contents($cache_file_name, $contents);
+  $content = str_replace('<title>...</title>', '<title>first</title>', $content);
 } else {
   $cache_contents = file_get_contents($cache_file_name);
   if ($cache_contents === $contents) {
-    $content = str_replace('<title>...</title>', '<title>first</title>', $content);
+    $content = str_replace('<title>...</title>', '<title>same</title>', $content);
   } else {
     file_put_contents($cache_file_name, $contents);
     $content = str_replace('<title>...</title>', '<title>update</title>', $content);
