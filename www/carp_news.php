@@ -20,6 +20,10 @@ $cache_file_name = '/tmp/' . urlencode($url);
 if (file_exists($cache_file_name) === FALSE) {
   file_put_contents($cache_file_name, $contents);
   $content = str_replace('<title>...</title>', '<title>first</title>', $content);
+  $cache_contents = file_get_contents($cache_file_name);
+  error_log('----- START -----');
+  error_log($cache_contents);
+  error_log('----- FINISH -----');
 } else {
   $cache_contents = file_get_contents($cache_file_name);
   if ($cache_contents === $contents) {
