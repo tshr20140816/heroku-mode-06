@@ -12,7 +12,7 @@ $content = preg_replace('/<noscript.+?<\/noscript>/s', '', $content, 1);
 $content = preg_replace('/<body.+?>/', '<body>', $content, 1);
 $content = preg_replace('/^ +/m', '', $content);
 $content = preg_replace('/^ *\n/m', '', $content);
-$content = preg_replace('/<title>.+?<\/title>/', '<title>news</title>', $content);
+$content = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $content);
 
 echo $content;
 
