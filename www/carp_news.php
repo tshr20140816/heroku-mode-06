@@ -24,7 +24,7 @@ if (file_exists($cache_file_name) === FALSE) {
 } else {
   $cache_contents = file_get_contents($cache_file_name);
   if ($cache_contents === $contents) {
-    $content = str_replace('<title>...</title>', '<title>same</title>', $content);
+    $content = str_replace('<title>...</title>', '<title>' . date('Hi') . '</title>', $content);
   } else {
     file_put_contents($cache_file_name, $contents);
     $content = str_replace('<title>...</title>', '<title>update</title>', $content);
