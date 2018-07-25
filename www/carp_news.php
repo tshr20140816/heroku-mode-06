@@ -16,9 +16,8 @@ $contents = preg_replace('/^ *\n/m', '', $contents);
 $contents = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $contents);
 $contents = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $contents);
 
-@mkdir('/tmp/cache_rss');
-// $cache_file_name = '/tmp/cache_rss/' . hash('sha256', $url);
-$cache_file_name = '/tmp/cache_rss/' . urlencode($url);
+@mkdir('/tmp/cache_page');
+$cache_file_name = '/tmp/cache_page/' . urlencode($url);
 if (file_exists($cache_file_name) === FALSE) {
   file_put_contents($cache_file_name, $contents);
   $contents = str_replace('<title>...</title>', '<title>first</title>', $contents);
