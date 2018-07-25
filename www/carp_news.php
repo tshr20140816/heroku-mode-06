@@ -14,17 +14,18 @@ $contents = preg_replace('/<body.+?>/', '<body>', $contents, 1);
 $contents = preg_replace('/^ +/m', '', $contents);
 $contents = preg_replace('/^ *\n/m', '', $contents);
 $contents = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $contents);
-$contents = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $contents);
 
 @mkdir('/tmp/cache_page');
 $cache_file_name = '/tmp/cache_page/' . urlencode($url);
 if (file_exists($cache_file_name) === FALSE) {
   file_put_contents($cache_file_name, $contents);
   $contents = str_replace('<title>...</title>', '<title>first</title>', $contents);
+  $contents = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $contents);
 } else {
   $cache_contents = file_get_contents($cache_file_name);
   if ($cache_contents === $contents) {
     $contents = str_replace('<title>...</title>', '<title>' . date('Hi', strtotime('+9 hours')) . '</title>', $contents);
+    $contents = str_replace('<head>', '<head><meta http-equiv="refresh" content="600">', $contents);
   } else {
     file_put_contents($cache_file_name, $contents);
     $contents = str_replace('<title>...</title>', '<title>update</title>', $contents);
