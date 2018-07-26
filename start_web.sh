@@ -62,6 +62,9 @@ if [ ${MODE} = 'APACHE' ]; then
   apache_version="$(httpd -v)"
   curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
 
+  curl_lastest_version=$(curl https://curl.haxx.se/download.html | grep ", Released on the " | grep -o "curl [0-9.]+")
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${curl_lastest_version}" ${url}
+
   curl_version="$(curl --version | head -n 1)"
   curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${curl_version}" ${url}
   
