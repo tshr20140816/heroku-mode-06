@@ -62,6 +62,9 @@ if [ ${MODE} = 'APACHE' ]; then
   apache_version="$(httpd -v)"
   curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${apache_version}" ${url}
 
+  curl_version="$(curl --version)"
+  curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${curl_version}" ${url}
+  
   wait
   new_version=$(cat composer.lock | grep version | awk '{print $2}' | tr -d ,)
   curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} heroku/heroku-buildpack-php current ${current_version} new ${new_version}" ${url} &
