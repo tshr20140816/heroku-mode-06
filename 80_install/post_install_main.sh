@@ -139,9 +139,9 @@ fi
 # ***** phppgadmin *****
 
 pushd www
-git clone --depth 1 https://github.com/phppgadmin/phppgadmin.git phppgadmin
-cp ../70_etc/config.inc.php phppgadmin/conf/
-cp ../70_etc/Connection.php phppgadmin/classes/database/
+git clone --depth 1 https://github.com/phppgadmin/phppgadmin.git 0phppgadmin
+cp ../70_etc/config.inc.php 0phppgadmin/conf/
+cp ../70_etc/Connection.php 0phppgadmin/classes/database/
 popd
 
 # ***** favicon.ico *****
