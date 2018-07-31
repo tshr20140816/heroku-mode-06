@@ -42,32 +42,19 @@ if ($result === FALSE) {
   $tmp = explode(':', getenv('REMOTE_PATH_2'));
   $x_key = $tmp[0];
   error_log($log_prefix . $x_key);
-  $context = [
-    'http' => [
-      'ignore_errors' => true,
-      'method' => 'GET',
-      'protocol_version' => '1.1',
-      'header' => [
-        'User-Agent: Love Love Show',
-        'X-Key: ' . $x_key,
-        'X-Request-Server: ' . getenv('HEROKU_APP_NAME'),
-        ]],
-    'ssl' => [
-      'verify_peer' => false,
-      'verify_peer_name' => false,
-      ]];
-  $result = file_get_contents('https://' . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name, false, stream_context_create($context));
-  error_log($log_prefix . $http_response_header[0]);
-  if (strpos($http_response_header[0], '200') !== FALSE) {
+  $url = 'https://' . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name';
+  list($contents, $http_code) = get_contents($url);
+  error_log($log_prefix . $http_code);
+  
+  if ($http_code === '200') {
     header('Content-Type: image/vnd.microsoft.icon');
-    echo $result;
+    echo $contents;
     $statement = $pdo->prepare('INSERT INTO t_icon_file (file_name, file_data) VALUES (:b_file_name, :b_file_data)');
     $statement->execute(
       [':b_file_name' => $icon_file_name,
-       ':b_file_data' => base64_encode($result),
+       ':b_file_data' => base64_encode($contents),
       ]);
   } else {
-    // http_response_code(503);
     header('Content-Type: image/vnd.microsoft.icon');
     echo file_get_contents('/app/www/black.ico');
   }
@@ -84,8 +71,13 @@ exit();
 function get_contents($url_) {
   $pid = getmypid();
   $ch = curl_init();
+  
+  $tmp = explode(':', getenv('REMOTE_PATH_2'));
+  $x_key = $tmp[0];
+  
   curl_setopt_array($ch,
                     [CURLOPT_URL => $url_,
+                     CURLOPT_SSL_VERIFYPEER => FALSE,
                      CURLOPT_RETURNTRANSFER => TRUE,
                      CURLOPT_ENCODING => '',
                      CURLOPT_CONNECTTIMEOUT => 20,
@@ -94,6 +86,7 @@ function get_contents($url_) {
                      CURLOPT_FILETIME => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_USERAGENT => 'Love Love Show',
+                     CURLOPT_HTTPHEADER => ['X-Key: ' . $x_key, 'X-Request-Server: ' . getenv('HEROKU_APP_NAME')],
                     ]);
   $contents = curl_exec($ch);
   $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
