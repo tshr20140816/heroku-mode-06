@@ -37,13 +37,7 @@ if ($result === FALSE) {
   loggly_log($log_prefix . 'File Not Found');
   error_log($log_prefix . getenv('REMOTE_PATH_2'));
   error_log($log_prefix . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name);
-  $http_response_header = null;
-  $http_response_header[] = '';
-  $tmp = explode(':', getenv('REMOTE_PATH_2'));
-  $x_key = $tmp[0];
-  error_log($log_prefix . $x_key);
-  $url = 'https://' . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name';
-  list($contents, $http_code) = get_contents($url);
+  list($contents, $http_code) = get_contents('https://' . getenv('REMOTE_PATH_2') . 'feed-icons/' . $icon_file_name');
   error_log($log_prefix . $http_code);
   
   if ($http_code === '200') {
