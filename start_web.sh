@@ -26,10 +26,10 @@ export X_HOST_NAME=$(hostname)
 if [ ${MODE} = 'APACHE' ]; then
 
   httpd -V
-  httpd -M
+  httpd -M | sort
   php --version
   whereis php
-  php -m
+  php -m | sort
   cat /proc/version
   curl --version
   printenv | sort
