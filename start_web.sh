@@ -120,7 +120,7 @@ if [ ${MODE} = 'APACHE' ]; then
   fi
   
   if [ ! -v ALLOW_USER_AGENT ]; then
-    export  ALLOW_USER_AGENT=${X_ACCESS_KEY}
+    export  ALLOW_USER_AGENT=${X_ACCESS_KEY}${X_HOST_NAME}
   fi
 
   mkdir -p /tmp/usr/lib
