@@ -118,6 +118,10 @@ if [ ${MODE} = 'APACHE' ]; then
     echo "Error : RSS_TEMPLATE_URL not defined."
     exit  
   fi
+  
+  if [ ! -v ALLOW_USER_AGENT ]; then
+    export  ALLOW_USER_AGENT=${X_ACCESS_KEY}
+  fi
 
   mkdir -p /tmp/usr/lib
   cp ./lib/libnghttp2.so.14 /tmp/usr/lib/
