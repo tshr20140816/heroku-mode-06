@@ -29,7 +29,7 @@ if [ ${MODE} = 'APACHE' ]; then
   httpd -M | sort
   php --version
   whereis php
-  php -m | sort
+  php -m
   cat /proc/version
   curl --version
   printenv | sort
