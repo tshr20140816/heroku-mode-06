@@ -131,11 +131,11 @@ function get_contents($url_, $force_) {
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_FILETIME => TRUE,
-                     // CURLOPT_TCP_FASTOPEN => TRUE,
                      // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_USERAGENT => getenv('USER_AGENT'),
                     ]);
+  @curl_setopt($ch, CURLOPT_TCP_FASTOPEN, TRUE);
   if ($force_ != TRUE && isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
     error_log($pid . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
