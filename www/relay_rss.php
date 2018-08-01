@@ -131,7 +131,6 @@ function get_contents($url_, $force_) {
                      CURLOPT_FOLLOWLOCATION => TRUE,
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_FILETIME => TRUE,
-                     // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_USERAGENT => getenv('USER_AGENT'),
                     ]);
@@ -186,10 +185,10 @@ function loggly_log($message_) {
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_POST => TRUE,
                      CURLOPT_HTTPHEADER => ['Content-Type: text/plain'],
-                     // CURLOPT_SSL_FALSESTART => TRUE,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
+  @curl_setopt($ch, CURLOPT_TCP_FASTOPEN, TRUE);
   // error_log("${pid} CURL_SETOPT_ARRAY RC : ${rc}");
   $rc = curl_exec($ch);
   // error_log("${pid} CURL_EXEC RC : ${rc}");
