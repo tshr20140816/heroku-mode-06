@@ -45,7 +45,8 @@ function get_contents($url_) {
                      CURLOPT_MAXREDIRS => 3,
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_USERAGENT => getenv('USER_AGENT'),
-                    ]);  
+                    ]);
+  @curl_setopt($ch, CURLOPT_TCP_FASTOPEN, TRUE);
   $contents = curl_exec($ch);
   // $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);  
   curl_close($ch);
