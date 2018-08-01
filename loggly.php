@@ -37,6 +37,7 @@ function loggly_log($message_) {
                      CURLOPT_PATH_AS_IS => TRUE,
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
+  @curl_setopt($ch, CURLOPT_TCP_FASTOPEN, TRUE);
   curl_exec($ch);
   if ($count % 10 == 9) {
     curl_close($ch);
