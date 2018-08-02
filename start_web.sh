@@ -31,6 +31,7 @@ if [ ${MODE} = 'APACHE' ]; then
   whereis php
   php -m
   cat /proc/version
+  cat /proc/cpuinfo | grep 'model name' | head -n 1
   curl --version
   printenv | sort
 
