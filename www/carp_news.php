@@ -1,7 +1,7 @@
 <?php
 
 $url = 'http://www.carp.co.jp/news18/index.html';
-$contents = get_contents('http://www.carp.co.jp/news18/index.html');
+$contents = get_contents($url);
 
 $contents = preg_replace('/<(img|link|script|a|span|meta n|meta c|div).+?>/', '', $contents);
 $contents = preg_replace('/<\/(script|a|span|div)>/', '', $contents);
@@ -14,7 +14,7 @@ $contents = preg_replace('/<body.+?>/', '<body>', $contents, 1);
 $contents = preg_replace('/^ +/m', '', $contents);
 $contents = preg_replace('/^ *\n/m', '', $contents);
 $contents = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $contents);
-$contents = str_replace('<body>', '<body><a href="http://www.carp.co.jp/news18/index.html">link</a>', $contents);
+$contents = str_replace('<body>', '<body><a href="' . $url . '">link</a>', $contents);
 
 @mkdir('/tmp/cache_page');
 $cache_file_name = '/tmp/cache_page/' . urlencode($url);
