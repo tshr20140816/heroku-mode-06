@@ -14,6 +14,7 @@ $contents = preg_replace('/<body.+?>/', '<body>', $contents, 1);
 $contents = preg_replace('/^ +/m', '', $contents);
 $contents = preg_replace('/^ *\n/m', '', $contents);
 $contents = preg_replace('/<title>.+?<\/title>/', '<title>...</title>', $contents);
+$contents = str_replace('<body>', '<body><a href="http://www.carp.co.jp/news18/index.html">link</a>', $contents);
 
 @mkdir('/tmp/cache_page');
 $cache_file_name = '/tmp/cache_page/' . urlencode($url);
