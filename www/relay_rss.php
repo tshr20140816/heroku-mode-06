@@ -135,6 +135,7 @@ function get_contents($url_, $force_) {
                      CURLOPT_USERAGENT => getenv('USER_AGENT'),
                     ]);
   @curl_setopt($ch, CURLOPT_TCP_FASTOPEN, TRUE);
+  @curl_setopt($ch, CURLOPT_SSL_FALSESTART, TRUE);
   if ($force_ != TRUE && isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['If-Modified-Since: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']]);
     error_log($pid . ' If-Modified-Since : ' . $_SERVER['HTTP_IF_MODIFIED_SINCE']);
@@ -189,6 +190,7 @@ function loggly_log($message_) {
                      CURLOPT_POSTFIELDS => $message_,
                     ]);
   @curl_setopt($ch, CURLOPT_TCP_FASTOPEN, TRUE);
+  @curl_setopt($ch, CURLOPT_SSL_FALSESTART, TRUE);
   // error_log("${pid} CURL_SETOPT_ARRAY RC : ${rc}");
   $rc = curl_exec($ch);
   // error_log("${pid} CURL_EXEC RC : ${rc}");
