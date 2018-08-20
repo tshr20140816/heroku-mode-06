@@ -40,7 +40,7 @@ if [ ${MODE} = 'APACHE' ]; then
   rm -rf /tmp/heroku-mode-06
   git clone --depth 1 https://github.com/tshr20140816/heroku-mode-06.git /tmp/heroku-mode-06 &
 
-  ss -lnt4
+  # ss -lnt4
 
   url="https://logs-01.loggly.com/inputs/${LOGGLY_TOKEN}/tag/START/"
 
@@ -57,8 +57,6 @@ if [ ${MODE} = 'APACHE' ]; then
   php_version="$(php -v | head -n 1)"
   curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} ${php_version}" ${url}
 
-  # apache_lastest_version=$(curl https://github.com/apache/httpd/releases | grep tag-name | head -n 1 | sed -e 's/<[^>]*>//g' | awk '{print $1}')
-  # apache_lastest_version=$(curl https://github.com/apache/httpd/releases | grep -o -E '/apache/httpd/releases/tag/2\.4\..+?"' | head -n 1 | grep -o -E '2.+\d')
   apache_lastest_version=$(curl https://github.com/apache/httpd/releases | grep -o -E '/apache/httpd/releases/tag/2\.4\..+?"' | head -n 1 | sed -e 's/.\+\///g' | sed -e 's/"//g')
   curl -H 'content-type:text/plain' -d "S ${HEROKU_APP_NAME} ${IP_ADDRESS} Apache Lastest Version : ${apache_lastest_version}" ${url}
 
