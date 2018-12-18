@@ -21,7 +21,7 @@ export CXXFLAGS="$CFLAGS"
 
 bash ./80_install/post_install_sub01.sh &
 
-git clone --depth 1 https://github.com/tshr20140816/heroku-mode-03.git /tmp/self_repository &
+git clone --depth 1 https://github.com/tshr20140816/heroku-mode-06.git /tmp/self_repository &
 
 # ***** pngquant *****
 
