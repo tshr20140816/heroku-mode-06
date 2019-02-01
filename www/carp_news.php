@@ -1,6 +1,6 @@
 <?php
 
-$url = 'http://www.carp.co.jp/news18/index.html';
+$url = 'http://www.carp.co.jp/news19/index.html';
 $contents = get_contents($url);
 
 $contents = preg_replace('/<(img|link|script|a|span|meta n|meta c|div).+?>/', '', $contents);
