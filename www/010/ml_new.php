@@ -10,7 +10,7 @@ set_time_limit(60);
 $html = <<< __HEREDOC__
 <html><body>
 <form method="POST" action="./ml_new.php">
-<input type="text" name="user" />
+<input type="text" name="user" autofocus />
 <input type="password" name="password" />
 <input type="submit" />
 </form>
