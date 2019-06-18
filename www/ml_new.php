@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
     $imap = imap_open('{imap.mail.yahoo.co.jp:993/ssl}', $user, $password);
 
-    $count = imap_heaimap_num_msgder($imap);
+    $count = imap_num_msg($imap);
     error_log("${pid} mail count : ${count}");
 
     imap_close($imap);
