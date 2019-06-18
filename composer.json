@@ -6,7 +6,8 @@
     "ext-apcu": "*",
     "ext-memcached": "*",
     "ext-mbstring": "*",
-    "ext-pcntl": "*"
+    "ext-pcntl": "*",
+    "ext-imap": "*"
   }
   ,
   "require-dev":
