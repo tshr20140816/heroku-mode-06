@@ -49,7 +49,7 @@ $range_start_number = 0;
 if (strpos(end($tmp), '-') !== FALSE) {
   $range = end($tmp);
   $tmp = explode('-', $range);
-  $range_start_number = $tmp[0]:
+  $range_start_number = $tmp[0];
   $range_last_number = end($tmp);
 }
 error_log("${pid} RANGE LAST NUMBER : ${range_last_number}");
