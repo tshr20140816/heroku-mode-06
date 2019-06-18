@@ -179,7 +179,7 @@ $message =
 
 loggly_log($message);
 
-error_log("${pid} ${res}");
+error_log("${pid} ${message}");
 
 error_log("${pid} ***** FILTER MESSAGE FINISH ***** ${uri}");
 
